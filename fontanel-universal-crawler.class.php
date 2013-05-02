@@ -10,6 +10,7 @@
         $this->event_types = unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES );
     	  $this->requireClasses();
     	  $this->requireCrawlers();
+    	  $this->requireTimelineEvents();
 				$this->database_manager = new TimelineDatabaseManager();
 				$this->crawlers[] = new TimelineTumblrCrawler( $this->database_manager );
 				$this->crawlers[] = new TimelineJobsCrawler( $this->database_manager );
@@ -29,6 +30,15 @@
   			  if( file_exists( dirname(__FILE__) . '/' . $this->file_prefix . $file . '.class.php' ) ) {
         		require_once( dirname(__FILE__) . '/' . $this->file_prefix . $file . '.class.php' );
         	}
+			  }
+    	}
+    	
+    	private function requireTimelineEvents() {
+        $timeline_events_dir = dirname(__FILE__) . '/timeline-events';
+        if( is_dir( $timeline_events_dir ) ) {
+  			  foreach( glob( $timeline_events_dir . '/*.*' ) as $file ) {
+        		require_once( $file );
+  			  }
 			  }
     	}
     	
