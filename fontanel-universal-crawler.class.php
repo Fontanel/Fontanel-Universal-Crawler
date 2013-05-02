@@ -1,8 +1,5 @@
 <?php
-	
-	
-	
-	if( ! class_exists( 'TimelineCrawler' ) ):
+  if( ! class_exists( 'TimelineCrawler' ) ):
 		class TimelineCrawler {
 			protected $db_manager;
 			private $url;
@@ -174,11 +171,23 @@
   	  private $crawlers = array();
   	  
     	public function __construct() {
+    	  $this->requireClasses();
 				$this->timelineDatabaseManager = new TimelineDatabaseManager();
 				$this->crawlers[] = new TimelineTumblrCrawler( $this->timelineDatabaseManager );
 				$this->crawlers[] = new TimelineJobsCrawler( $this->timelineDatabaseManager );
 				$this->crawlers[] = new TimelineMagazineCrawler( $this->timelineDatabaseManager );
-				$this->fetchPosts();
+				$this->prepareForWP();
+				// $this->fetchPosts();
+			}
+			
+			private function requireClasses() {
+  			if( file_exists( dirname(__FILE__) . '/fontanel-universal-crawler-database-manager.class.php' ) ) {
+      		require_once( dirname(__FILE__) . '/fontanel-universal-crawler-database-manager.class.php' );
+      	}
+    	}
+			
+			private function prepareForWP() {
+  			// add_filter( 'page_template', array( &$this, 'register_page_templates' ) );
 			}
 			
 			private function fetchPosts() {
@@ -186,6 +195,10 @@
 					$crawler->fetchPosts();
 				}
 			}
+			
+			public function getEvents( $page = 0, $per_page = 10 ) {
+  			return $this->timelineDatabaseManager->getEvents( $page, $per_page );
+  		}
   	}
   endif;
 ?>

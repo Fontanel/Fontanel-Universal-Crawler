@@ -15,7 +15,7 @@
 	// Import settings:
 	if( file_exists( dirname(__FILE__) . '/fontanel-universal-crawler.class.php' ) ) {
 		require_once( dirname(__FILE__) . '/fontanel-universal-crawler.class.php' );
-	}	
+	}
 
 	if ( class_exists( 'FontanelTumblrImporter' ) ):
 		$MyFontanelUniversalCrawler = new FontanelUniversalCrawler();
