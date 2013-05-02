@@ -1,1 +1,1 @@
-<p>Bier!</p>
+<p><?php print_r($vars); ?></p>
