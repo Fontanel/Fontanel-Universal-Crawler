@@ -50,7 +50,11 @@
 			}
 			
 			public function getEvents( $page = 0, $per_page = 10 ) {
-  			return $this->timelineDatabaseManager->getEvents( $page, $per_page );
+        $returns = Array();
+  			foreach( $this->timelineDatabaseManager->getEvents( $page, $per_page ) as $event ) {
+    			$returns[] = new TimelineEvent( split( ',', $event->objects ) );
+  			}
+  			return $returns;
   		}
   	}
   endif;
