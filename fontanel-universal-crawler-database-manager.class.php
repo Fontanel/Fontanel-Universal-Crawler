@@ -82,6 +82,14 @@
           "LIMIT " . $per_page . ";";
         return $this->iwpdb->get_results( $query );
       }
+      
+      public function getObjects( $objects ) {
+        $query = 
+          "SELECT " . $this->tables['objects'] . ".type, " . $this->tables['objects'] . ".object " .
+          "FROM " . $this->tables['objects'] . " " .
+          "WHERE " . $this->tables['objects'] . ".id IN (" . $objects . ");";
+        return $this->iwpdb->get_results( $query );
+      }
   	}
 	endif;
 ?>
