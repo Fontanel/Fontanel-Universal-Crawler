@@ -19,7 +19,8 @@
 			private function requireClasses() {
 			  $includes = array(
 			   'database-manager',
-			   'timeline-crawler'
+			   'timeline-crawler',
+			   'timeline-event'
 			  );
 			  
 			  foreach( $includes as $file ) {
