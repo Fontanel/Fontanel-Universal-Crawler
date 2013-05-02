@@ -181,9 +181,14 @@
 			}
 			
 			private function requireClasses() {
-  			if( file_exists( dirname(__FILE__) . '/fontanel-universal-crawler-database-manager.class.php' ) ) {
-      		require_once( dirname(__FILE__) . '/fontanel-universal-crawler-database-manager.class.php' );
-      	}
+			  $file_prefix = 'fontanel-universal-crawler-';
+			  $includes = array('database-manager');
+			  
+			  foreach( $includes as $file ) {
+  			  if( file_exists( dirname(__FILE__) . '/' . $file_prefix . $file . '.class.php' ) ) {
+        		require_once( dirname(__FILE__) . '/' . $file_prefix . $file . '.class.php' );
+        	}
+			  }
     	}
 			
 			private function prepareForWP() {
