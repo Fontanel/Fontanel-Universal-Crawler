@@ -3,15 +3,23 @@
 		class TimelineEvent {
 			private $objects = Array();
 			private $template_path;
+			private $database_manager;
 			private $slug = 'timeline-event';
 			
-			public function __construct( $objects, $template_path = false ) {
-				$this->objects = $objects;
+			public function __construct( $objects, $database_manager, $template_path = false ) {
+        $this->database_manager = $database_manager;
+        
+        $this->setObjects( $objects );
+				
 				if( !$template_path ) {
   				$this->findTemplate();
 				} else {
   				$this->template_path = $template_path;
 				}
+			}
+			
+			private function setObjects( $objects ) {
+  			$this->objects = $this->database_manager->getObjects( $objects );
 			}
 			
 			private function findTemplate() {
@@ -25,11 +33,12 @@
 			}
 			
 			public function render() {
-/*
-        if (is_array($vars) && !empty($vars)) {
+        $vars = $this->objects;
+        	 
+        if( is_array( $vars ) && !empty( $vars ) ) {
           extract($vars);
         }
-*/
+        
   			ob_start();
         include $this->template_path;
         return ob_get_clean();
