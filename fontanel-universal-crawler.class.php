@@ -1,17 +1,19 @@
 <?php
 	if( ! class_exists( 'FontanelUniversalCrawler' ) ):
   	class FontanelUniversalCrawler {
-  	  private $timelineDatabaseManager;
+  	  private $database_manager;
   	  private $crawlers = array();
   	  private $file_prefix = 'fontanel-universal-crawler-';
+  	  private $event_types = Array();
   	  
     	public function __construct() {
+        $this->event_types = unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES );
     	  $this->requireClasses();
     	  $this->requireCrawlers();
-				$this->timelineDatabaseManager = new TimelineDatabaseManager();
-				$this->crawlers[] = new TimelineTumblrCrawler( $this->timelineDatabaseManager );
-				$this->crawlers[] = new TimelineJobsCrawler( $this->timelineDatabaseManager );
-				$this->crawlers[] = new TimelineMagazineCrawler( $this->timelineDatabaseManager );
+				$this->database_manager = new TimelineDatabaseManager();
+				$this->crawlers[] = new TimelineTumblrCrawler( $this->database_manager );
+				$this->crawlers[] = new TimelineJobsCrawler( $this->database_manager );
+				$this->crawlers[] = new TimelineMagazineCrawler( $this->database_manager );
 				$this->prepareForWP();
 				// $this->fetchPosts();
 			}
@@ -51,10 +53,15 @@
 			
 			public function getEvents( $page = 0, $per_page = 10 ) {
         $returns = Array();
-  			foreach( $this->timelineDatabaseManager->getEvents( $page, $per_page ) as $event ) {
-    			$returns[] = new TimelineEvent( split( ',', $event->objects ) );
+  			foreach( $this->database_manager->getEvents( $page, $per_page ) as $event ) {
+    			$returns[] = $this->createEventObject( $event );
   			}
   			return $returns;
+  		}
+  		
+  		private function createEventObject( $event ) {
+  		  print_r( array_flip( $this->event_types )[ $event->type ] );
+    		return new TimelineEvent( $event->objects, $this->database_manager );
   		}
   	}
   endif;
