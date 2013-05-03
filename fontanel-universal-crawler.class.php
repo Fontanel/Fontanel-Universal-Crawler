@@ -84,11 +84,12 @@
   		
   		private function createEventObject( $event ) {
   		  if( $event->type > 0 ) {
-    		  $class_name = 'TimelineEvent' . array_flip( $this->event_types )[ $event->type ];
+  		    $type = array_flip( $this->event_types )[ $event->type ];
+    		  $class_name = 'TimelineEvent' . $type;
     		  if( class_exists( $class_name ) ) {
-      		  return new $class_name( $event->objects, $this->database_manager );
+      		  return new $class_name( $event->objects, $this->database_manager, $type );
     		  } else {
-        		return new TimelineEvent( $event->objects, $this->database_manager );
+        		return new TimelineEvent( $event->objects, $this->database_manager, $type );
       		}
     		}
   		}

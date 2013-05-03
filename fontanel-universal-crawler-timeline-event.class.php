@@ -5,8 +5,10 @@
 			private $template_path;
 			private $database_manager;
 			protected $slug = 'timeline-event';
+			protected $type = 'Undefined';
 			
-			public function __construct( $objects, $database_manager, $template_path = false ) {
+			public function __construct( $objects, $database_manager, $type = 'Undefined', $template_path = false ) {
+        $this->type = $type;
         $this->database_manager = $database_manager;
         
         $this->setObjects( $objects );
@@ -37,7 +39,10 @@
 			}
 			
 			public function render() {
-        $vars = $this->objects;
+        $vars = Array();
+        $vars['objects'] = $this->objects;
+        $vars['type'] = $this->type;
+        $vars['slug'] = $this->slug;
         	 
         if( is_array( $vars ) && !empty( $vars ) ) {
           extract( $vars );
