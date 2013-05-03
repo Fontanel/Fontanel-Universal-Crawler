@@ -70,11 +70,13 @@
   		}
   		
   		private function createEventObject( $event ) {
-  		  $class_name = 'TimelineEvent' . array_flip( $this->event_types )[ $event->type ];
-  		  if( class_exists( $class_name ) ) {
-    		  return new $class_name( $event->objects, $this->database_manager );
-  		  } else {
-      		return new TimelineEvent( $event->objects, $this->database_manager );
+  		  if( $event->type > 0 ) {
+    		  $class_name = 'TimelineEvent' . array_flip( $this->event_types )[ $event->type ];
+    		  if( class_exists( $class_name ) ) {
+      		  return new $class_name( $event->objects, $this->database_manager );
+    		  } else {
+        		return new TimelineEvent( $event->objects, $this->database_manager );
+      		}
     		}
   		}
   	}
