@@ -2,23 +2,23 @@
 	if( ! class_exists( 'FontanelUniversalCrawler' ) ):
   	class FontanelUniversalCrawler {
   	  private $database_manager;
-  	  private $crawlers = array();
-  	  private $file_prefix = 'fontanel-universal-crawler-';
+  	  private $crawlers = Array();
   	  private $event_types = Array();
+  	  private $file_prefix = 'fontanel-universal-crawler-';
   	  
     	public function __construct( $fetch = false ) {
-      	if( $fetch ) {
-        	$this->fetchPosts();
-      	}
-
         $this->event_types = unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES );
+    	  
     	  $this->requireClasses();
+    	  $this->database_manager = new TimelineDatabaseManager();
+    	  
     	  $this->requireTimelineEvents();
     	  $this->requireCrawlers();
-				$this->database_manager = new TimelineDatabaseManager();
-				$this->crawlers[] = new TimelineTumblrCrawler( $this->database_manager );
-				$this->crawlers[] = new TimelineJobsCrawler( $this->database_manager );
-				$this->crawlers[] = new TimelineMagazineCrawler( $this->database_manager );
+    	  
+    	  if( $fetch ) {
+        	$this->fetchPosts();
+      	}
+      	
 				$this->prepareForWP();
 			}
 			
@@ -52,6 +52,12 @@
         		require_once( $file );
   			  }
 			  }
+			  
+			  foreach( get_declared_classes() as $class ) {
+          if( is_subclass_of( $class, 'TimelineCrawler' ) ) {
+            $this->crawlers[] = new $class( $this->database_manager );
+          }
+        }
     	}
 			
 			private function prepareForWP() {
