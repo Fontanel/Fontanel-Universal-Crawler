@@ -10,7 +10,7 @@
 			'TumblrPhoto' => 7,
 			'TumblrChat' => 8,
 			'JobsStage' => 9,
-			'JobsFulltime' => 10,
+			'JobsVastebaan' => 10,
 			'MagazineWeekvan' => 11,
 			'MagazineNieuwwerk' => 12,
 			'MagazineGoedbezig' => 13,
