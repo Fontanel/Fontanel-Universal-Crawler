@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Fontanel Universal Crawler
 	Description: Periodically imports posts from a any source and puts all content in a timeline
-	Version: 2.0
+	Version: 3.0
 	Author: Fontanel, Jasper Kennis
 	Author URI: http://fontanel.nl
 	License: None
