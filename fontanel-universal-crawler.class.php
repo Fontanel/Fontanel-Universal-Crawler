@@ -9,8 +9,8 @@
     	public function __construct() {
         $this->event_types = unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES );
     	  $this->requireClasses();
-    	  $this->requireCrawlers();
     	  $this->requireTimelineEvents();
+    	  $this->requireCrawlers();
 				$this->database_manager = new TimelineDatabaseManager();
 				$this->crawlers[] = new TimelineTumblrCrawler( $this->database_manager );
 				$this->crawlers[] = new TimelineJobsCrawler( $this->database_manager );
@@ -70,8 +70,13 @@
   		}
   		
   		private function createEventObject( $event ) {
-  		  print_r( array_flip( $this->event_types )[ $event->type ] );
-    		return new TimelineEvent( $event->objects, $this->database_manager );
+  		  $class_name = 'TimelineEvent' . array_flip( $this->event_types )[ $event->type ];
+  		  print_r( $class_name . '' . class_exists( $class_name ) );
+  		  if( class_exists( $class_name ) ) {
+    		  return new $class_name( $event->objects, $this->database_manager );
+  		  } else {
+      		return new TimelineEvent( $event->objects, $this->database_manager );
+    		}
   		}
   	}
   endif;

@@ -30,6 +30,8 @@
     		} else {
       		$this->template_path = dirname(__FILE__) . '/timeline-event-templates/timeline-event.php';
     		}
+    		//print_r( $this->slug );
+    		//print_r( $this->template_path );
 			}
 			
 			public function render() {
