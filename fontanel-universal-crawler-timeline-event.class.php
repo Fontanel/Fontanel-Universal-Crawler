@@ -23,12 +23,16 @@
 			}
 			
 			private function findTemplate() {
-        if( file_exists( get_template_directory() . '/timeline-events/' . $this->slug . '.php' ) ) {
-    			$this->template_path = get_template_directory() . '/timeline-events/' . $this->slug . '.php';
-    		} elseif( file_exists( dirname(__FILE__) . '/timeline-events-templates/' . $this->slug . '.php' ) ) {
-      		$this->template_path =  dirname(__FILE__) . '/timeline-event-templates/' . $this->slug . '.php';
+        $template_file = get_template_directory() . '/timeline-events/' . $this->slug . '.php';
+        $plugin_file = dirname(__FILE__) . '/timeline-event-templates/' . $this->slug . '.php';
+        $default_file = dirname(__FILE__) . '/timeline-event-templates/timeline-event.php';
+        
+        if( file_exists( $template_file ) ) {
+    			$this->template_path = $template_file;
+    		} elseif( file_exists( $plugin_file ) ) {
+      		$this->template_path = $plugin_file;
     		} else {
-      		$this->template_path = dirname(__FILE__) . '/timeline-event-templates/timeline-event.php';
+      		$this->template_path = $default_file;
     		}
 			}
 			
