@@ -40,7 +40,7 @@
         $vars = $this->objects;
         	 
         if( is_array( $vars ) && !empty( $vars ) ) {
-          extract($vars);
+          extract( $vars );
         }
         
   			ob_start();
