@@ -62,15 +62,15 @@
 			}
 			
 			public function getEvents( $page = 0, $per_page = 10 ) {
-        $returns = Array();
+        $events = Array();
   			foreach( $this->database_manager->getEvents( $page, $per_page ) as $event ) {
     			$new_event = $this->createEventObject( $event );
     			
     			if( is_object( $new_event ) ) {
-      			$returns[] = $new_event;
+      			$events[] = $new_event;
     			}
   			}
-  			return $returns;
+  			return $events;
   		}
   		
   		private function createEventObject( $event ) {
