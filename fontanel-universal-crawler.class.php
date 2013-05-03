@@ -71,7 +71,6 @@
   		
   		private function createEventObject( $event ) {
   		  $class_name = 'TimelineEvent' . array_flip( $this->event_types )[ $event->type ];
-  		  print_r( $class_name . '' . class_exists( $class_name ) );
   		  if( class_exists( $class_name ) ) {
     		  return new $class_name( $event->objects, $this->database_manager );
   		  } else {
