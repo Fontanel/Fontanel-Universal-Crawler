@@ -6,7 +6,11 @@
   	  private $file_prefix = 'fontanel-universal-crawler-';
   	  private $event_types = Array();
   	  
-    	public function __construct() {
+    	public function __construct( $fetch = false ) {
+      	if( $fetch ) {
+        	$this->fetchPosts();
+      	}
+
         $this->event_types = unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES );
     	  $this->requireClasses();
     	  $this->requireTimelineEvents();
@@ -16,7 +20,6 @@
 				$this->crawlers[] = new TimelineJobsCrawler( $this->database_manager );
 				$this->crawlers[] = new TimelineMagazineCrawler( $this->database_manager );
 				$this->prepareForWP();
-				// $this->fetchPosts();
 			}
 			
 			private function requireClasses() {
