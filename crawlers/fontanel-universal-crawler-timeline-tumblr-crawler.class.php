@@ -12,32 +12,30 @@
 			}
 			
 			public function fetchPosts() {
-				$result = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=1' );
+				$result = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=10' );
 				$this->processResult( $result );
 			}
 			
 			private function processResult( $result ) {
 				$workable_result = json_decode( $result );
-				$type = $workable_result->response->posts[0]->type;
-				$object_id = $workable_result->response->posts[0]->id;
-				$type_id = $this->getTypeId( $this->platform, $type );
-				$timestamp = $workable_result->response->posts[0]->timestamp;
-				
-				$savable_objects = $this->createSavableObjects( $workable_result->response->posts );
-				
-				$this->storeEvent( $type_id, $object_id, $timestamp, $savable_objects );
+				foreach( $workable_result->response->posts as $post) {
+  				$type = $post->type;
+  				$object_id = $post->id;
+  				$type_id = $this->getTypeId( $this->platform, $type );
+  				$timestamp = $post->timestamp;
+  				
+  				$savable_objects = $this->createSavableObjects( $post );
+  				
+  				$this->storeEvent( $type_id, $object_id, $timestamp, $savable_objects );
+				}
 			}
 			
-			private function createSavableObjects( $raw_objects ) {
-				$results = array();
-				foreach( $raw_objects as $raw_object ) {
-					$new_savable_objects = array();
-					$new_savable_objects['type'] = 'tumblr';
-					$new_savable_objects['id'] = $raw_object->id;
-					$new_savable_objects['object'] = json_encode( $raw_object );
-					$results[] = $new_savable_objects;
-				}
-				return $results;
+			private function createSavableObjects( $raw_object ) {
+				$new_savable_object = array();
+				$new_savable_object['type'] = 'tumblr';
+				$new_savable_object['id'] = $raw_object->id;
+				$new_savable_object['object'] = json_encode( $raw_object );
+				return Array( $new_savable_object );
 			}
 		}
 	endif;
