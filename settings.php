@@ -1,20 +1,20 @@
 <?php	
 	$options = array(
 		'EVENT_TYPES' => serialize( array(
-			'tumblr_text' => 1,
-			'tumblr_quote' => 2,
-			'tumblr_link' => 3,
-			'tumblr_answer' => 4,
-			'tumblr_video' => 5,
-			'tumblr_audio' => 6,
-			'tumblr_photo' => 7,
-			'tumblr_chat' => 8,
-			'jobs_stage' => 9,
-			'jobs_fulltime' => 10,
-			'magazine_weekvan' => 11,
-			'magazine_nieuwwerk' => 12,
-			'magazine_goedbezig' => 13,
-			'magazine_fontanel' => 14
+			'TumblrText' => 1,
+			'TumblrQuote' => 2,
+			'TumblrLink' => 3,
+			'TumblrAnswer' => 4,
+			'TumblrVideo' => 5,
+			'TumblrAudio' => 6,
+			'TumblrPhoto' => 7,
+			'TumblrChat' => 8,
+			'JobsStage' => 9,
+			'JobsFulltime' => 10,
+			'MagazineWeekvan' => 11,
+			'MagazineNieuwwerk' => 12,
+			'MagazineGoedbezig' => 13,
+			'MagazineFontanel' => 14
 		) )
 	);
 	
