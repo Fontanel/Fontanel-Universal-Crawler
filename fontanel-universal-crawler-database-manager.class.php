@@ -78,7 +78,7 @@
         $query = 
           "SELECT " . $this->tables['events'] . ".type, " . $this->tables['events'] . ".objects " .
           "FROM " . $this->tables['events'] . " " .
-          "ORDER BY time " .
+          "ORDER BY time DESC " .
           "LIMIT " . $per_page . ";";
         return $this->iwpdb->get_results( $query );
       }
