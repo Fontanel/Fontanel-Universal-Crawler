@@ -4,7 +4,7 @@
 			private $objects = Array();
 			private $template_path;
 			private $database_manager;
-			private $slug = 'timeline-event';
+			protected $slug = 'timeline-event';
 			
 			public function __construct( $objects, $database_manager, $template_path = false ) {
         $this->database_manager = $database_manager;
