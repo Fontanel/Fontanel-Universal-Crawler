@@ -11,7 +11,7 @@
 			}
 			
 			protected function getTypeId ( $platform = 'wp', $post_type = 'post' ) {
-				$type = $platform . '_' . $post_type;
+				$type = str_replace(' ', '', ucfirst( $platform ) . ucfirst( $post_type ) );
 				return $this->event_types[ $type ];
 			}
 			

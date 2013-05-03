@@ -2,21 +2,24 @@
 	if( ! class_exists( 'FontanelUniversalCrawler' ) ):
   	class FontanelUniversalCrawler {
   	  private $database_manager;
-  	  private $crawlers = array();
-  	  private $file_prefix = 'fontanel-universal-crawler-';
+  	  private $crawlers = Array();
   	  private $event_types = Array();
+  	  private $file_prefix = 'fontanel-universal-crawler-';
   	  
-    	public function __construct() {
+    	public function __construct( $fetch = false ) {
         $this->event_types = unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES );
+    	  
     	  $this->requireClasses();
+    	  $this->database_manager = new TimelineDatabaseManager();
+    	  
     	  $this->requireTimelineEvents();
     	  $this->requireCrawlers();
-				$this->database_manager = new TimelineDatabaseManager();
-				$this->crawlers[] = new TimelineTumblrCrawler( $this->database_manager );
-				$this->crawlers[] = new TimelineJobsCrawler( $this->database_manager );
-				$this->crawlers[] = new TimelineMagazineCrawler( $this->database_manager );
+    	  
+    	  if( $fetch ) {
+        	$this->fetchPosts();
+      	}
+      	
 				$this->prepareForWP();
-				// $this->fetchPosts();
 			}
 			
 			private function requireClasses() {
@@ -49,6 +52,12 @@
         		require_once( $file );
   			  }
 			  }
+			  
+			  foreach( get_declared_classes() as $class ) {
+          if( is_subclass_of( $class, 'TimelineCrawler' ) ) {
+            $this->crawlers[] = new $class( $this->database_manager );
+          }
+        }
     	}
 			
 			private function prepareForWP() {
@@ -62,19 +71,25 @@
 			}
 			
 			public function getEvents( $page = 0, $per_page = 10 ) {
-        $returns = Array();
+        $events = Array();
   			foreach( $this->database_manager->getEvents( $page, $per_page ) as $event ) {
-    			$returns[] = $this->createEventObject( $event );
+    			$new_event = $this->createEventObject( $event );
+    			
+    			if( is_object( $new_event ) ) {
+      			$events[] = $new_event;
+    			}
   			}
-  			return $returns;
+  			return $events;
   		}
   		
   		private function createEventObject( $event ) {
-  		  $class_name = 'TimelineEvent' . array_flip( $this->event_types )[ $event->type ];
-  		  if( class_exists( $class_name ) ) {
-    		  return new $class_name( $event->objects, $this->database_manager );
-  		  } else {
-      		return new TimelineEvent( $event->objects, $this->database_manager );
+  		  if( $event->type > 0 ) {
+    		  $class_name = 'TimelineEvent' . array_flip( $this->event_types )[ $event->type ];
+    		  if( class_exists( $class_name ) ) {
+      		  return new $class_name( $event->objects, $this->database_manager );
+    		  } else {
+        		return new TimelineEvent( $event->objects, $this->database_manager );
+      		}
     		}
   		}
   	}
