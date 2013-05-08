@@ -34,6 +34,14 @@
           . "updated_at int NOT NULL,"
           . "object text NOT NULL,"
           . "PRIMARY KEY(id,type) );";
+          
+        $sql[] =
+          "CREATE TABLE IF NOT EXISTS " . $this->tables['authors'] . " ( "
+          . "tumblr_tag varchar(128) NOT NULL,"
+          . "name varchar(128) NOT NULL,"
+          . "thumb varchar(128) NOT NULL,"
+          . "wordpress_id int NOT NULL,"
+          . "PRIMARY KEY(tumblr_tag) );";
 				
 				foreach( $sql as $query ) {
 					$this->iwpdb->query( $query );
