@@ -87,10 +87,18 @@
       
       public function getEvents( $page = 0, $per_page = 10 ) {
         $query = 
-          "SELECT " . $this->tables['events'] . ".type, " . $this->tables['events'] . ".objects " .
-          "FROM " . $this->tables['events'] . " " .
-          "ORDER BY time DESC " .
-          "LIMIT " . $per_page . ";";
+          "SELECT "
+          . $this->tables['events'] . ".type,"
+          . $this->tables['events'] . ".objects,"
+          . $this->tables['events'] . ".sticky_untill,"
+          . $this->tables['authors'] . ".name,"
+          . $this->tables['authors'] . ".thumb,"
+          . $this->tables['authors'] . ".wordpress_id "
+          . "FROM " . $this->tables['events'] . " "
+            . "LEFT JOIN " . $this->tables['authors'] . " "
+            . "ON " . $this->tables['authors'] . ".tumblr_tag = " . $this->tables['events'] . ".author "
+          . "ORDER BY time DESC "
+          . "LIMIT " . $per_page . ";";
         return $this->iwpdb->get_results( $query );
       }
       
