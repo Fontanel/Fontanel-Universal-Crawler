@@ -26,7 +26,8 @@
 			  $includes = array(
 			   'database-manager',
 			   'timeline-crawler',
-			   'timeline-event'
+			   'timeline-event',
+			   'user'
 			  );
 			  
 			  foreach( $includes as $file ) {
@@ -85,10 +86,16 @@
   		  if( $event->type > 0 ) {
   		    $type = array_flip( $this->event_types )[ $event->type ];
     		  $class_name = 'TimelineEvent' . $type;
+    		  $user = NULL;
+    		  
+    		  if( !empty( $event->name ) ) {
+      		  $user = new FontanelUniversalCrawlerUser( $event->name, $event->thumb, $event->wordpress_id );
+    		  }
+    		  
     		  if( class_exists( $class_name ) ) {
-      		  return new $class_name( $event->objects, $this->database_manager, $type );
+      		  return new $class_name( $event->objects, $this->database_manager, $type, $user );
     		  } else {
-        		return new TimelineEvent( $event->objects, $this->database_manager, $type );
+        		return new TimelineEvent( $event->objects, $this->database_manager, $type, $user );
       		}
     		}
   		}

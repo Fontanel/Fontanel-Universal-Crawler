@@ -4,12 +4,14 @@
 			private $objects = Array();
 			private $template_path;
 			private $database_manager;
+			private $user;
 			protected $slug = 'timeline-event';
 			protected $type = 'Undefined';
 			
-			public function __construct( $objects, $database_manager, $type = 'Undefined', $template_path = false ) {
+			public function __construct( $objects, $database_manager, $type = 'Undefined', $template_path = false, $user = NULL ) {
         $this->type = $type;
         $this->database_manager = $database_manager;
+        $this->user = $user;
         
         $this->setObjects( $objects );
 				
@@ -43,6 +45,7 @@
         $vars['objects'] = $this->objects;
         $vars['type'] = $this->type;
         $vars['slug'] = $this->slug;
+/*         $vars['user'] = json_encode( $this->user ); */
         	 
         if( is_array( $vars ) && !empty( $vars ) ) {
           extract( $vars );
