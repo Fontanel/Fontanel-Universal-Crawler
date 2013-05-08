@@ -3,7 +3,7 @@
   	class TimelineDatabaseManager {
     	private $database_prefix = 'timeline_';
     	private $tables = array();
-    	private $iwpdb;
+    	public $iwpdb;
   	
       public function __construct() {
       	global $wpdb;
@@ -25,6 +25,7 @@
           . "updated_at int NOT NULL,"
           . "objects varchar(128) NOT NULL,"
           . "sticky_untill int NOT NULL,"
+          . "author varchar(128) NULL,"
           . "PRIMARY KEY(time,objects) );";
 				
 				$sql[] =
@@ -63,12 +64,13 @@
       	return false;
       }
       
-      public function storeEvent( $type = 0, $objects = '', $timestamp = 0 ) {
+      public function storeEvent( $type = 0, $objects = '', $timestamp = 0, $author = NULL ) {
       	$this->iwpdb->insert( $this->tables['events'], array(
       		'type' => $type,
       		'objects' => $objects,
       		'time' => $timestamp,
-      		'updated_at' => $timestamp
+      		'updated_at' => $timestamp,
+      		'author' => $author
       	) );
       }
       
