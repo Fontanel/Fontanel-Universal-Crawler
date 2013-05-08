@@ -8,8 +8,9 @@
       public function __construct() {
       	global $wpdb;
       	$this->iwpdb = $wpdb;
-      	$this->tables['events'] = $this->iwpdb->prefix . $this->database_prefix . "events";
-      	$this->tables['objects'] = $this->iwpdb->prefix . $this->database_prefix . "objects";
+      	foreach( array( 'events', 'objects', 'authors' ) as $table_name ) {
+          $this->tables[$table_name] = $this->iwpdb->prefix . $this->database_prefix . $table_name;	
+      	}
       	
 				/* require_once( ABSPATH . 'wp-admin/includes/upgrade.php' ); */
         $this->ensureDatabaseExistence();
