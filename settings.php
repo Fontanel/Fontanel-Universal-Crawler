@@ -15,7 +15,8 @@
 			'MagazineNieuwwerk' => 12,
 			'MagazineGoedbezig' => 13,
 			'MagazineFontanel' => 14
-		) )
+		) ),
+		'TIMELINE_EVENTS_DIR' => dirname(__FILE__) . '/timeline-events'
 	);
 	
 	foreach( $options as $key => $value ) {
