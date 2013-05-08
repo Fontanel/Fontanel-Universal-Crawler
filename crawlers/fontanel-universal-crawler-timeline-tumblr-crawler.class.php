@@ -39,7 +39,6 @@
           . "WHERE `tumblr_tag` REGEXP  '" . $search . "' "
           . "LIMIT 1";
         $author = $this->db_manager->iwpdb->get_row( $sql );
-        print_r($author);
         if( $author ){ return $author->tumblr_tag; }
         return '';
 			}
