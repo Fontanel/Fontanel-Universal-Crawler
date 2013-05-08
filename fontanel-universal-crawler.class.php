@@ -37,9 +37,8 @@
     	}
     	
     	private function requireTimelineEvents() {
-        $timeline_events_dir = dirname(__FILE__) . '/timeline-events';
-        if( is_dir( $timeline_events_dir ) ) {
-  			  foreach( glob( $timeline_events_dir . '/*.*' ) as $file ) {
+        if( is_dir( FONTANEL_UNIVERSAL_CRAWLER_TIMELINE_EVENTS_DIR ) ) {
+  			  foreach( glob( FONTANEL_UNIVERSAL_CRAWLER_TIMELINE_EVENTS_DIR . '/*.*' ) as $file ) {
         		require_once( $file );
   			  }
 			  }
