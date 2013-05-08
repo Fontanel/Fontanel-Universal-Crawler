@@ -3,7 +3,7 @@
 	<aside class="avatar"></aside>
 	<div class="article-body">
 		<figure>
-			<img src="<?php print( $photo->url ); ?>" width="<?php print( $photo->width ); ?>" height="<?php print( $photo->height ); ?>">
+			<img src="<?php print( $photo->url ); ?>" width="100%" height="auto">
 		</figure>
 		<div class="caption">
 			<?php print( json_decode( $vars['objects'][0]->object )->caption ); ?>
