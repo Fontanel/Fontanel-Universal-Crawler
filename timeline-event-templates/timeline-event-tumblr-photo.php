@@ -1,6 +1,6 @@
 <?php $photo = json_decode( $vars['objects'][0]->object )->photos[0]->alt_sizes[1]; ?>
 <article class="note photo">
-	<aside class="avatar"></aside>
+	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 		<figure>
 			<img src="<?php print( $photo->url ); ?>" width="100%" height="auto">

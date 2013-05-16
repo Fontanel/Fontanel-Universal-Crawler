@@ -1,6 +1,6 @@
 <?php $video = json_decode( $vars['objects'][0]->object ); ?>
 <article class="note photo">
-	<aside class="avatar"></aside>
+	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 		<figure>
 			<?php print( $video->player[0]->embed_code ); ?>

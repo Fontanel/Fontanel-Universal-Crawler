@@ -1,5 +1,5 @@
 <article class="note text">
-	<aside class="avatar"></aside>
+  <?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 		<h2><a href="#fixme"><?php print_r($vars['type']); ?> (<?php print_r($vars['slug']); ?>)</a></h2>
 		<div class="caption">
