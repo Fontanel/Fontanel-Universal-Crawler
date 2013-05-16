@@ -10,7 +10,7 @@
 
 				while ( have_posts() ) : the_post();
 					$type_id = $this->getTypeId( $this->platform, get_post_type( get_the_ID() ) );
-					$this->storeEvent( $type_id, get_the_ID(), get_the_time() );
+					$this->storeEvent( $type_id, (string)get_the_ID(), get_the_time( 'U', true ) );
 				endwhile;
 				
 				wp_reset_query();
