@@ -1,10 +1,10 @@
 <?php
   if( ! class_exists( 'TimelineEvent' ) ):
 		class TimelineEvent {
-			private $objects = Array();
 			private $template_path;
 			private $database_manager;
 			private $user;
+			protected $objects = Array();
 			protected $slug = 'timeline-event';
 			protected $type = 'Undefined';
 			
@@ -22,7 +22,7 @@
 				}
 			}
 			
-			private function setObjects( $objects ) {
+			protected function setObjects( $objects ) {
   			$this->objects = $this->database_manager->getObjects( $objects );
 			}
 			
