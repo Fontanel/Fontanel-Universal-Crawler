@@ -7,7 +7,6 @@
 		</figure>
 		<div class="caption">
 			<?php print( json_decode( $vars['objects'][0]->object )->caption ); ?>
-			<p><a href="<?php print( json_decode( $vars['objects'][0]->object )->post_url ); ?>">De originele post</a></p>
 		</div>
 		<footer>
 			<div class="fb-share">Share</div>
