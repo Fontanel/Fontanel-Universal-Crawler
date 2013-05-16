@@ -62,6 +62,18 @@
 			
 			private function prepareForWP() {
   			// add_filter( 'page_template', array( &$this, 'register_page_templates' ) );
+  			add_action( 'wp_enqueue_scripts', array( &$this, 'register_fontanel_universal_import_scripts' ) );
+			}
+			
+			public function register_fontanel_universal_import_scripts() {
+				wp_register_script( 'waypoints', plugins_url( '/js/waypoints.min.js', __FILE__ ), array('jquery'), 1, true );
+				wp_register_script( 'fitvid', plugins_url( '/js/fitvid.js', __FILE__ ), array('jquery'), 1, true );
+				wp_register_script( 'infinity', plugins_url( '/js/infinity.min.js', __FILE__ ), array('jquery'), 1, true );
+/* 				wp_register_script( 'infinite-scroll', plugins_url( '/js/infinite-scroll.js', __FILE__ ), array( 'infinity', 'jquery', 'waypoints', 'spin' ), 1, true ); */
+				
+				wp_enqueue_script( 'waypoints' );
+				wp_enqueue_script( 'fitvid' );
+/* 				wp_enqueue_script( 'infinite-scroll' );  */
 			}
 			
 			private function fetchPosts() {
