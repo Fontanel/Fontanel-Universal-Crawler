@@ -45,7 +45,7 @@
         $vars['objects'] = $this->objects;
         $vars['type'] = $this->type;
         $vars['slug'] = $this->slug;
-        $vars['user'] = json_encode( $this->user );
+        $vars['user'] = $this->user;
         	 
         if( is_array( $vars ) && !empty( $vars ) ) {
           extract( $vars );
