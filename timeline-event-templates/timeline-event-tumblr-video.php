@@ -7,7 +7,6 @@
 		</figure>
 		<div class="caption">
 			<?php print( $video->caption ); ?>
-      <p><a href="<?php print( $video->post_url ); ?>">De originele post</a></p>
 		</div>
 		<footer>
 			<div class="fb-share">Share</div>
