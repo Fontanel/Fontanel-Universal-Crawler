@@ -11,7 +11,6 @@
 		  <img src="<?php print( $logo_l[0] ); ?>" ?>
 			<h2><?php print( $vars['objects']->post_title ); ?></h2>
 			<h3>post_excerpt</h3>
-			<div style="width: 100px; height: 100px; background-color: <?php print($rgb) ?>;">
       <!-- <p><?php print_r($vars['objects']); ?></p> -->
 		</div>
 	</div>

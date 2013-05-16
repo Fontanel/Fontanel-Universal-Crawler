@@ -1,4 +1,4 @@
-<article class="story nieuwwerk">
+<article class="story weekvan">
 	<div class="article-body">
 		<div class="caption">
 			<h2><?php print_r($vars['type']); ?> (<?php print_r($vars['slug']); ?>)</h2>

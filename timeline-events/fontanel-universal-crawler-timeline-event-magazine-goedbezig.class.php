@@ -1,12 +1,10 @@
 <?php
+  require_once( FONTANEL_UNIVERSAL_CRAWLER_TIMELINE_EVENTS_DIR . '/fontanel-universal-crawler-timeline-event-magazine.class.php' );
+  
   if( ! class_exists( 'TimelineEventMagazineGoedbezig' ) ):
-		class TimelineEventMagazineGoedbezig extends TimelineEvent {
+		class TimelineEventMagazineGoedbezig extends TimelineEventMagazine {
 			protected $slug = 'timeline-event-magazine-goedbezig';
 			protected $type = 'Magazine Goedbezig';
-			
-			protected function setObjects( $objects ) {
-  			$this->objects = get_post( $objects );
-			}
 		}
 	endif;
 ?>
