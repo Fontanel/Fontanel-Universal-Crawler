@@ -10,7 +10,7 @@
 		  <img src="<?php print( $portrait[0] ); ?>" ?>
 		  <img src="<?php print( $logo_l[0] ); ?>" ?>
 			<h2><?php print( $vars['objects']->post_title ); ?></h2>
-			<h3>post_excerpt</h3>
+			<h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
       <!-- <p><?php print_r($vars['objects']); ?></p> -->
 		</div>
 	</div>
