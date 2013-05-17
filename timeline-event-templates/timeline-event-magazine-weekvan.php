@@ -32,7 +32,7 @@
 				  false,
 				  array(
 				    'class' => 'prev-thumb',
-				    'style' => 'right: -' . rand( 1, 4 ) . 'rem; top: -' . rand( 1, 4 ) . 'rem; transform:rotate(' . rand( -15, 15 ) . 'deg);-ms-transform:rotate(' . rand( -15, 15 ) . 'deg);-webkit-transform:rotate(' . rand( -15, 15 ) . 'deg);'
+				    'style' => 'right: -' . rand( 1, 4 ) . 'rem; top: -' . rand( 1, 4 ) . 'rem; transform:rotate(' . rand( -25, 25 ) . 'deg);-ms-transform:rotate(' . rand( -25, 25 ) . 'deg);-webkit-transform:rotate(' . rand( -25, 25 ) . 'deg);'
 				  ) 
 				) ); ?>
   		<?php endforeach;
