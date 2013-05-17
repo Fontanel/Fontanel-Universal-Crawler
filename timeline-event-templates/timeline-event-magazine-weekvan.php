@@ -26,7 +26,15 @@
   <?php
 		if ( count( $attachments ) > 0 ):
 			foreach ( $attachments as $attachment ): ?>
-				<?php print( wp_get_attachment_image( $attachment->ID, 'weekvan-photo', false ) ); ?>
+				<?php print( wp_get_attachment_image(
+				  $attachment->ID,
+				  'portrait_s',
+				  false,
+				  array(
+				    'class' => 'prev-thumb',
+				    'style' => 'right: -' . rand( 1, 4 ) . 'rem; top: -' . rand( 1, 4 ) . 'rem; transform:rotate(' . rand( -15, 15 ) . 'deg);-ms-transform:rotate(' . rand( -15, 15 ) . 'deg);-webkit-transform:rotate(' . rand( -15, 15 ) . 'deg);'
+				  ) 
+				) ); ?>
   		<?php endforeach;
 		endif;
 	?>
