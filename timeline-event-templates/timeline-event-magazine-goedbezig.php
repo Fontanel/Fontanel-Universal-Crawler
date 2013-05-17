@@ -6,8 +6,12 @@
 ?>
 <article class="story goedbezig" style="background-image: url(<?php print( $bg ); ?>);">
   <div class="title">
-    <img src="<?php print( $logo_l[0] ); ?>" class="logo left">
-    <img src="<?php print( $logo_l[0] ); ?>" class="logo right">
+    <div class="wrap-logo left">
+      <img src="<?php print( $logo_l[0] ); ?>" class="logo">
+    </div>
+    <div class="wrap-logo right">
+      <img src="<?php print( $logo_l[0] ); ?>" class="logo">
+    </div>
     <img src="<?php print( $portrait[0] ); ?>" class="portrait">
     <img src="<?php print( $portrait[0] ); ?>" class="fake-portrait">
   </div>
