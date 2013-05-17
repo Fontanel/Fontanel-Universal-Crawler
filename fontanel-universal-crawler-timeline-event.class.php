@@ -1,15 +1,17 @@
 <?php
   if( ! class_exists( 'TimelineEvent' ) ):
 		class TimelineEvent {
-			private $objects = Array();
 			private $template_path;
 			private $database_manager;
+			private $user;
+			protected $objects = Array();
 			protected $slug = 'timeline-event';
 			protected $type = 'Undefined';
 			
-			public function __construct( $objects, $database_manager, $type = 'Undefined', $template_path = false ) {
+			public function __construct( $objects, $database_manager, $type = 'Undefined', $template_path = false, $user = NULL ) {
         $this->type = $type;
         $this->database_manager = $database_manager;
+        $this->user = $user;
         
         $this->setObjects( $objects );
 				
@@ -20,7 +22,7 @@
 				}
 			}
 			
-			private function setObjects( $objects ) {
+			protected function setObjects( $objects ) {
   			$this->objects = $this->database_manager->getObjects( $objects );
 			}
 			
@@ -43,6 +45,7 @@
         $vars['objects'] = $this->objects;
         $vars['type'] = $this->type;
         $vars['slug'] = $this->slug;
+        $vars['user'] = $this->user;
         	 
         if( is_array( $vars ) && !empty( $vars ) ) {
           extract( $vars );

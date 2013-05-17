@@ -26,7 +26,8 @@
 			  $includes = array(
 			   'database-manager',
 			   'timeline-crawler',
-			   'timeline-event'
+			   'timeline-event',
+			   'user'
 			  );
 			  
 			  foreach( $includes as $file ) {
@@ -37,9 +38,8 @@
     	}
     	
     	private function requireTimelineEvents() {
-        $timeline_events_dir = dirname(__FILE__) . '/timeline-events';
-        if( is_dir( $timeline_events_dir ) ) {
-  			  foreach( glob( $timeline_events_dir . '/*.*' ) as $file ) {
+        if( is_dir( FONTANEL_UNIVERSAL_CRAWLER_TIMELINE_EVENTS_DIR ) ) {
+  			  foreach( glob( FONTANEL_UNIVERSAL_CRAWLER_TIMELINE_EVENTS_DIR . '/*.*' ) as $file ) {
         		require_once( $file );
   			  }
 			  }
@@ -62,6 +62,20 @@
 			
 			private function prepareForWP() {
   			// add_filter( 'page_template', array( &$this, 'register_page_templates' ) );
+  			add_action( 'wp_enqueue_scripts', array( &$this, 'register_fontanel_universal_import_scripts' ) );
+			}
+			
+			public function register_fontanel_universal_import_scripts() {
+				wp_register_script( 'waypoints', plugins_url( '/js/waypoints.min.js', __FILE__ ), array('jquery'), 1, true );
+				wp_register_script( 'fitvid', plugins_url( '/js/fitvid.js', __FILE__ ), array('jquery'), 1, true );
+				wp_register_script( 'infinity', plugins_url( '/js/infinity.min.js', __FILE__ ), array('jquery'), 1, true );
+				wp_register_script( 'universal-importer', plugins_url( '/js/universal-importer.js', __FILE__ ), array('fitvid','jquery','waypoints'), 1, true );
+/* 				wp_register_script( 'infinite-scroll', plugins_url( '/js/infinite-scroll.js', __FILE__ ), array( 'infinity', 'jquery', 'waypoints', 'spin' ), 1, true ); */
+				
+				wp_enqueue_script( 'waypoints' );
+				wp_enqueue_script( 'fitvid' );
+				wp_enqueue_script( 'universal-importer' );
+/* 				wp_enqueue_script( 'infinite-scroll' );  */
 			}
 			
 			private function fetchPosts() {
@@ -86,10 +100,16 @@
   		  if( $event->type > 0 ) {
   		    $type = array_flip( $this->event_types )[ $event->type ];
     		  $class_name = 'TimelineEvent' . $type;
+    		  $user = NULL;
+    		  
+    		  if( !empty( $event->name ) ) {
+      		  $user = new FontanelUniversalCrawlerUser( $event->name, $event->thumb, $event->wordpress_id );
+    		  }
+    		  
     		  if( class_exists( $class_name ) ) {
-      		  return new $class_name( $event->objects, $this->database_manager, $type );
+      		  return new $class_name( $event->objects, $this->database_manager, $type, false, $user );
     		  } else {
-        		return new TimelineEvent( $event->objects, $this->database_manager, $type );
+        		return new TimelineEvent( $event->objects, $this->database_manager, $type, false, $user );
       		}
     		}
   		}

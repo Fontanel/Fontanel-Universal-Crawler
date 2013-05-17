@@ -1,10 +1,8 @@
+<?php $article_parts = preg_split("/<p><!-- more -->.*?\/p>/", json_decode( $vars['objects'][0]->object )->body ); ?>
 <article class="note text">
-  <?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
+	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
-		<h2><a href="#fixme"><?php print_r($vars['type']); ?> (<?php print_r($vars['slug']); ?>)</a></h2>
-		<div class="caption">
-			<p><?php print_r($vars['objects']); ?></p>
-		</div>
+  	<div class="text"><?php print( $article_parts[0] ); ?></div>
 		<footer>
 			<div class="fb-share">Share</div>
 			<div class="twitter">Tweet</div>
@@ -22,3 +20,4 @@
 		</footer>
 	</div>
 </article>
+
