@@ -23,5 +23,5 @@
 				</ul>
 			</div>
 		</footer>
-<!-- Like -->  </div>
+  </div>
 </article>

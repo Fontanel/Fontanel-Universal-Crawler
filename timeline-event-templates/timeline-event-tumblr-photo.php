@@ -2,7 +2,6 @@
   $post = json_decode( $vars['objects'][0]->object );
   $photo = $post->photos[0]->alt_sizes[1];
 ?>
-<!-- <?php print_r($post); ?> -->
 <article class="note photo">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
