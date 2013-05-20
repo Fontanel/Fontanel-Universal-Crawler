@@ -6,7 +6,7 @@
 <article class="note photo">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
-		<figure<?php if( count( $post->photos ) > 0 ): ?> class="has-slideshow"<?php endif; ?>>
+		<figure<?php if( count( $post->photos ) > 1 ): ?> class="has-slideshow"<?php endif; ?>>
 			<img src="<?php print( $photo->url ); ?>" width="100%" height="auto">
 		</figure>
 		<ul class="all-images" data-ref="group-<?php print( $post->id ); ?>">
