@@ -1,12 +1,21 @@
-<?php $photo = json_decode( $vars['objects'][0]->object )->photos[0]->alt_sizes[1]; ?>
+<?php
+  $post = json_decode( $vars['objects'][0]->object );
+  $photo = $post->photos[0]->alt_sizes[1];
+?>
+<!-- <?php print_r($post); ?> -->
 <article class="note photo">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 		<figure>
 			<img src="<?php print( $photo->url ); ?>" width="100%" height="auto">
 		</figure>
+		<ul class="all-images" data-ref="group-<?php print( $post->id ); ?>">
+		  <?php foreach( $post->photos as $slide_photo ): ?>
+		    <li><a class="group-<?php print( $post->id ); ?>" href="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">Dit is een foto</a></li>
+		  <?php endforeach; ?>
+		</ul>
 		<div class="caption">
-			<?php print( json_decode( $vars['objects'][0]->object )->caption ); ?>
+			<?php print( $post->caption ); ?>
 		</div>
 		<footer>
 			<div class="fb-share">Share</div>
@@ -23,5 +32,5 @@
 				</ul>
 			</div>
 		</footer>
-<!-- Like -->  </div>
+  </div>
 </article>
