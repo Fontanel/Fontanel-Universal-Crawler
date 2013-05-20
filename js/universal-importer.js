@@ -5,12 +5,19 @@ if ($('.fitting-video').length > 0) {
 
 if ($('.all-images').length > 0) {
   $('.all-images').each(function(i, e) {
-    var box, collection_class;
+    var box, collection_class, parent, prime_image;
 
     collection_class = $(e).data('ref');
-    box = $(collection_class).colorbox({
-      rel: collection_class
+    parent = $(e).parent('.article-body');
+    prime_image = parent.find('figure');
+    box = $("." + collection_class).colorbox({
+      rel: collection_class,
+      maxWidth: '90%',
+      maxHeight: '90%'
     });
-    return console.log(box);
+    return prime_image.on('click', function(e) {
+      e.preventDefault();
+      return box.first().click();
+    });
   });
 }
