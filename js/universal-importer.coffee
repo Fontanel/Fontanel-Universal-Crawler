@@ -1,9 +1,17 @@
+if $( '#banners' ).length > 0
+  $( '#articles' ).waypoint ( dir ) ->
+    if dir is 'up'
+      $( '#banners' ).removeClass 'sticky'
+    else
+      $( '#banners' ).addClass 'sticky'
+  ,
+    offset: 30
+
 if $( '.fitting-video' ).length > 0
   $( '.fitting-video' ).fitVids()
   
 if $( '.all-images' ).length > 0
   $( '.all-images' ).each ( i, e ) ->
-#     $( e ).hide()
     collection_class = $( e ).data 'ref'
     parent = $( e ).parent( '.article-body' )
     prime_image = parent.find( 'figure' )
