@@ -13,22 +13,22 @@
 				$workable_result = json_decode( $result );
 				
 				$mapper = function($val) {
-  				$val->id;
+  				return( $val->id );
 				};
 				
-				$object_ids = array_map($mapper, $workable_result );
+				$object_ids = array_map( $mapper, $workable_result );
 				$type_id = $this->getTypeId( $this->platform, 'roundup' );
 				$timestamp = $workable_result[0]->created_at;
 				
 				$savable_objects = $this->createSavableObjects( $workable_result );
 				
-				$this->storeEvent( $type_id, $object_ids, $timestamp, $savable_objects );
+				$this->storeEvent( $type_id, implode( ',', $object_ids ), $timestamp, $savable_objects );
 			}
 			
 			private function createSavableObjects( $raw_objects ) {
 				$results = array();
 				foreach( $raw_objects as $raw_object ) {
-				  if( $raw_object['type'] == 'Vaste baan' ) {
+				  if( $raw_object->job_type == 'Vaste baan' ) {
   					$new_savable_object = array();
   					$new_savable_object['type'] = 'jobs';
   					$new_savable_object['id'] = $raw_object->id;
