@@ -24,7 +24,7 @@
 				
 				$savable_objects = $this->createSavableObjects( $workable_result );
 				
-				$this->storeEvent( $type_id, implode( ',', $object_ids ), $timestamp, $savable_objects );
+				$this->storeEvent( $type_id, implode( ',', $object_ids ), $timestamp, $savable_objects, 'jobs' );
 			}
 			
 			private function createSavableObjects( $raw_objects ) {
