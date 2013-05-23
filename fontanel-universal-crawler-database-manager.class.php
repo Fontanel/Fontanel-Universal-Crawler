@@ -38,11 +38,12 @@
           
         $sql[] =
           "CREATE TABLE IF NOT EXISTS " . $this->tables['authors'] . " ( "
-          . "tumblr_tag varchar(128) NOT NULL,"
+          . "tag varchar(128) NOT NULL,"
           . "name varchar(128) NOT NULL,"
           . "thumb varchar(128) NOT NULL,"
-          . "wordpress_id int NOT NULL,"
-          . "PRIMARY KEY(tumblr_tag) );";
+          . "wordpress_id int NULL,"
+          . "url varchar(128) NULL,"
+          . "PRIMARY KEY(tag) );";
 				
 				foreach( $sql as $query ) {
 					$this->iwpdb->query( $query );
@@ -93,10 +94,11 @@
           . $this->tables['events'] . ".sticky_untill,"
           . $this->tables['authors'] . ".name,"
           . $this->tables['authors'] . ".thumb,"
+          . $this->tables['authors'] . ".url,"
           . $this->tables['authors'] . ".wordpress_id "
           . "FROM " . $this->tables['events'] . " "
             . "LEFT JOIN " . $this->tables['authors'] . " "
-            . "ON " . $this->tables['authors'] . ".tumblr_tag = " . $this->tables['events'] . ".author "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
           . "ORDER BY time DESC "
           . "LIMIT " . $per_page . ";";
         return $this->iwpdb->get_results( $query );
@@ -109,6 +111,18 @@
           "WHERE " . $this->tables['objects'] . ".id IN (" . $objects . ");";
         return $this->iwpdb->get_results( $query );
       }
+      
+      public function tryToFindAuthor( $tags ) {
+        $search = implode('|', $tags );
+        $sql =
+          "SELECT * "
+          . "FROM `wp_timeline_authors` "
+          . "WHERE `tag` REGEXP  '" . $search . "' "
+          . "LIMIT 1";
+        $author = $this->iwpdb->get_row( $sql );
+        if( $author ){ return $author->tag; }
+        return '';
+			}
   	}
 	endif;
 ?>

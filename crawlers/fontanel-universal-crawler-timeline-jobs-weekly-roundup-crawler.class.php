@@ -13,12 +13,12 @@
 				$workable_result = json_decode( $result );
 				
 				$mapper = function($val) {
-				  if( $raw_object->job_type == 'Vaste baan' ) {
+				  if( $val->job_type == 'Vaste baan' ) {
     				return( $val->id );
   				}
 				};
 				
-				$object_ids = array_map( $mapper, $workable_result );
+				$object_ids = array_filter( array_map( $mapper, $workable_result ) );
 				$type_id = $this->getTypeId( $this->platform, 'roundup' );
 				$timestamp = $workable_result[0]->created_at;
 				

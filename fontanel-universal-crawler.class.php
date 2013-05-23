@@ -103,7 +103,7 @@
     		  $user = NULL;
     		  
     		  if( !empty( $event->name ) ) {
-      		  $user = new FontanelUniversalCrawlerUser( $event->name, $event->thumb, $event->wordpress_id );
+      		  $user = new FontanelUniversalCrawlerUser( $event->name, $event->thumb, $event->wordpress_id, $event->url );
     		  }
     		  
     		  if( class_exists( $class_name ) ) {
