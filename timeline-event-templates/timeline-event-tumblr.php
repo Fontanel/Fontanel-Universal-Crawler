@@ -3,7 +3,7 @@
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
   	<div class="text"><?php print( $article_parts[0] ); ?></div>
-		<footer>
+		<footer class="timeline-footer">
 			<div class="fb-share">Share</div>
 			<div class="twitter">Tweet</div>
 			<time>16 uur geleden</time>

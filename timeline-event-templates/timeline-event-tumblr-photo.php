@@ -16,7 +16,7 @@
 		<div class="caption">
 			<?php print( $post->caption ); ?>
 		</div>
-		<footer>
+		<footer class="timeline-footer">
 			<div class="fb-share">Share</div>
 			<div class="twitter">Tweet</div>
 			<time>16 uur geleden</time>
