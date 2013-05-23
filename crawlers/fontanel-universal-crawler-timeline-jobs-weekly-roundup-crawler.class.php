@@ -13,7 +13,9 @@
 				$workable_result = json_decode( $result );
 				
 				$mapper = function($val) {
-  				return( $val->id );
+				  if( $raw_object->job_type == 'Vaste baan' ) {
+    				return( $val->id );
+  				}
 				};
 				
 				$object_ids = array_map( $mapper, $workable_result );
