@@ -14,7 +14,8 @@
 			'MagazineWeekvan' => 11,
 			'MagazineNieuwwerk' => 12,
 			'MagazineGoedbezig' => 13,
-			'MagazineFontanel' => 14
+			'MagazineFontanel' => 14,
+			'JobsRoundup' => 15
 		) ),
 		'TIMELINE_EVENTS_DIR' => dirname(__FILE__) . '/timeline-events'
 	);
