@@ -54,7 +54,7 @@
           "SELECT updated_at "
           . "FROM " . $this->tables['events'] . " "
           . "WHERE type=" . $type . " "
-          . "AND objects=" . $objects . ";";
+          . "AND objects='" . $objects . "';";
       	$existing_objects = $this->iwpdb->get_row( $sql );
       	
       	if( is_null( $existing_objects ) ) {
