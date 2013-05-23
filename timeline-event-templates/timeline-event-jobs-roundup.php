@@ -21,9 +21,7 @@
             </p>
           </a>
         </li>
-        <!-- <?php print_r( $job ); ?> -->
   	  <?php endforeach; ?>
   	</ul>
-
   </div>
 </article>
