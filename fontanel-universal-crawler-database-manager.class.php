@@ -86,7 +86,28 @@
       	}
       }
       
-      public function getEvents( $page = 0, $per_page = 10 ) {
+      public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
+        global $filter_types_on;
+        
+        $filter = function( $key ) {
+          global $filter_types_on;
+          return( strpos( strtolower( $key ), $filter_types_on ) !== false );
+        };
+        
+        switch( $types ) {
+          case 'magazine':
+          case 'stories':
+            $types = 'magazine';
+            $filter_types_on = $types;
+            $keys = array_flip( unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES ) );
+            $filtered_keys = array_filter( $keys, $filter );
+            $types = implode( ',', array_keys( $filtered_keys ) );
+            break;
+          default:
+            $types = null;
+            break;
+        }
+        
         $query = 
           "SELECT "
           . $this->tables['events'] . ".type,"
@@ -99,8 +120,10 @@
           . "FROM " . $this->tables['events'] . " "
             . "LEFT JOIN " . $this->tables['authors'] . " "
             . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+          . ( is_null( $types ) ? "" : "WHERE " . $this->tables['events'] . ".type IN (" . $types . ") " )
           . "ORDER BY time DESC "
           . "LIMIT " . $per_page . ";";
+          
         return $this->iwpdb->get_results( $query );
       }
       
