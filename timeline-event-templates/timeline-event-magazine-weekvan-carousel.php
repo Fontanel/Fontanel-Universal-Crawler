@@ -1,4 +1,3 @@
-<!--
 <?php
   $post_content = $vars['objects']->post_content;
 	preg_match('/\[gallery.*ids=.(.*).\]/', $post_content, $ids);
@@ -22,7 +21,7 @@
 	$portrait = wp_get_attachment_image_src( get_field('portretfoto', $vars['objects']->ID), 'medium' );
 ?>
 
-<article class="story weekvan">
+<div class="item story weekvan">
   <img src="<?php echo $portrait[0] ?>" class="portrait">
   <img src="<?php bloginfo('template_directory') ?>/img/format-weekvan-logo-l.png" class="logo" />
   <?php
@@ -43,9 +42,4 @@
   <h2><?php print( $vars['objects']->post_title ); ?></h2>
   <h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
   <a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>">Bekijk de story</a>
-</article>
--->
-
-<div style="background-image: url(<?php print( bloginfo( 'template_url' ) ); ?>/img/mainstory-img.png);" class="item">
-  <img src="<?php print( bloginfo( 'template_url' ) ); ?>/img/logo.png" alt="logo" width="285" height="100" id="logo">
 </div>
