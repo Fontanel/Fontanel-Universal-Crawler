@@ -120,7 +120,8 @@
           . "FROM " . $this->tables['events'] . " "
             . "LEFT JOIN " . $this->tables['authors'] . " "
             . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
-          . ( is_null( $types ) ? "" : "WHERE " . $this->tables['events'] . ".type IN (" . $types . ") " )
+          . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
+          . ( is_null( $types ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
           . "ORDER BY time DESC "
           . "LIMIT " . $per_page . ";";
           
