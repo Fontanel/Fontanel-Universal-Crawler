@@ -11,11 +11,11 @@
     };
     
     $keys = explode( ',', $ids[1] );
-    $random_keys = array_rand( $keys, 4 );
+    $random_keys = array_rand( $keys, 3 );
     $random_vals = array_map( $mapper, $random_keys );
     $attachments = get_posts( array(
   		'post_type' => 'attachment',
-  		'posts_per_page' => 4,
+  		'posts_per_page' => 3,
   		'include' => $random_vals,
   		'exclude' => array(
   									get_field( 'portret_persoon', $vars['objects']->ID ),
@@ -39,8 +39,7 @@
 				  array( 240, 240 ),
 				  false,
 				  array(
-				    'class' => 'prev-thumb',
-				    'style' => 'right: ' . rand( -1 * $i, 5 * $i ) . 'rem; top: ' . rand( -2, 4 ) . 'rem; z-index: ' . rand( 1, 4 ) . '; transform:rotate(' . rand( -25, 25 ) . 'deg);-ms-transform:rotate(' . rand( -25, 25 ) . 'deg);-webkit-transform:rotate(' . rand( -25, 25 ) . 'deg);'
+				    'class' => 'prev-thumb'
 				  ) 
 				) );
 				$i++;
