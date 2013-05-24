@@ -84,9 +84,9 @@
 				}
 			}
 			
-			public function getEvents( $page = 0, $per_page = 10 ) {
+			public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
         $events = Array();
-  			foreach( $this->database_manager->getEvents( $page, $per_page ) as $event ) {
+  			foreach( $this->database_manager->getEvents( $types, $page, $per_page ) as $event ) {
     			$new_event = $this->createEventObject( $event );
     			
     			if( is_object( $new_event ) ) {
