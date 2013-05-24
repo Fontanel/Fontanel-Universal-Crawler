@@ -40,7 +40,16 @@
     		}
 			}
 			
-			public function render() {
+			private function extendTemplatePath( $template ) {
+  			$this->template_path = preg_replace('/\.php/', "-$template.php", $this->template_path);
+  			print_r($this->template_path);
+			}
+			
+			public function render( $template = null ) {
+			  if( !is_null( $template ) ){
+  			  $this->extendTemplatePath( $template );
+			  }
+			  
         $vars = Array();
         $vars['objects'] = $this->objects;
         $vars['type'] = $this->type;
