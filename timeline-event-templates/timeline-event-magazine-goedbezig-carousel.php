@@ -17,5 +17,5 @@
   </div>
 	<h2><?php print( $vars['objects']->post_title ); ?></h2>
 	<h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
-	<a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>">Bekijk de story</a>
+	<a class="next" href="#"></a>
 </div>
