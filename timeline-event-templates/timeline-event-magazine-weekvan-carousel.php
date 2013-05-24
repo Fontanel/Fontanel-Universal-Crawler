@@ -27,7 +27,7 @@
 	$portrait = wp_get_attachment_image_src( get_field('portretfoto', $vars['objects']->ID), 'medium' );
 ?>
 
-<div class="item story weekvan">
+<div class="item story weekvan" data-second-background="#300747">
   <img src="<?php echo $portrait[0] ?>" class="portrait">
   <img src="<?php bloginfo('template_directory') ?>/img/format-weekvan-logo-l.png" class="logo" />
   <?php
