@@ -12,10 +12,10 @@
               <h5><?php print( $job->company ); ?> zoekt</h5>
               <h4><?php print( $job->job_function ); ?></h4>
               <p>
-                Vaste baan in Den Haag E.O.
+                Vaste baan in <?php print( $job->city ); ?>
                 <span class="fields-container">
                   <span class="dot">•</span>
-                  Grafisch ontwerp + Reclame
+                  <?php print( $job->fields ); ?>
                 </span>
                 <span class="dot">•</span>
                 17 mei 2013
