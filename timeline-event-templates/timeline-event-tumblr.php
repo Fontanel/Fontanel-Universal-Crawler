@@ -1,4 +1,5 @@
-<?php $article_parts = preg_split("/<p><!-- more -->.*?\/p>/", json_decode( $vars['objects'][0]->object )->body ); ?>
+<?php $post = json_decode( $vars['objects'][0]->object ); ?>
+<?php $article_parts = preg_split("/<p><!-- more -->.*?\/p>/", $post->body ); ?>
 <article class="note text">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
@@ -6,7 +7,7 @@
 		<footer class="timeline-footer">
 			<div class="fb-share">Share</div>
 			<div class="twitter">Tweet</div>
-			<time>16 uur geleden</time>
+			<time><?php print( fontanel_time_ago( $post->timestamp ) ); ?></time>
 			<a href="#" class="tags-trigger"><span>Tags</span></a>
 			<div class="tags">
 				<ul>

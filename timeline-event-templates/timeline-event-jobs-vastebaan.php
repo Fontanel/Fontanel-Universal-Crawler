@@ -15,7 +15,7 @@
           <?php print( $vacancy->fields ); ?>
         </span>
         <span class="dot">•</span>
-        17 mei 2013
+        <?php print( fontanel_time_ago( $vacancy->created_at ) ); ?>
       </p>
   	</footer>
 	</div>

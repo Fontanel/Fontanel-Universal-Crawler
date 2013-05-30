@@ -19,7 +19,7 @@
 		<footer class="timeline-footer">
 			<div class="fb-share">Share</div>
 			<div class="twitter">Tweet</div>
-			<time>16 uur geleden</time>
+			<time><?php print( fontanel_time_ago( $post->timestamp ) ); ?></time>
 			<a href="#" class="tags-trigger"><span>Tags</span></a>
 			<div class="tags">
 				<ul>
