@@ -9,8 +9,8 @@
     	    <?php $job = json_decode( $raw_job->object ); ?>
           <li>
             <a href="/vacature/senior-designer-on-en-offline" target="_blank">
-              <h5><?php print( $job->company ); ?> zoekt</h5>
-              <h4><?php print( $job->job_function ); ?></h4>
+              <h5><?php print( $job->company ); ?> zoekt een</h5>
+              <h4><?php print( $job->job_function ); ?> <span class="new">nieuw</span></h4>
               <p>
                 Vaste baan in <?php print( $job->city ); ?>
                 <span class="fields-container">
@@ -26,19 +26,6 @@
       	  <li><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Bekijk alle vacatures en stages &gt;</a></li>
     	</ul>
 	  </section>
-  	<footer class="timeline-footer">
-			<div class="fb-share">Share</div>
-			<div class="twitter">Tweet</div>
-			<a href="#" class="tags-trigger"><span>Tags</span></a>
-			<div class="tags">
-				<ul>
-					<li><a class="tag" href="#fixme">kunst</a></li>
-					<li><a class="tag" href="#fixme">joep meloen</a></li>
-					<li><a class="tag" href="#fixme">erotiek</a></li>
-					<li><a class="tag" href="#fixme">amsterdam</a></li>
-					<li><a class="tag" href="#fixme">design</a></li>
-				</ul>
-			</div>
-		</footer>
+  	<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
   </div>
 </article>

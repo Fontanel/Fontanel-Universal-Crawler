@@ -9,7 +9,7 @@
 			<div class="fb-share">Share</div>
 			<div class="twitter">Tweet</div>
 			<time>x geleden</time>
-			<a href="#" class="tags-trigger"><span>Tags</span></a>
+			<a href="#" class="tags-trigger icon-tag"><span>Tags</span></a>
 			<div class="tags">
 				<ul>
 					<li><a class="tag" href="#fixme">kunst</a></li>

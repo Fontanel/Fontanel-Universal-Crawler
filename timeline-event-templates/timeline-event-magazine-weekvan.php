@@ -22,7 +22,7 @@
 ?>
 <article class="story weekvan">
   <img src="<?php echo $portrait[0] ?>" class="portrait">
-  <img src="<?php bloginfo('template_directory') ?>/img/format-weekvan-logo-l.png" class="logo" />
+  <img src="<?php bloginfo('template_directory') ?>/img/logo-weekvan.png" class="logo" />
   <?php
 		if ( count( $attachments ) > 0 ):
 			foreach ( $attachments as $attachment ): ?>
