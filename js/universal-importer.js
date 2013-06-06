@@ -25,7 +25,15 @@ if ($('.all-images').length > 0) {
     box = $("." + collection_class).colorbox({
       rel: collection_class,
       maxWidth: '90%',
-      maxHeight: '90%'
+      maxHeight: '90%',
+      next: '',
+      previous: '',
+      close: '',
+      onOpen: function() {
+        $('#cboxNext').addClass('icon-arrow-right');
+        $('#cboxPrevious').addClass('icon-arrow-left');
+        return $('#cboxClose').addClass('icon-exit');
+      }
     });
     return prime_image.on('click', function(e) {
       e.preventDefault();

@@ -19,6 +19,13 @@ if $( '.all-images' ).length > 0
       rel: collection_class
       maxWidth: '90%'
       maxHeight: '90%'
+      next: ''
+      previous: ''
+      close: ''
+      onOpen: ->
+        $( '#cboxNext' ).addClass 'icon-arrow-right'
+        $( '#cboxPrevious' ).addClass 'icon-arrow-left'
+        $( '#cboxClose' ).addClass 'icon-exit'
       
     prime_image.on 'click', ( e ) ->
       e.preventDefault()
