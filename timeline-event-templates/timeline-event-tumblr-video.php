@@ -1,4 +1,11 @@
-<?php $video = json_decode( $vars['objects'][0]->object ); ?>
+<?php
+  $video = json_decode( $vars['objects'][0]->object ); 
+  if( !$vars['skip_readmore_wrap'] ) {
+    $article_parts = preg_split("/<p><!-- more -->.*?\/p>/", $video->caption );
+  } else {
+    $article_parts = array( $video->caption );
+  }
+?>
 <article class="note video photo">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
@@ -6,7 +13,8 @@
 			<?php print( $video->player[0]->embed_code ); ?>
 		</figure>
 		<div class="caption">
-			<?php print( $video->caption ); ?>
+			<?php print( $article_parts[0] ); ?>
+			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
 		</div>
 		<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
   </div>
