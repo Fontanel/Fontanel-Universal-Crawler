@@ -119,9 +119,9 @@
     		  }
     		  
     		  if( class_exists( $class_name ) ) {
-      		  return new $class_name( $event->objects, $this->database_manager, $type, false, $user );
+      		  return new $class_name( $event->id, $event->objects, $this->database_manager, $type, false, $user );
     		  } else {
-        		return new TimelineEvent( $event->objects, $this->database_manager, $type, false, $user );
+        		return new TimelineEvent( $event->id, $event->objects, $this->database_manager, $type, false, $user );
       		}
     		}
   		}
