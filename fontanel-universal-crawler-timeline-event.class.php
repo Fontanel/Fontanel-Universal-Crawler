@@ -4,11 +4,13 @@
 			private $template_path;
 			private $database_manager;
 			private $user;
+			private $id;
 			protected $objects = Array();
 			protected $slug = 'timeline-event';
 			protected $type = 'Undefined';
 			
-			public function __construct( $objects, $database_manager, $type = 'Undefined', $template_path = false, $user = NULL ) {
+			public function __construct( $id, $objects, $database_manager, $type = 'Undefined', $template_path = false, $user = NULL ) {
+			  $this->id = $id;
         $this->type = $type;
         $this->database_manager = $database_manager;
         $this->user = $user;
@@ -52,6 +54,7 @@
         $vars = Array();
         $vars['objects'] = $this->objects;
         $vars['type'] = $this->type;
+        $vars['id'] = $this->id;
         $vars['slug'] = $this->slug;
         $vars['user'] = $this->user;
         $vars['skip_readmore_wrap'] = $skip_readmore_wrap;
