@@ -8,20 +8,6 @@
 		<div class="caption">
 			<?php print( $video->caption ); ?>
 		</div>
-		<footer>
-			<div class="fb-share">Share</div>
-			<div class="twitter">Tweet</div>
-			<time>16 uur geleden</time>
-			<a href="#" class="tags-trigger"><span>Tags</span></a>
-			<div class="tags">
-				<ul>
-					<li><a class="tag" href="#fixme">kunst</a></li>
-					<li><a class="tag" href="#fixme">joep meloen</a></li>
-					<li><a class="tag" href="#fixme">erotiek</a></li>
-					<li><a class="tag" href="#fixme">amsterdam</a></li>
-					<li><a class="tag" href="#fixme">design</a></li>
-				</ul>
-			</div>
-		</footer>
-<!-- Like -->  </div>
+		<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
+  </div>
 </article>

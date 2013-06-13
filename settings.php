@@ -14,9 +14,11 @@
 			'MagazineWeekvan' => 11,
 			'MagazineNieuwwerk' => 12,
 			'MagazineGoedbezig' => 13,
-			'MagazineFontanel' => 14
+			'MagazineFontanel' => 14,
+			'JobsRoundup' => 15
 		) ),
-		'TIMELINE_EVENTS_DIR' => dirname(__FILE__) . '/timeline-events'
+		'TIMELINE_EVENTS_DIR' => dirname(__FILE__) . '/timeline-events',
+		'JOBS_URL' => 'http://www.fontaneljobs.nl'
 	);
 	
 	foreach( $options as $key => $value ) {

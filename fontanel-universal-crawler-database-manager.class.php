@@ -38,11 +38,12 @@
           
         $sql[] =
           "CREATE TABLE IF NOT EXISTS " . $this->tables['authors'] . " ( "
-          . "tumblr_tag varchar(128) NOT NULL,"
+          . "tag varchar(128) NOT NULL,"
           . "name varchar(128) NOT NULL,"
           . "thumb varchar(128) NOT NULL,"
-          . "wordpress_id int NOT NULL,"
-          . "PRIMARY KEY(tumblr_tag) );";
+          . "wordpress_id int NULL,"
+          . "url varchar(128) NULL,"
+          . "PRIMARY KEY(tag) );";
 				
 				foreach( $sql as $query ) {
 					$this->iwpdb->query( $query );
@@ -54,7 +55,7 @@
           "SELECT updated_at "
           . "FROM " . $this->tables['events'] . " "
           . "WHERE type=" . $type . " "
-          . "AND objects=" . $objects . ";";
+          . "AND objects='" . $objects . "';";
       	$existing_objects = $this->iwpdb->get_row( $sql );
       	
       	if( is_null( $existing_objects ) ) {
@@ -85,7 +86,28 @@
       	}
       }
       
-      public function getEvents( $page = 0, $per_page = 10 ) {
+      public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
+        global $filter_types_on;
+        
+        $filter = function( $key ) {
+          global $filter_types_on;
+          return( strpos( strtolower( $key ), $filter_types_on ) !== false );
+        };
+        
+        switch( $types ) {
+          case 'magazine':
+          case 'stories':
+            $types = 'magazine';
+            $filter_types_on = $types;
+            $keys = array_flip( unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES ) );
+            $filtered_keys = array_filter( $keys, $filter );
+            $types = implode( ',', array_keys( $filtered_keys ) );
+            break;
+          default:
+            $types = null;
+            break;
+        }
+        
         $query = 
           "SELECT "
           . $this->tables['events'] . ".type,"
@@ -93,12 +115,16 @@
           . $this->tables['events'] . ".sticky_untill,"
           . $this->tables['authors'] . ".name,"
           . $this->tables['authors'] . ".thumb,"
+          . $this->tables['authors'] . ".url,"
           . $this->tables['authors'] . ".wordpress_id "
           . "FROM " . $this->tables['events'] . " "
             . "LEFT JOIN " . $this->tables['authors'] . " "
-            . "ON " . $this->tables['authors'] . ".tumblr_tag = " . $this->tables['events'] . ".author "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+          . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
+          . ( is_null( $types ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
           . "ORDER BY time DESC "
           . "LIMIT " . $per_page . ";";
+          
         return $this->iwpdb->get_results( $query );
       }
       
@@ -109,6 +135,18 @@
           "WHERE " . $this->tables['objects'] . ".id IN (" . $objects . ");";
         return $this->iwpdb->get_results( $query );
       }
+      
+      public function tryToFindAuthor( $tags ) {
+        $search = implode('|', $tags );
+        $sql =
+          "SELECT * "
+          . "FROM `wp_timeline_authors` "
+          . "WHERE `tag` REGEXP  '" . $search . "' "
+          . "LIMIT 1";
+        $author = $this->iwpdb->get_row( $sql );
+        if( $author ){ return $author->tag; }
+        return '';
+			}
   	}
 	endif;
 ?>

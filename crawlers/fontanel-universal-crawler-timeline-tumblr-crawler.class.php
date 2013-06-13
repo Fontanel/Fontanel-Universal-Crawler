@@ -22,25 +22,13 @@
   				$type = $post->type;
   				$object_id = $post->id;
   				$type_id = $this->getTypeId( $this->platform, $type );
-  				$author = $this->tryToFindAuthor( $post->tags );
+  				$author = $this->db_manager->tryToFindAuthor( $post->tags );
   				$timestamp = $post->timestamp;
   				
   				$savable_objects = $this->createSavableObjects( $post );
   				
   				$this->storeEvent( $type_id, $object_id, $timestamp, $savable_objects, $author );
 				}
-			}
-			
-			private function tryToFindAuthor( $tags ) {
-        $search = implode('|', $tags );
-        $sql =
-          "SELECT * "
-          . "FROM `wp_timeline_authors` "
-          . "WHERE `tumblr_tag` REGEXP  '" . $search . "' "
-          . "LIMIT 1";
-        $author = $this->db_manager->iwpdb->get_row( $sql );
-        if( $author ){ return $author->tumblr_tag; }
-        return '';
 			}
 			
 			private function createSavableObjects( $raw_object ) {

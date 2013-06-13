@@ -4,7 +4,7 @@
 			private $platform = 'jobs';
 			
 			public function fetchPosts() {
-				$result = $this->fetch( 'http://fontaneljobs.nl/vacatures.json?limit=10' );
+				$result = $this->fetch( 'http://fontaneljobs.nl/vacatures.json?limit=50' );
 				
 				$this->processResult( $result );
 			}
