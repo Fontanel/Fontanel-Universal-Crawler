@@ -26,7 +26,7 @@
           . "objects varchar(128) NOT NULL,"
           . "sticky_untill int NOT NULL,"
           . "author varchar(128) NULL,"
-          . "PRIMARY KEY(time,objects) );";
+          . "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY );";
 				
 				$sql[] =
           "CREATE TABLE IF NOT EXISTS " . $this->tables['objects'] . " ( "
@@ -124,6 +124,45 @@
           . ( is_null( $types ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
           . "ORDER BY time DESC "
           . "LIMIT " . $per_page . ";";
+          
+        return $this->iwpdb->get_results( $query );
+      }
+      
+      public function getEvent( $id ) {
+        global $filter_types_on;
+        
+        $filter = function( $key ) {
+          global $filter_types_on;
+          return( strpos( strtolower( $key ), $filter_types_on ) !== false );
+        };
+        
+        switch( $types ) {
+          case 'magazine':
+          case 'stories':
+            $types = 'magazine';
+            $filter_types_on = $types;
+            $keys = array_flip( unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES ) );
+            $filtered_keys = array_filter( $keys, $filter );
+            $types = implode( ',', array_keys( $filtered_keys ) );
+            break;
+          default:
+            $types = null;
+            break;
+        }
+        
+        $query = 
+          "SELECT "
+          . $this->tables['events'] . ".type, "
+          . $this->tables['events'] . ".objects, "
+          . $this->tables['events'] . ".sticky_untill, "
+          . $this->tables['authors'] . ".name, "
+          . $this->tables['authors'] . ".thumb, "
+          . $this->tables['authors'] . ".url, "
+          . $this->tables['authors'] . ".wordpress_id "
+          . "FROM " . $this->tables['events'] . " "
+            . "LEFT JOIN " . $this->tables['authors'] . " "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+          . "WHERE " . $this->tables['events'] . ".id=" . $id . ";";
           
         return $this->iwpdb->get_results( $query );
       }

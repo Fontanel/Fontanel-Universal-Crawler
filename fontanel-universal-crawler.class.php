@@ -96,6 +96,18 @@
   			return $events;
   		}
   		
+  		public function getEvent( $id ) {
+        $events = Array();
+  			foreach( $this->database_manager->getEvent( $id ) as $event ) {
+    			$new_event = $this->createEventObject( $event );
+    			
+    			if( is_object( $new_event ) ) {
+      			$events[] = $new_event;
+    			}
+  			}
+  			return $events;
+  		}
+  		
   		private function createEventObject( $event ) {
   		  if( $event->type > 0 ) {
   		    $type = array_flip( $this->event_types )[ $event->type ];
