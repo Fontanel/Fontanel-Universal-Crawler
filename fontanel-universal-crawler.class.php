@@ -69,7 +69,7 @@
 				wp_register_script( 'waypoints'         , plugins_url( '/js/waypoints.min.js', __FILE__ ), array('jquery'), 1, true );
 				wp_register_script( 'fitvid'            , plugins_url( '/js/fitvid.js', __FILE__ ), array('jquery'), 1, true );
 				wp_register_script( 'infinity'          , plugins_url( '/js/infinity.min.js', __FILE__ ), array('jquery'), 1, true );
-				wp_register_script( 'colorbox'          , plugins_url( '/js/vendor/colorbox/jquery.colorbox-min.js', __FILE__ ), array( 'jquery' ), 1, true );
+				wp_register_script( 'colorbox'          , plugins_url( '/js/vendor/jquery.colorbox-min.js', __FILE__ ), array( 'jquery' ), 1, true );
 				wp_register_script( 'universal-importer', plugins_url( '/js/universal-importer.js', __FILE__ ), array('fitvid','jquery','waypoints', 'colorbox'), 1, true );
 
         wp_enqueue_script( 'colorbox' );
