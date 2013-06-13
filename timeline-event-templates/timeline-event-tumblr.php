@@ -10,6 +10,7 @@
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
   	<div class="text"><?php print( $article_parts[0] ); ?></div>
+  	<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
 		<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
 	</div>
 </article>
