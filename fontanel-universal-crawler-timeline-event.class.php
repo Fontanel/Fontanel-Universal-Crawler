@@ -44,7 +44,7 @@
   			$this->template_path = preg_replace('/\.php/', "-$template.php", $this->template_path);
 			}
 			
-			public function render( $template = null ) {
+			public function render( $template = null, $skip_readmore_wrap = false ) {
 			  if( !is_null( $template ) ){
   			  $this->extendTemplatePath( $template );
 			  }
@@ -54,6 +54,7 @@
         $vars['type'] = $this->type;
         $vars['slug'] = $this->slug;
         $vars['user'] = $this->user;
+        $vars['skip_readmore_wrap'] = $skip_readmore_wrap;
         	 
         if( is_array( $vars ) && !empty( $vars ) ) {
           extract( $vars );
