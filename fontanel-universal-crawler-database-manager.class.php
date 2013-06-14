@@ -4,7 +4,9 @@
     	private $database_prefix = 'timeline_';
     	private $tables = array();
     	public $iwpdb;
-  	
+	
+	
+	
       public function __construct() {
       	global $wpdb;
       	$this->iwpdb = $wpdb;
@@ -15,7 +17,9 @@
 				/* require_once( ABSPATH . 'wp-admin/includes/upgrade.php' ); */
         $this->ensureDatabaseExistence();
       }
-      
+    
+    
+    
       private function ensureDatabaseExistence() {
         $sql = array();
         $sql[] =
@@ -49,7 +53,9 @@
 					$this->iwpdb->query( $query );
 				}
       }
-      
+
+
+
       public function newOrUpdatedEvent( $type = 0, $objects = '0', $timestamp = 0 ) {
 	      $sql =
           "SELECT updated_at "
@@ -64,7 +70,9 @@
 	      
       	return false;
       }
-      
+
+
+
       public function storeEvent( $type = 0, $objects = '', $timestamp = 0, $author = NULL ) {
       	$this->iwpdb->insert( $this->tables['events'], array(
       		'type' => $type,
@@ -74,7 +82,9 @@
       		'author' => $author
       	) );
       }
-      
+    
+    
+    
       public function storeObjects( $objects ) {
       	foreach( $objects as $object ) {
 		      $this->iwpdb->insert( $this->tables['objects'], array(
@@ -85,7 +95,9 @@
 	      	) );
       	}
       }
-      
+    
+    
+    
       public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
         global $filter_types_on;
         
@@ -128,7 +140,9 @@
           
         return $this->iwpdb->get_results( $query );
       }
-      
+
+
+
       public function getEvent( $id ) {
         global $filter_types_on;
         
@@ -168,7 +182,9 @@
           
         return $this->iwpdb->get_results( $query );
       }
-      
+
+
+
       public function getObjects( $objects ) {
         $query = 
           "SELECT " . $this->tables['objects'] . ".type, " . $this->tables['objects'] . ".object " .

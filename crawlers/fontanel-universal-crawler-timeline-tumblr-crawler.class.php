@@ -12,7 +12,7 @@
 			}
 			
 			public function fetchPosts() {
-				$result = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=50' );
+				$result = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=1' );
 				$this->processResult( $result );
 			}
 			

@@ -58,7 +58,7 @@
         $vars['slug'] = $this->slug;
         $vars['user'] = $this->user;
         $vars['skip_readmore_wrap'] = $skip_readmore_wrap;
-        	 
+        
         if( is_array( $vars ) && !empty( $vars ) ) {
           extract( $vars );
         }
