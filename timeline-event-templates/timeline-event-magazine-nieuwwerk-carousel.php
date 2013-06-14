@@ -2,6 +2,7 @@
 	<h2><?php print( $vars['objects']->post_title ); ?></h2>
 	<h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
 	<?php include( dirname(__FILE__) . '/partials/carousel-next.php' ); ?>
+	<?php include( dirname(__FILE__) . '/partials/carousel-prev.php' ); ?>
 </div>
 
 <?php include( dirname(__FILE__) . '/partials/gradient-bg.php' ); ?>

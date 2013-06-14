@@ -5,4 +5,5 @@
 		</div>
 	</div>
 	<?php include( dirname(__FILE__) . '/partials/carousel-next.php' ); ?>
+	<?php include( dirname(__FILE__) . '/partials/carousel-prev.php' ); ?>
 </div>
