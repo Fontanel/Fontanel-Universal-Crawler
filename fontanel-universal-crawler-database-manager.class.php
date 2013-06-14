@@ -176,6 +176,18 @@
           "WHERE " . $this->tables['objects'] . ".id IN (" . $objects . ");";
         return $this->iwpdb->get_results( $query );
       }
+
+
+
+      public function getObject( $id ) {
+        $query = 
+          "SELECT " . $this->tables['objects'] . ".type " .
+          "FROM " . $this->tables['objects'] . " " .
+          "WHERE " . $this->tables['objects'] . ".id = (" . $id . ");";
+        return $this->iwpdb->get_results( $query );
+      }
+      
+      
       
       public function tryToFindAuthor( $tags ) {
         $search = implode('|', $tags );
