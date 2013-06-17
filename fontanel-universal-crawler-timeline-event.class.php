@@ -5,6 +5,7 @@
 			private $database_manager;
 			private $user;
 			private $id;
+			protected $created_at;
 			protected $objects = Array();
 			protected $slug = 'timeline-event';
 			protected $type = 'Undefined';
@@ -14,11 +15,15 @@
         $this->type = $type;
         $this->database_manager = $database_manager;
         $this->user = $user;
+        
         if( empty( $objects ) ) {
           return false;
         } else {
           $this->setObjects( $objects );
 				}
+				
+				$this->setCreatedAt();
+				
 				if( !$template_path ) {
   				$this->findTemplate();
 				} else {
@@ -28,6 +33,10 @@
 			
 			protected function setObjects( $objects ) {
   			$this->objects = $this->database_manager->getObjects( $objects );
+			}
+			
+			protected function setCreatedAt() {
+  			$this->createdAt = 0;
 			}
 			
 			private function findTemplate() {
@@ -59,6 +68,7 @@
         $vars['id'] = $this->id;
         $vars['slug'] = $this->slug;
         $vars['user'] = $this->user;
+        $vars['created_at'] = $this->createdAt;
         $vars['skip_readmore_wrap'] = $skip_readmore_wrap;
         
         if( is_array( $vars ) && !empty( $vars ) ) {

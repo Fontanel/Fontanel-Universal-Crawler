@@ -1,6 +1,7 @@
 <footer class="timeline-footer">
 	<div class="fb-share icon-facebook-1">Share</div>
 	<div class="twitter icon-twitter"> Tweet</div>
+	<?php print( fontanel_time_ago( $vars['created_at'] ) ); ?>
 	<a href="#" class="tags-trigger icon-tag"><span>Tags</span></a>
 	<div class="tags">
 		<ul>

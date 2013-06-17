@@ -14,4 +14,3 @@
 		<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
 	</div>
 </article>
-
