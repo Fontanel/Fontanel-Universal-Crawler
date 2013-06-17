@@ -4,6 +4,4 @@
 			<h2><?php print_r($vars['type']); ?> (<?php print_r($vars['slug']); ?>)</h2>
 		</div>
 	</div>
-	<?php include( dirname(__FILE__) . '/partials/carousel-next.php' ); ?>
-	<?php include( dirname(__FILE__) . '/partials/carousel-prev.php' ); ?>
 </div>
