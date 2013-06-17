@@ -75,9 +75,11 @@
           extract( $vars );
         }
         
-  			ob_start();
-        include $this->template_path;
-        return ob_get_clean();
+        if( !empty( $this->template_path ) ){
+    			ob_start();
+          include $this->template_path;
+          return ob_get_clean();
+        }
 			}
 		}
 	endif;

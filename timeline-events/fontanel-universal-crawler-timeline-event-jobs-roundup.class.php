@@ -5,6 +5,11 @@
 		class TimelineEventJobsRoundup extends TimelineEventJobs {
 		  protected $slug = 'timeline-event-jobs-roundup';
 			protected $type = 'JobsRoundup';
+			
+			protected function setCreatedAt() {
+			  $obj = json_decode( $this->objects[0]->object );
+  			$this->createdAt = date( 'W', $obj->created_at );
+			}
 		}
 	endif;
 ?>
