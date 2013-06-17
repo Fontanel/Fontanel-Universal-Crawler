@@ -14,9 +14,11 @@
         $this->type = $type;
         $this->database_manager = $database_manager;
         $this->user = $user;
-        
-        $this->setObjects( $objects );
-				
+        if( empty( $objects ) ) {
+          return false;
+        } else {
+          $this->setObjects( $objects );
+				}
 				if( !$template_path ) {
   				$this->findTemplate();
 				} else {
