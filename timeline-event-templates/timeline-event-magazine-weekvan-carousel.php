@@ -47,7 +47,8 @@
 		endif;
 	?>
   <h2><?php print( $vars['objects']->post_title ); ?></h2>
-  <h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
+  <h3>Chief Pencil bij Present Plus</h3>
+  <h4><?php print( $vars['objects']->post_excerpt ); ?></h4>
   <a class="next icon-arrow-right" href="#"></a>
   <a class="prev icon-arrow-left" href="#"></a>
 </div>
