@@ -1,7 +1,8 @@
 <?php
   $post_content = $vars['objects']->post_content;
 	preg_match('/\[gallery.*ids=.(.*).\]/', $post_content, $ids);
-  $attachments = array();
+  /*
+$attachments = array();
 		
   if( count( $ids ) > 0 ) {
     global $keys;
@@ -25,13 +26,15 @@
   	);
 	}
 	$portrait = wp_get_attachment_image_src( get_field('portretfoto', $vars['objects']->ID), 'medium' );
+*/
 ?>
 
 <div class="item story weekvan" data-second-background="#300747">
-  <img src="<?php echo $portrait[0] ?>" class="portrait">
+  <?php /* <img src="<?php echo $portrait[0] ?>" class="portrait"> */ ?>
   <img src="<?php bloginfo('template_directory') ?>/img/logo-weekvan.png" class="logo" />
   <?php
-		if ( count( $attachments ) > 0 ):
+		/*
+if ( count( $attachments ) > 0 ):
 		  $i = 0;
 			foreach ( $attachments as $attachment ):
 				print( wp_get_attachment_image(
@@ -45,6 +48,7 @@
 				$i++;
   		endforeach;
 		endif;
+*/
 	?>
   <h2><?php print( $vars['objects']->post_title ); ?></h2>
   <h3>Chief Pencil bij Present Plus</h3>
