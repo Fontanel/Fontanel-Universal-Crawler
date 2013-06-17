@@ -32,7 +32,15 @@ if ($('.all-images').length > 0) {
       onOpen: function() {
         $('#cboxNext').addClass('icon-arrow-right');
         $('#cboxPrevious').addClass('icon-arrow-left');
-        return $('#cboxClose').addClass('icon-exit');
+        $('#cboxClose').addClass('icon-exit');
+        return $('body').css({
+          overflow: 'hidden'
+        });
+      },
+      onClosed: function() {
+        return $('body').css({
+          overflow: 'auto'
+        });
       }
     });
     return prime_image.on('click', function(e) {
