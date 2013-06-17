@@ -2,8 +2,8 @@
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 	  <section>
-    	<h2><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly roundup</a></h2>
-    	<h3>Alle vacatures van de afgelopen week</h3>
+    	<h2><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly Jobs Roundup</a></h2>
+    	<h3>Alle vacatures vorige week op Fontanel Jobs</h3>
     	<ul>
     	  <?php foreach( $vars['objects'] as $raw_job ): ?>
     	    <?php $job = json_decode( $raw_job->object ); ?>
@@ -23,7 +23,7 @@
             </a>
           </li>
     	  <?php endforeach; ?>
-      	  <li><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Bekijk alle vacatures en stages &gt;</a></li>
+      	  <li><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>" class="deep">Bekijk alle vacatures en stages</a></li>
     	</ul>
 	  </section>
   	<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
