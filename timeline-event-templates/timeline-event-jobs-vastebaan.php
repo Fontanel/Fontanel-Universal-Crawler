@@ -3,7 +3,11 @@
 	<a class="article-body" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL . $vacancy->url ); ?>">
 	  <div class="left">
   	  <figure>
-    	  <img src="">
+  	    <?php if( !empty( $vacancy->company_logo ) ): ?>
+      	  <img src="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL . $vacancy->company_logo ); ?>">
+    	  <?php else: ?>
+      	  <img src="">
+    	  <?php endif; ?>
     	</figure>
 	  </div>
 	  <div class="right">
