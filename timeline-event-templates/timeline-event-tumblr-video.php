@@ -13,9 +13,11 @@
 			<?php print( $video->player[0]->embed_code ); ?>
 		</figure>
 		<div class="caption">
-			<?php print( $article_parts[0] ); ?>
-			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
+		  <section>
+  			<?php print( $article_parts[0] ); ?>
+  			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
+		  </section>
+		  <?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
 		</div>
-		<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
   </div>
 </article>
