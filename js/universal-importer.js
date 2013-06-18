@@ -29,6 +29,7 @@ if ($('.all-images').length > 0) {
       next: '',
       previous: '',
       close: '',
+      scrolling: false,
       onOpen: function() {
         $('#cboxNext').addClass('icon-arrow-right');
         $('#cboxPrevious').addClass('icon-arrow-left');
@@ -38,8 +39,11 @@ if ($('.all-images').length > 0) {
         });
       },
       onClosed: function() {
-        return $('body').css({
+        $('body').css({
           overflow: 'auto'
+        });
+        return $('#cboxOverlay').css({
+          opacity: 0
         });
       }
     });
