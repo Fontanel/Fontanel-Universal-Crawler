@@ -22,6 +22,7 @@
 		<div class="caption">
 		  <section>
   			<?php print( $article_parts[0] ); ?>
+  			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
 		  </section>
 			<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
 		</div>
