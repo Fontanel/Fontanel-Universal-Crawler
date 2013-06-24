@@ -72,6 +72,7 @@
         $vars['user'] = $this->user;
         $vars['created_at'] = $this->createdAt;
         $vars['skip_readmore_wrap'] = $skip_readmore_wrap;
+        $vars['sponsor'] = $this->sponsor;
         
         if( is_array( $vars ) && !empty( $vars ) ) {
           extract( $vars );
