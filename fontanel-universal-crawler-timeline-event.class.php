@@ -5,16 +5,18 @@
 			private $database_manager;
 			private $user;
 			private $id;
+			private $sponsor;
 			protected $created_at;
 			protected $objects = Array();
 			protected $slug = 'timeline-event';
 			protected $type = 'Undefined';
 			
-			public function __construct( $id, $objects, $database_manager, $type = 'Undefined', $template_path = false, $user = NULL ) {
+			public function __construct( $id, $objects, $database_manager, $type = 'Undefined', $template_path = false, $user = NULL, $sponsor = NULL ) {
 			  $this->id = $id;
         $this->type = $type;
         $this->database_manager = $database_manager;
         $this->user = $user;
+        $this->sponsor = $sponsor;
         
         if( empty( $objects ) ) {
           return false;
