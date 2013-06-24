@@ -2,10 +2,10 @@
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 	  <section>
-    	<h2><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly roundup</a></h2>
-    	<h3>Alle vacatures van de afgelopen week</h3>
+    	<h2><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly Jobs Roundup</a></h2>
+    	<h3>Alle vacatures vorige week op Fontanel Jobs</h3>
     	<ul>
-    	  <?php foreach( $vars['objects'] as $raw_job ): ?>
+    	  <?php foreach( array_reverse( $vars['objects'] ) as $raw_job ): ?>
     	    <?php $job = json_decode( $raw_job->object ); ?>
           <li>
             <a href="/vacature/senior-designer-on-en-offline" target="_blank">
@@ -18,14 +18,19 @@
                   <?php print( $job->fields ); ?>
                 </span>
                 <span class="dot">•</span>
-                17 mei 2013
+                <?php print( fontanel_time_ago( $job->created_at ) ); ?>
               </p>
             </a>
           </li>
     	  <?php endforeach; ?>
-      	  <li><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Bekijk alle vacatures en stages &gt;</a></li>
+      	  <li><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>" class="deep">Bekijk alle vacatures en stages</a></li>
     	</ul>
 	  </section>
-  	<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
+    <footer class="timeline-footer">
+    	<div class="fb-share icon-facebook-1">Like<span>126</span></div>
+    	<div class="twitter icon-twitter"> Tweet<span>240</span></div>
+    	<time class="icon-clock">Week <?php print( $vars['created_at'] ); ?></time>
+    </footer>
+
   </div>
 </article>

@@ -1,6 +1,7 @@
 <?php
   $post_content = $vars['objects']->post_content;
-	preg_match('/\[gallery.*ids=.(.*).\]/', $post_content, $ids);
+	/*
+preg_match('/\[gallery.*ids=.(.*).\]/', $post_content, $ids);
   $attachments = array();
 		
   if( count( $ids ) > 0 ) {
@@ -17,14 +18,20 @@
   								)
   		)
   	);
-	} 
+	}
+*/ 
 	$portrait = wp_get_attachment_image_src( get_field('portretfoto', $vars['objects']->ID), 'medium' );
 ?>
 <article class="story weekvan">
   <img src="<?php echo $portrait[0] ?>" class="portrait">
+  <figure class="sponsor">
+    <figcaption>presented by</figcaption>
+    <img src="<?php bloginfo('template_directory') ?>/img/vitra-logo-purple.png">
+  </figure>
   <img src="<?php bloginfo('template_directory') ?>/img/logo-weekvan.png" class="logo" />
   <?php
-		if ( count( $attachments ) > 0 ):
+		/*
+if ( count( $attachments ) > 0 ):
 			foreach ( $attachments as $attachment ): ?>
 				<?php print( wp_get_attachment_image(
 				  $attachment->ID,
@@ -37,8 +44,10 @@
 				) ); ?>
   		<?php endforeach;
 		endif;
+*/
 	?>
   <h2><?php print( $vars['objects']->post_title ); ?></h2>
-  <h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
-  <a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>">Bekijk de story</a>
+  <h3>Chief Pencil bij Present Plus</h3>
+  <h4><?php print( $vars['objects']->post_excerpt ); ?></h4>
+  <a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="deep">Bekijk de story</a>
 </article>

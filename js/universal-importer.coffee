@@ -22,10 +22,19 @@ if $( '.all-images' ).length > 0
       next: ''
       previous: ''
       close: ''
+      scrolling: false
       onOpen: ->
         $( '#cboxNext' ).addClass 'icon-arrow-right'
         $( '#cboxPrevious' ).addClass 'icon-arrow-left'
         $( '#cboxClose' ).addClass 'icon-exit'
+        $( 'body' ).css
+          overflow: 'hidden'
+      onClosed: ->
+        $( 'body' ).css
+          overflow: 'auto'
+        $( '#cboxOverlay' ).css
+          opacity: 0
+        
       
     prime_image.on 'click', ( e ) ->
       e.preventDefault()

@@ -29,10 +29,22 @@ if ($('.all-images').length > 0) {
       next: '',
       previous: '',
       close: '',
+      scrolling: false,
       onOpen: function() {
         $('#cboxNext').addClass('icon-arrow-right');
         $('#cboxPrevious').addClass('icon-arrow-left');
-        return $('#cboxClose').addClass('icon-exit');
+        $('#cboxClose').addClass('icon-exit');
+        return $('body').css({
+          overflow: 'hidden'
+        });
+      },
+      onClosed: function() {
+        $('body').css({
+          overflow: 'auto'
+        });
+        return $('#cboxOverlay').css({
+          opacity: 0
+        });
       }
     });
     return prime_image.on('click', function(e) {
