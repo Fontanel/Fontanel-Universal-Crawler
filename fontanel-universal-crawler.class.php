@@ -51,6 +51,11 @@
     	
     	
     	
+    	
+    	public function getAuthors() {
+      	return $this->database_manager->getAuthors();
+    	}
+    	
     	private function requireCrawlers() {
         $crawler_dir = dirname(__FILE__) . '/crawlers';
         if( is_dir( $crawler_dir ) ) {

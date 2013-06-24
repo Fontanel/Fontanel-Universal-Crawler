@@ -103,8 +103,21 @@
 	      	) );
       	}
       }
-    
-    
+      
+      
+      
+      public function getAuthors() {
+        $query = 
+          "SELECT "
+          . $this->tables['authors'] . ".name, "
+          . $this->tables['authors'] . ".thumb, "
+          . $this->tables['authors'] . ".tag "
+          . "FROM " . $this->tables['authors'] . ";";
+          
+        return $this->iwpdb->get_results( $query );
+      }
+
+
     
       public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
         global $filter_types_on;
