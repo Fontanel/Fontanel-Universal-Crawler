@@ -130,7 +130,7 @@
   		  if( $event->type > 0 ) {
   		    $type = array_flip( $this->event_types )[ $event->type ];
     		  $class_name = 'TimelineEvent' . $type;
-    		  $user = NULL;
+    		  $user = $sponsor = NULL;
     		  
     		  if( !empty( $event->name ) ) {
       		  $user = new FontanelUniversalCrawlerUser( $event->name, $event->thumb, $event->wordpress_id, $event->url );
