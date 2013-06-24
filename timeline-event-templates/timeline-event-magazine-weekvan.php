@@ -24,6 +24,10 @@ preg_match('/\[gallery.*ids=.(.*).\]/', $post_content, $ids);
 ?>
 <article class="story weekvan">
   <img src="<?php echo $portrait[0] ?>" class="portrait">
+  <figure class="sponsor">
+    <figcaption>presented by</figcaption>
+    <img src="<?php bloginfo('template_directory') ?>/img/vitra-logo-purple.png">
+  </figure>
   <img src="<?php bloginfo('template_directory') ?>/img/logo-weekvan.png" class="logo" />
   <?php
 		/*
