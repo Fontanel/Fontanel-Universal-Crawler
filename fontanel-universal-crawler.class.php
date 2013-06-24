@@ -136,6 +136,10 @@
       		  $user = new FontanelUniversalCrawlerUser( $event->name, $event->thumb, $event->wordpress_id, $event->url );
     		  }
     		  
+    		  if( !empty( $event->brand ) ) {
+      		  $sponsor = new FontanelUniversalCrawlerUser( $event->sponsor_url, $event->sponsor_logo, $event->brand );
+    		  }
+    		  
     		  if( class_exists( $class_name ) ) {
       		  return new $class_name( $event->id, $event->objects, $this->database_manager, $type, false, $user );
     		  } else {
