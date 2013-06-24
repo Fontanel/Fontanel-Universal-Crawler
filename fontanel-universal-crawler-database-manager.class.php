@@ -10,7 +10,7 @@
       public function __construct() {
       	global $wpdb;
       	$this->iwpdb = $wpdb;
-      	foreach( array( 'events', 'objects', 'authors' ) as $table_name ) {
+      	foreach( array( 'events', 'objects', 'authors', 'sponsors' ) as $table_name ) {
           $this->tables[$table_name] = $this->iwpdb->prefix . $this->database_prefix . $table_name;	
       	}
       	
@@ -30,6 +30,7 @@
           . "objects varchar(128) NOT NULL,"
           . "sticky_untill int NOT NULL,"
           . "author varchar(128) NULL,"
+          . "sponsor int NULL,"
           . "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY );";
 				
 				$sql[] =
@@ -48,6 +49,12 @@
           . "wordpress_id int NULL,"
           . "url varchar(128) NULL,"
           . "PRIMARY KEY(tag) );";
+        
+        $sql[] =
+          "CREATE TABLE IF NOT EXISTS " . $this->tables['sponsors'] . " ( "
+          . "brand varchar(128) NOT NULL,"
+          . "logo_url varchar(128) NOT NULL,"
+          . "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY );";
 				
 				foreach( $sql as $query ) {
 					$this->iwpdb->query( $query );
