@@ -52,8 +52,9 @@
         
         $sql[] =
           "CREATE TABLE IF NOT EXISTS " . $this->tables['sponsors'] . " ( "
-          . "brand varchar(128) NOT NULL,"
-          . "logo_url varchar(128) NOT NULL,"
+          . "brand varchar(128) NOT NULL, "
+          . "logo_url varchar(128) NOT NULL, "
+          . "url varchar(128) NOT NULL, "
           . "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY );";
 				
 				foreach( $sql as $query ) {
@@ -133,13 +134,19 @@
           . $this->tables['events'] . ".objects, "
           . $this->tables['events'] . ".id, "
           . $this->tables['events'] . ".sticky_untill, "
+          . $this->tables['events'] . ".sponsor, "
           . $this->tables['authors'] . ".name, "
           . $this->tables['authors'] . ".thumb, "
           . $this->tables['authors'] . ".url, "
-          . $this->tables['authors'] . ".wordpress_id "
+          . $this->tables['authors'] . ".wordpress_id, "
+          . $this->tables['sponsors'] . ".brand, "
+          . $this->tables['sponsors'] . ".url AS sponsor_url, "
+          . $this->tables['sponsors'] . ".logo_url AS sponsor_logo "
           . "FROM " . $this->tables['events'] . " "
             . "LEFT JOIN " . $this->tables['authors'] . " "
             . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+            . "LEFT JOIN " . $this->tables['sponsors'] . " "
+            . "ON " . $this->tables['sponsors'] . ".id = " . $this->tables['events'] . ".sponsor "
           . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
           . ( is_null( $types ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
           . "ORDER BY time DESC "
