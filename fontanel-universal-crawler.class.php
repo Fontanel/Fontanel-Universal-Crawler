@@ -138,7 +138,7 @@
     		  $user = $sponsor = NULL;
     		  
     		  if( !empty( $event->name ) ) {
-      		  $user = new FontanelUniversalCrawlerUser( $event->name, $event->thumb, $event->wordpress_id, $event->url );
+      		  $user = new FontanelUniversalCrawlerUser( $event->name, $event->thumb, $event->wordpress_id, $event->url, $event->user_tag );
     		  }
     		  
     		  if( !empty( $event->brand ) ) {

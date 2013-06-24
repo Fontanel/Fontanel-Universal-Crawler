@@ -152,6 +152,7 @@
           . $this->tables['authors'] . ".thumb, "
           . $this->tables['authors'] . ".url, "
           . $this->tables['authors'] . ".wordpress_id, "
+          . $this->tables['authors'] . ".tag AS user_tag, "
           . $this->tables['sponsors'] . ".brand, "
           . $this->tables['sponsors'] . ".url AS sponsor_url, "
           . $this->tables['sponsors'] . ".logo_url AS sponsor_logo "
