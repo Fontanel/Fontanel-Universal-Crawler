@@ -22,6 +22,8 @@
 				$this->prepareForWP();
 			}
 			
+			
+			
 			private function requireClasses() {
 			  $includes = array(
 			   'database-manager',
@@ -37,6 +39,8 @@
 			  }
     	}
     	
+    	
+    	
     	private function requireTimelineEvents() {
         if( is_dir( FONTANEL_UNIVERSAL_CRAWLER_TIMELINE_EVENTS_DIR ) ) {
   			  foreach( glob( FONTANEL_UNIVERSAL_CRAWLER_TIMELINE_EVENTS_DIR . '/*.*' ) as $file ) {
@@ -44,6 +48,8 @@
   			  }
 			  }
     	}
+    	
+    	
     	
     	private function requireCrawlers() {
         $crawler_dir = dirname(__FILE__) . '/crawlers';
@@ -60,10 +66,14 @@
         }
     	}
 			
+			
+			
 			private function prepareForWP() {
   			// add_filter( 'page_template', array( &$this, 'register_page_templates' ) );
   			add_action( 'wp_enqueue_scripts', array( &$this, 'register_fontanel_universal_import_scripts' ) );
 			}
+			
+			
 			
 			public function register_fontanel_universal_import_scripts() {
 				wp_register_script( 'waypoints'         , plugins_url( '/js/waypoints.min.js', __FILE__ ), array('jquery'), 1, true );
@@ -78,11 +88,15 @@
 				wp_enqueue_script( 'universal-importer' );
 			}
 			
+			
+			
 			private function fetchPosts() {
 				foreach( $this->crawlers as $crawler ){
 					$crawler->fetchPosts();
 				}
 			}
+			
+			
 			
 			public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
         $events = Array();
@@ -96,6 +110,8 @@
   			return $events;
   		}
   		
+  		
+  		
   		public function getEvent( $id ) {
         $events = Array();
   			foreach( $this->database_manager->getEvent( $id ) as $event ) {
@@ -108,6 +124,8 @@
   			return $events;
   		}
   		
+  		
+
   		private function createEventObject( $event ) {
   		  if( $event->type > 0 ) {
   		    $type = array_flip( $this->event_types )[ $event->type ];
