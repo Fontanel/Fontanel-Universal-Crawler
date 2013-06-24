@@ -8,7 +8,7 @@
     $article_parts = array( $post->caption );
   }
 ?>
-<article class="note photo">
+<article class="note photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 		<figure class="<?php if( count( $post->photos ) > 1 ): ?>icon-gallery has-slideshow<?php endif; ?>">

@@ -6,7 +6,7 @@
     $article_parts = array( $post->body );
   }
 ?>
-<article class="note text">
+<article class="note text<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
   	<div class="text">

@@ -6,7 +6,7 @@
     $article_parts = array( $video->caption );
   }
 ?>
-<article class="note video photo">
+<article class="note video photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 		<figure class="fitting-video">
