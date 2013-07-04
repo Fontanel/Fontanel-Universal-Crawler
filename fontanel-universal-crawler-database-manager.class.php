@@ -164,7 +164,7 @@
           . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
           . ( is_null( $types ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
           . "ORDER BY time DESC "
-          . "LIMIT " . $per_page . ";";
+          . "LIMIT " . ( $per_page * $page ) . "," . ( ( $per_page * $page ) + ( $per_page - 1 ) ) . ";";
           
         return $this->iwpdb->get_results( $query );
       }
