@@ -270,9 +270,11 @@
 			
 			
 			public function render_options_admin() {
+/*
 				if ( !current_user_can( 'manage_options' ) )	{
 					wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 				}
+*/
 				
 				if( file_exists( dirname(__FILE__) . '/fontanel-universal-crawler-options-admin.php' ) ) {
 					require_once( dirname(__FILE__) . '/fontanel-universal-crawler-options-admin.php' );
