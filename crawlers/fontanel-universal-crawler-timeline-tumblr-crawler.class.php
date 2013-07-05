@@ -8,7 +8,7 @@
 			public function __construct( $db_manager) {
 				parent::__construct( $db_manager );
 				
-				$this->api_key = get_option( 'fontanel_tumblr_importer_api_key' );
+				$this->api_key = get_option( 'fontanel_universal_crawler_tumblr_api_key' );
 			}
 			
 			public function fetchPosts() {
