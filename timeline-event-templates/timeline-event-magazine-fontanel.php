@@ -1,8 +1,8 @@
-<article class="story nieuwwerk">
-	<div class="article-body">
-	  <?php include( dirname(__FILE__) . '/partials/sponsor.php' ); ?>
-		<div class="caption">
-			<h2><?php print_r($vars['type']); ?> (<?php print_r($vars['slug']); ?>)</h2>
-		</div>
-	</div>
+<article class="story nieuwwerk post-<?php print( $vars['objects']->ID ); ?>" style="background-image: url('<?php the_field( 'achtergrondafbeelding', $vars['objects']->ID ); ?>');" id="post-<?php print( $vars['objects']->ID ); ?>">
+  <?php include( dirname(__FILE__) . '/partials/sponsor.php' ); ?>
+	<h2><?php print( $vars['objects']->post_title ); ?></h2>
+	<h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
+	<a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" style="background-color: <?php the_field( 'header_kleur_boven', $vars['objects']->ID ) ?>;" class="deep">Bekijk de story</a>
 </article>
+
+<?php include( dirname(__FILE__) . '/partials/gradient-bg.php' ); ?>
