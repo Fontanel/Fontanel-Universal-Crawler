@@ -20,6 +20,8 @@
       	}
       	
 				$this->prepareForWP();
+				
+				$this->register_admin_pages();
 			}
 			
 			
@@ -93,6 +95,10 @@
 				wp_enqueue_script( 'universal-importer' );
 			}
 			
+			public function register_admin_pages() {
+  			add_action( 'admin_init', array( &$this, 'register_editable_settings' ) );
+  			add_action( 'admin_menu', array( &$this, 'add_plugin_menu' ) );
+			}
 			
 			
 			private function fetchPosts() {
@@ -152,6 +158,102 @@
       		}
     		}
   		}
+  		
+  		
+  		
+  		public function register_editable_settings() {
+				register_setting(
+				  'fontanel_universal_crawler_section',
+				  'fontanel_universal_crawler_tumblr_api_key',
+				  array( &$this, 'sanitize_fontanel_universal_crawler_tumblr_api_key' ) 
+				);
+				register_setting(
+				  'fontanel_universal_crawler_section',
+          'fontanel_universal_crawler_tumblr_blog_url',
+          array( &$this, 'sanitize_fontanel_universal_crawler_tumblr_blog_url' ) 
+        );
+			}
+			
+			
+			
+			public function add_plugin_menu() {
+				add_settings_section(
+				  'fontanel_universal_crawler_section',
+				  'General',
+				  array( &$this, 'render_fontanel_universal_crawler_tumblr_api_key_section' ),
+				  'fontanel-universal-crawler-options'
+				);
+				
+				add_settings_field(
+				  'fontanel_universal_crawler_tumblr_api_key_field',
+				  'Tumblr Api Key',
+				  array( &$this, 'render_fontanel_universal_crawler_tumblr_api_key_field' ),
+				  'fontanel-universal-crawler-options',
+				  'fontanel_universal_crawler_section'
+				);
+				
+				add_settings_field(
+				  'fontanel_universal_crawler_tumblr_blog_url_field',
+				  'Tumblr Url (without \'http\' or \'www\')',
+				  array( &$this, 'render_fontanel_universal_crawler_tumblr_blog_url_field' ),
+				  'fontanel-universal-crawler-options',
+				  'fontanel_universal_crawler_section'
+				);
+				
+				add_settings_field(
+				  'fontanel_universal_crawler_ajax_url_field',
+				  'Tumblr Url (with \'http\')',
+				  array( &$this, 'render_fontanel_universal_crawler_ajax_url_field' ),
+				  'fontanel-universal-crawler-options',
+				  'fontanel_universal_crawler_section'
+				);
+				
+				add_options_page(
+				  'Fontanel Universal Crawler Options',
+				  'Universal Crawler',
+				  'manage_options',
+				  'fontanel-universal-crawler-options',
+				  array( &$this, 'render_options_admin' )
+				);
+			}
+			
+			
+			
+			public function render_fontanel_universal_crawler_tumblr_api_key_field() {
+				echo '<input id="fontanel_universal_crawler_tumblr_api_key_field" name="fontanel_universal_crawler_tumblr_api_key[fontanel_universal_crawler_tumblr_api_key_field]" value="' . get_option( 'fontanel_universal_crawler_tumblr_api_key' ) . '">';
+			}
+			
+			
+			
+			public function render_fontanel_universal_crawler_tumblr_blog_url_field() {
+				echo '<input id="fontanel_universal_crawler_tumblr_blog_url_field" name="fontanel_universal_tumblr_blog_url[fontanel_universal_crawler_tumblr_blog_url_field]" value="' . get_option( 'fontanel_universal_crawler_tumblr_blog_url' ) . '">';
+			}
+			
+			
+			
+			public function render_fontanel_universal_crawler_ajax_url_field() {
+				echo '<input id="fontanel_universal_crawler_ajax_url_field" name="fontanel_universal_ajax_url[fontanel_universal_crawler_ajax_url_field]" value="' . get_option( 'fontanel_universal_crawler_ajax_url' ) . '">';
+			}
+			
+			
+			
+			public function render_fontanel_universal_crawler_tumblr_api_key_section() {
+				do_settings_fields( 'fontanel-universal-crawler-options', 'fontanel_universal_crawler_tumblr_api_key_field' );
+				do_settings_fields( 'fontanel-universal-crawler-options', 'fontanel_universal_crawler_tumblr_blog_url_field' );
+				do_settings_fields( 'fontanel-universal-crawler-options', 'fontanel_universal_crawler_ajax_url_field' );
+			}
+			
+			
+			
+			public function render_options_admin() {
+				if ( !current_user_can( 'manage_options' ) )	{
+					wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+				}
+				
+				if( file_exists( dirname(__FILE__) . '/fontanel-universal-crawler-options-admin.php' ) ) {
+					require_once( dirname(__FILE__) . '/fontanel-universal-crawler-options-admin.php' );
+				}
+			}
   	}
   endif;
 ?>
