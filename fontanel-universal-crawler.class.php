@@ -167,10 +167,17 @@
 				  'fontanel_universal_crawler_tumblr_api_key',
 				  array( &$this, 'sanitize_fontanel_universal_crawler_tumblr_api_key' ) 
 				);
+				
 				register_setting(
 				  'fontanel_universal_crawler_section',
           'fontanel_universal_crawler_tumblr_blog_url',
           array( &$this, 'sanitize_fontanel_universal_crawler_tumblr_blog_url' ) 
+        );
+        
+        register_setting(
+				  'fontanel_universal_crawler_section',
+          'fontanel_universal_crawler_ajax_url',
+          array( &$this, 'sanitize_fontanel_universal_crawler_ajax_url' ) 
         );
 			}
 			
@@ -202,7 +209,7 @@
 				
 				add_settings_field(
 				  'fontanel_universal_crawler_ajax_url_field',
-				  'Tumblr Url (with \'http\')',
+				  'Ajax Url (with \'http\')',
 				  array( &$this, 'render_fontanel_universal_crawler_ajax_url_field' ),
 				  'fontanel-universal-crawler-options',
 				  'fontanel_universal_crawler_section'
@@ -219,20 +226,37 @@
 			
 			
 			
+			private function standard_input_field( $name ){
+  			return '<input id="fontanel_universal_crawler_' . $name . '_field" name="fontanel_universal_crawler_' . $name . '[fontanel_universal_crawler_' . $name . '_field]" value="' . get_option( 'fontanel_universal_crawler_' . $name ) . '">';
+			}
+			
+			
 			public function render_fontanel_universal_crawler_tumblr_api_key_field() {
-				echo '<input id="fontanel_universal_crawler_tumblr_api_key_field" name="fontanel_universal_crawler_tumblr_api_key[fontanel_universal_crawler_tumblr_api_key_field]" value="' . get_option( 'fontanel_universal_crawler_tumblr_api_key' ) . '">';
+				echo $this->standard_input_field( 'tumblr_api_key' );
+			}
+			
+			public function sanitize_fontanel_universal_crawler_tumblr_api_key( $input ) {
+				return $input['fontanel_universal_crawler_tumblr_api_key_field'];
 			}
 			
 			
 			
 			public function render_fontanel_universal_crawler_tumblr_blog_url_field() {
-				echo '<input id="fontanel_universal_crawler_tumblr_blog_url_field" name="fontanel_universal_tumblr_blog_url[fontanel_universal_crawler_tumblr_blog_url_field]" value="' . get_option( 'fontanel_universal_crawler_tumblr_blog_url' ) . '">';
+			  echo $this->standard_input_field( 'tumblr_blog_url' );
+			}
+			
+			public function sanitize_fontanel_universal_crawler_tumblr_blog_url( $input ) {
+				return $input['fontanel_universal_crawler_tumblr_blog_url_field'];
 			}
 			
 			
 			
 			public function render_fontanel_universal_crawler_ajax_url_field() {
-				echo '<input id="fontanel_universal_crawler_ajax_url_field" name="fontanel_universal_ajax_url[fontanel_universal_crawler_ajax_url_field]" value="' . get_option( 'fontanel_universal_crawler_ajax_url' ) . '">';
+			  echo $this->standard_input_field( 'ajax_url' );
+			}
+			
+			public function sanitize_fontanel_universal_crawler_ajax_url( $input ) {
+				return $input['fontanel_universal_crawler_ajax_url_field'];
 			}
 			
 			
