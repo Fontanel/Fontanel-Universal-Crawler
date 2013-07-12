@@ -1,4 +1,4 @@
-<article class="story nieuwwerk post-<?php print( $vars['objects']->ID ); ?>" style="background-image: url('<?php the_field( 'achtergrondafbeelding', $vars['objects']->ID ); ?>');" id="post-<?php print( $vars['objects']->ID ); ?>">
+<article class="story nieuwwerk post-<?php print( $vars['objects']->ID ); ?>" style="background-image: url('<?php the_field( 'achtergrondafbeelding', $vars['objects']->ID ); ?>');" id="post-<?php print( $vars['objects']->ID ); ?>" data-id="<?php print_r( $vars['id'] ); ?>">
   <?php include( dirname(__FILE__) . '/partials/sponsor.php' ); ?>
 	<h2><?php print( $vars['objects']->post_title ); ?></h2>
 	<h3><?php print( $vars['objects']->post_excerpt ); ?></h3>

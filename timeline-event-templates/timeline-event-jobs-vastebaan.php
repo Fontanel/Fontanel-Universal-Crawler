@@ -1,5 +1,5 @@
 <?php $vacancy = json_decode( $vars['objects'][0]->object ); ?>
-<article class="jobs fulltime">
+<article class="jobs fulltime" data-id="<?php print_r( $vars['id'] ); ?>">
 	<a class="article-body" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL . $vacancy->url ); ?>">
 	  <div class="left">
   	  <figure>

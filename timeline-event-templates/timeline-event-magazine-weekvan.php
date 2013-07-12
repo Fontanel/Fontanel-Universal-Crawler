@@ -1,4 +1,4 @@
-<article class="story weekvan">
+<article class="story weekvan" data-id="<?php print_r( $vars['id'] ); ?>">
   <img src="<?php echo $portrait[0] ?>" class="portrait">
   <?php if( is_null( $vars['sponsor'] ) ): ?>
     <figure class="sponsor">
