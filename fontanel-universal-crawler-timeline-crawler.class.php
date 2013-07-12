@@ -11,7 +11,7 @@
 			}
 			
 			protected function getTypeId ( $platform = 'wp', $post_type = 'post' ) {
-				$type = $platform . '_' . $post_type;
+				$type = str_replace(' ', '', ucfirst( $platform ) . ucfirst( $post_type ) );
 				return $this->event_types[ $type ];
 			}
 			
@@ -22,10 +22,10 @@
 			 *   array( ['type'] => 'job', ['id'] => 987859, ['object'] => OBJECT )
 			 * );
 			 */
-			protected function storeEvent( $type_id, $objects_id, $timestamp, $objects = NULL ) {
+			protected function storeEvent( $type_id, $objects_id, $timestamp, $objects = NULL, $author = NULL ) {
 				$new_or_updated = $this->db_manager->newOrUpdatedEvent( $type_id, $objects_id, $timestamp );
 				if( $new_or_updated ) {
-					$this->db_manager->storeEvent( $type_id, $objects_id, $timestamp );
+					$this->db_manager->storeEvent( $type_id, $objects_id, $timestamp, $author );
 					
 					if( ! is_null( $objects ) ) {
 						$this->db_manager->storeObjects($objects);

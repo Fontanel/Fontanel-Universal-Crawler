@@ -10,12 +10,15 @@
 			'TumblrPhoto' => 7,
 			'TumblrChat' => 8,
 			'JobsStage' => 9,
-			'JobsFulltime' => 10,
+			'JobsVastebaan' => 10,
 			'MagazineWeekvan' => 11,
 			'MagazineNieuwwerk' => 12,
 			'MagazineGoedbezig' => 13,
-			'MagazineFontanel' => 14
-		) )
+			'MagazineFontanel' => 14,
+			'JobsRoundup' => 15
+		) ),
+		'TIMELINE_EVENTS_DIR' => dirname(__FILE__) . '/timeline-events',
+		'JOBS_URL' => 'http://www.fontaneljobs.nl'
 	);
 	
 	foreach( $options as $key => $value ) {
