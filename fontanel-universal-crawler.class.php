@@ -109,7 +109,7 @@
 			
 			
 			
-			public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
+			public function getEvents( $types = null, $page = 0, $per_page = 10, $cleaned_order = false ) {
         $events = Array();
   			foreach( $this->database_manager->getEvents( $types, $page, $per_page ) as $event ) {
     			$new_event = $this->createEventObject( $event );
@@ -118,6 +118,19 @@
       			$events[] = $new_event;
     			}
   			}
+  			
+  			if( $cleaned_order ) {
+  			  $move = Array();
+  			  
+  			  if( $events[0]->isStory() ) {
+    			  $move[] = array_shift( $events );
+  			  }
+  			  
+  			  array_splice( $events, 1, 0, $move );
+  			  
+/*   			  $move = Array(); */
+  			}
+  			
   			return $events;
   		}
   		
