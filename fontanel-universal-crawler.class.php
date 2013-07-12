@@ -120,17 +120,16 @@
   			}
   			
   			if( $cleaned_order ) {
-  			  $move = Array();
-  			  
-  			  if( $events[0]->isStory() ) {
-    			  $move[] = array_shift( $events );
+  			  $i = 1;
+  			  foreach( $events as $event ) {
+  			    if( $event->isNote() ) {
+    			    array_unshift($events, $event);
+    			    unset( $events[$i] );
+    			    break;
+  			    }
+  			    $i++;
   			  }
-  			  
-  			  array_splice( $events, 1, 0, $move );
-  			  
-/*   			  $move = Array(); */
   			}
-  			
   			return $events;
   		}
   		

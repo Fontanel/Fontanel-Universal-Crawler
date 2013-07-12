@@ -85,11 +85,15 @@
         }
 			}
 			
-			public function isStory() {
-  			if( $this->type == 'MagazineWeekvan' or
-  			    $this->type == 'MagazineNieuwwerk' or
-  			    $this->type == 'MagazineGoedbezig' or
-  			    $this->type == 'MagazineFontanel' ) {
+			public function isNote() {
+  			if( $this->type == 'TumblrText' or
+  			    $this->type == 'TumblrQuote' or
+  			    $this->type == 'TumblrLink' or
+  			    $this->type == 'TumblrAnswer' or
+  			    $this->type == 'TumblrVideo' or
+  			    $this->type == 'TumblrAudio' or
+      			$this->type == 'TumblrPhoto' or
+  			    $this->type == 'TumblrChat' ) {
     			return true;
   			}
   			
