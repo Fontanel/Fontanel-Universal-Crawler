@@ -31,7 +31,7 @@
           . "sticky_untill int NOT NULL,"
           . "author varchar(128) NULL,"
           . "sponsor int NULL,"
-          . "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY );";
+          . "id int NOT NULL AUTO_INCREMENT PRIMARY KEY );";
 				
 				$sql[] =
           "CREATE TABLE IF NOT EXISTS " . $this->tables['objects'] . " ( "
