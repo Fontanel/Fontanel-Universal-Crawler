@@ -22,7 +22,9 @@
   				$type = $post->type;
   				$object_id = $post->id;
   				$type_id = $this->getTypeId( $this->platform, $type );
-  				$author = $this->db_manager->tryToFindAuthor( $post->tags );
+  				if( !empty( $post->tags ) ) {
+    				$author = $this->db_manager->tryToFindAuthor( $post->tags );
+  				}
   				$timestamp = $post->timestamp;
   				
   				$savable_objects = $this->createSavableObjects( $post );

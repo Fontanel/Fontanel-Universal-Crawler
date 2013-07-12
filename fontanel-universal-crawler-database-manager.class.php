@@ -238,7 +238,7 @@
         $sql =
           "SELECT * "
           . "FROM `wp_timeline_authors` "
-          . "WHERE `tag` REGEXP  '" . $search . "' "
+          . "WHERE `tag` REGEXP '" . $search . "' "
           . "LIMIT 1";
         $author = $this->iwpdb->get_row( $sql );
         if( $author ){ return $author->tag; }
