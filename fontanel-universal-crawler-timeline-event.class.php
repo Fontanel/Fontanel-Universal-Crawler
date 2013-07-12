@@ -84,6 +84,17 @@
           return ob_get_clean();
         }
 			}
+			
+			public function isStory() {
+  			if( $this->type == 'MagazineWeekvan' or
+  			    $this->type == 'MagazineNieuwwerk' or
+  			    $this->type == 'MagazineGoedbezig' or
+  			    $this->type == 'MagazineFontanel' ) {
+    			return true;
+  			}
+  			
+  			return false;
+			}
 		}
 	endif;
 ?>
