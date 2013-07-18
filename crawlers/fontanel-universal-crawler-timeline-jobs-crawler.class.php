@@ -26,12 +26,12 @@
 			
 			private function createSavableObjects( $raw_object, $excludeInternships = false ) {
 			  if( !( $excludeInternships and $raw_object->job_type == "Stage" ) ) {
-					$new_savable_objects = array();
-					$new_savable_objects['type'] = 'jobs';
-					$new_savable_objects['id'] = $raw_object->id;
-					$new_savable_objects['object'] = json_encode( $raw_object );
+					$new_savable_object = array();
+					$new_savable_object['type'] = 'jobs';
+					$new_savable_object['id'] = $raw_object->id;
+					$new_savable_object['object'] = json_encode( $raw_object );
 					
-					return $new_savable_objects;
+					return array( $new_savable_object );
 				}
 			}
 		}
