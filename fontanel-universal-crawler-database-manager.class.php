@@ -106,8 +106,8 @@
     	    "INTO " . $this->tables['objects'] ." " .
   	      "(type, object, id, updated_at) " .
   	      "VALUES (" .
-  	        "'" . intval( $object['type'] ) . "'," .
-  	        "'" . $object['object'] . "'," .
+  	        "'" . $object['type'] . "'," .
+  	        "'" . mysql_real_escape_string( $object['object'] ) . "'," .
   	        "'" . intval( $object['id'] ) . "'," .
   	        "'" . time() . "'" .
   	      ");";
