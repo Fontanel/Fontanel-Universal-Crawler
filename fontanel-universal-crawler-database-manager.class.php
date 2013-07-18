@@ -95,12 +95,16 @@
     
       public function storeObjects( $objects ) {
       	foreach( $objects as $object ) {
-		      $this->iwpdb->insert( $this->tables['objects'], array(
-	      		'type' => $object['type'],
-	      		'object' => $object['object'],
-	      		'id' => $object['id'],
-	      		'updated_at' => time()
-	      	) );
+      	  $query = "REPLACE " .
+      	    "INTO " . $this->tables['objects'] ." " .
+    	      "(type, object, id, updated_at) " .
+    	      "VALUES (" .
+    	        "'" . intval( $object['type'] ) . "'," .
+    	        "'" . intval( $object['object'] ) . "'," .
+    	        "'" . intval( $object['id'] ) . "'," .
+    	        "'" . time() . "'" .
+    	      ");";
+		      $this->iwpdb->get_results( $query );
       	}
       }
       
