@@ -39,7 +39,7 @@
           . "id varchar(128) NOT NULL,"
           . "updated_at int NOT NULL,"
           . "object text NOT NULL,"
-          . "pretty_url varchar(128) NULL"
+          . "pretty_url varchar(128) NULL,"
           . "PRIMARY KEY(id,type) );";
           
         $sql[] =
