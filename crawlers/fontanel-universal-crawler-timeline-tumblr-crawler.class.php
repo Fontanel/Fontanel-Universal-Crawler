@@ -38,6 +38,7 @@
 				$new_savable_object['type'] = 'tumblr';
 				$new_savable_object['id'] = $raw_object->id;
 				$new_savable_object['object'] = json_encode( $raw_object );
+				$new_savable_object['pretty_url'] = strrchr( $raw_object->post_url, '/' );
 				return Array( $new_savable_object );
 			}
 		}
