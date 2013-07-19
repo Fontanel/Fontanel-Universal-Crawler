@@ -105,12 +105,13 @@
       public function storeObject( $object ) {
     	  $query = "REPLACE " .
     	    "INTO " . $this->tables['objects'] ." " .
-  	      "(type, object, id, updated_at) " .
+  	      "(type, object, id, updated_at, pretty_url) " .
   	      "VALUES (" .
   	        "'" . $object['type'] . "'," .
   	        "'" . mysql_real_escape_string( $object['object'] ) . "'," .
   	        "'" . intval( $object['id'] ) . "'," .
-  	        "'" . time() . "'" .
+  	        "'" . time() . "'," .
+  	        "'" . $object['pretty_url'] . "'" .
   	      ");";
 	      $this->iwpdb->get_results( $query );
       }
