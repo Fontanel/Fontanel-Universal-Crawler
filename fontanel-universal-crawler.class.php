@@ -136,15 +136,21 @@
   		
   		
   		public function getEvent( $id ) {
-        $events = Array();
-  			foreach( $this->database_manager->getEvent( $id ) as $event ) {
+  		  $events = $res = Array();
+  		  if( gettype( $id ) === "integer" ) {
+          $events = $this->database_manager->getEvent( $id );
+        } else {
+          $events = $this->database_manager->getEventByNoteUrl( $id );
+        }
+        
+  			foreach( $events as $event ) {
     			$new_event = $this->createEventObject( $event );
     			
     			if( is_object( $new_event ) ) {
-      			$events[] = $new_event;
+      			$res[] = $new_event;
     			}
   			}
-  			return $events;
+  			return $res;
   		}
   		
   		

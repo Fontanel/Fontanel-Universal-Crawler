@@ -221,11 +221,11 @@
         
         $query = 
           "SELECT "
-          . $this->tables['notes'] . ".id"
-          . "FROM " . $this->tables['notes'] . " "
-          . "WHERE " . $this->tables['notes'] . ".pretty_url='" . $url . "';";
-          
+          . $this->tables['objects'] . ".id "
+          . "FROM " . $this->tables['objects'] . " "
+          . "WHERE " . $this->tables['objects'] . ".pretty_url='" . $url . "';";
         $id = $this->iwpdb->get_results( $query );
+        $id = $id[0]->id;
         
         $query = 
           "SELECT "
@@ -240,8 +240,8 @@
           . "FROM " . $this->tables['events'] . " "
             . "LEFT JOIN " . $this->tables['authors'] . " "
             . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
-          . "WHERE " . $this->tables['events'] . ".id=" . $id . ";";
-          
+          . "WHERE " . $this->tables['events'] . ".objects LIKE '%" . $id . "%';";
+        
         return $this->iwpdb->get_results( $query );
       }
 
@@ -249,7 +249,9 @@
 
       public function getObjects( $objects ) {
         $query = 
-          "SELECT " . $this->tables['objects'] . ".type, " . $this->tables['objects'] . ".object " .
+          "SELECT " . $this->tables['objects'] . ".type" .
+          ", " . $this->tables['objects'] . ".object " .
+          ", " . $this->tables['objects'] . ".pretty_url " .
           "FROM " . $this->tables['objects'] . " " .
           "WHERE " . $this->tables['objects'] . ".id IN (" . $objects . ");";
         return $this->iwpdb->get_results( $query );
