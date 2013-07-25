@@ -131,26 +131,13 @@
 
 
     
-      public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
-        if( !is_null( $types ) ) {
-          global $filter_types_on;
-          
-          $filter = function( $key ) {
-            global $filter_types_on;
-            return( strpos( strtolower( $key ), $filter_types_on ) !== false );
-          };
-          
-          switch( $types ) {
-            case 'magazine':
-            case 'stories':
-              $types = 'magazine';
-              break;
-          }
-          
-          $filter_types_on = $types;
-          $keys = array_flip( unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES ) );
-          $filtered_keys = array_filter( $keys, $filter );
-          $types = implode( ',', array_keys( $filtered_keys ) );
+      public function getEvents( $types = NULL, $page = 0, $per_page = 10, $author_id = NULL ) {
+        if( !is_null( $types ) and !empty( $types ) ) {
+          $types = $this->prepareTypes( $types );
+        }
+        
+        if( !is_null( $author_id ) ) {
+          $author = $this->getAuthorByWPId( $author_id );
         }
         
         $query = 
@@ -174,11 +161,42 @@
             . "LEFT JOIN " . $this->tables['sponsors'] . " "
             . "ON " . $this->tables['sponsors'] . ".id = " . $this->tables['events'] . ".sponsor "
           . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
-          . ( is_null( $types ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
+          . ( ( is_null( $types ) or empty( $types ) ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
+          . ( ( is_null( $author ) or empty( $author ) ) ? "" : "AND " . $this->tables['events'] . ".author = '" . $author . "' " )
           . "ORDER BY time DESC "
           . "LIMIT " . ( $per_page * $page ) . "," . $per_page . ";";
           
         return $this->iwpdb->get_results( $query );
+      }
+      
+      private function getAuthorByWPId( $author_id ) {
+        $query = 
+          "SELECT " . $this->tables['authors'] . ".tag " .
+          "FROM " . $this->tables['authors'] . " " .
+          "WHERE " . $this->tables['authors'] . ".wordpress_id = (" . $author_id . ");";
+        $res = $this->iwpdb->get_results( $query );
+        return $res[0]->tag;
+      }
+      
+      private function prepareTypes( $types ) {
+        global $filter_types_on;
+          
+        $filter = function( $key ) {
+          global $filter_types_on;
+          return( strpos( strtolower( $key ), $filter_types_on ) !== false );
+        };
+        
+        switch( $types ) {
+          case 'magazine':
+          case 'stories':
+            $types = 'magazine';
+            break;
+        }
+        
+        $filter_types_on = $types;
+        $keys = array_flip( unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES ) );
+        $filtered_keys = array_filter( $keys, $filter );
+        return implode( ',', array_keys( $filtered_keys ) );
       }
 
 
