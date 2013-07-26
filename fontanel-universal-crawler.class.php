@@ -119,18 +119,22 @@
     			}
   			}
   			
-  			if( $cleaned_order ) {
-  			  $i = 1;
-  			  foreach( $events as $event ) {
-  			    if( $event->isNote() ) {
-    			    array_unshift($events, $event);
-    			    unset( $events[$i] );
-    			    break;
-  			    }
-  			    $i++;
-  			  }
-  			}
+  			if( $cleaned_order ) { return $this->cleanOrder( $events ); }
+  			
   			return $events;
+  		}
+  		
+  		private function cleanOrder( $events ) {
+    		$i = 1;
+			  foreach( $events as $event ) {
+			    if( $event->isNote() ) {
+  			    array_unshift($events, $event);
+  			    unset( $events[$i] );
+  			    break;
+			    }
+			    $i++;
+			  }
+			  return $events;
   		}
   		
   		
