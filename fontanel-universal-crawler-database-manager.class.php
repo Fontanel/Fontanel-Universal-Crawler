@@ -123,7 +123,8 @@
           "SELECT "
           . $this->tables['authors'] . ".name, "
           . $this->tables['authors'] . ".thumb, "
-          . $this->tables['authors'] . ".tag "
+          . $this->tables['authors'] . ".tag, "
+          . $this->tables['authors'] . ".wordpress_id "
           . "FROM " . $this->tables['authors'] . ";";
           
         return $this->iwpdb->get_results( $query );
