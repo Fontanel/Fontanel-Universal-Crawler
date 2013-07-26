@@ -1,4 +1,4 @@
-<div href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="item story weekvan" data-second-background="#300747" data-id="<?php print_r( $vars['id'] ); ?>">
+<div href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="item story weekvan header" data-second-background="#300747" data-id="<?php print_r( $vars['id'] ); ?>">
   <?php if( is_null( $vars['sponsor'] ) ): ?>
     <figure class="sponsor">
       <figcaption>presented by</figcaption>
