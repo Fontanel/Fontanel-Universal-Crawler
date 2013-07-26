@@ -169,6 +169,8 @@
         return $this->iwpdb->get_results( $query );
       }
       
+      
+      
       public function getEventsByObjectIds( $ids = '' ) {        
         $query = 
           "SELECT "
@@ -197,6 +199,8 @@
         return $this->iwpdb->get_results( $query );
       }
       
+      
+      
       private function getAuthorByWPId( $author_id ) {
         $query = 
           "SELECT " . $this->tables['authors'] . ".tag " .
@@ -205,6 +209,8 @@
         $res = $this->iwpdb->get_results( $query );
         return $res[0]->tag;
       }
+      
+      
       
       private function prepareTypes( $types ) {
         global $filter_types_on;
