@@ -62,6 +62,8 @@
 			public function render( $template = null, $skip_readmore_wrap = false ) {
 			  if( !is_null( $template ) ){
   			  $this->extendTemplatePath( $template );
+			  } else {
+  			  $this->findTemplate();
 			  }
 			  
         $vars = Array();
