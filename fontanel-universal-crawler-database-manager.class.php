@@ -131,13 +131,13 @@
 
 
     
-      public function getEvents( $types = NULL, $page = 0, $per_page = 10, $author_id = NULL ) {
+      public function getEvents( $types = NULL, $page = 0, $per_page = 10, $author = NULL ) {
         if( !is_null( $types ) and !empty( $types ) ) {
           $types = $this->prepareTypes( $types );
         }
         
-        if( !is_null( $author_id ) ) {
-          $author = $this->getAuthorByWPId( $author_id );
+        if( !is_null( $author ) ) {
+          $author = $this->getAuthorByWPId( $author );
         }
         
         $query = 
