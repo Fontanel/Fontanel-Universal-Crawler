@@ -124,6 +124,20 @@
   			return $events;
   		}
   		
+  		public function getEventsByObjectIds( $ids ) {
+    		$events = Array();
+  			foreach( $this->database_manager->getEventsByObjectIds( $ids ) as $event ) {
+    			$new_event = $this->createEventObject( $event );
+    			
+    			if( is_object( $new_event ) ) {
+      			$events[] = $new_event;
+    			}
+  			}
+  			
+  			return $this->cleanOrder( $events );
+  		}
+  		
+  		
   		private function cleanOrder( $events ) {
     		$i = 1;
 			  foreach( $events as $event ) {
