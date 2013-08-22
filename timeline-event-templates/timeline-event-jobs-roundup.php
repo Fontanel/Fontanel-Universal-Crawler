@@ -1,5 +1,12 @@
 <article class="jobs weekly" data-id="<?php print_r( $vars['id'] ); ?>">
-	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
+  <aside class="avatar jobs">
+    <figure>
+      <a href="http://www.fontaneljobs.nl">
+        <img src="<?php bloginfo('template_directory') ?>/img/timeline-jobs-logo.png">
+        <figcaption>Fontanel Jobs</figcaption>
+      </a>
+    </figure>
+  </aside>
 	<div class="article-body">
 	  <section>
     	<h2><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly Jobs Roundup</a></h2>
