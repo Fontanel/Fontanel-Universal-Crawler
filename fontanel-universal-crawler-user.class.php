@@ -5,7 +5,7 @@
   	  public $thumb = '';
   	  public $url = '';
   	  public $tag = '';
-  	  private $wordpress_id = 0;
+  	  public $wordpress_id = 0;
   	    	  
     	public function __construct( $name = '', $thumb = '', $wordpress_id = 0, $url = '', $tag = '' ) {
         $this->name = $name;
