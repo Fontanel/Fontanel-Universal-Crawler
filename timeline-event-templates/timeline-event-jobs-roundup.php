@@ -38,6 +38,5 @@
     	<div class="twitter icon-twitter"> Tweet<span>240</span></div>
     	<time class="icon-clock">Week <?php print( $vars['created_at'] ); ?></time>
     </footer>
-
   </div>
 </article>
