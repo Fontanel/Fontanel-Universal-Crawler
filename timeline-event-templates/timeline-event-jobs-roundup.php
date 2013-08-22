@@ -10,7 +10,7 @@
           <li>
             <a href="/vacature/senior-designer-on-en-offline" target="_blank">
               <h5><?php print( $job->company ); ?> zoekt een</h5>
-              <h4><?php print( $job->job_function ); ?> <span class="new">nieuw</span></h4>
+              <h4><?php print( $job->job_function ); ?><?php if( ( time() - $job->created_at ) < 604800 ): ?> <span class="new">nieuw</span><?php endif; ?></h4>
               <p>
                 Vaste baan in <?php print( $job->city ); ?>
                 <span class="fields-container">

@@ -12,7 +12,7 @@
 	  </div>
 	  <div class="left">
   	  <h3><?php print( $vacancy->company ); ?> zoekt een</h3>
-    	<h2><?php print( $vacancy->job_function ); ?></h2>
+    	<h2><?php print( $vacancy->job_function ); ?><?php if( ( time() - $vacancy->created_at ) < 604800 ): ?> <span class="new">nieuw</span><?php endif; ?></h2>
     	<p>We zoeken <?php print( $vacancy->short_description ); ?></p>
     	<footer>
       	<p>
