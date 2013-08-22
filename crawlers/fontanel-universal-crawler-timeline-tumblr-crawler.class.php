@@ -22,7 +22,9 @@
   				$type = $post->type;
   				$object_id = $post->id;
   				$type_id = $this->getTypeId( $this->platform, $type );
-  				$author = $this->db_manager->tryToFindAuthor( $post->tags );
+  				if( !empty( $post->tags ) ) {
+    				$author = $this->db_manager->tryToFindAuthor( $post->tags );
+  				}
   				$timestamp = $post->timestamp;
   				
   				$savable_objects = $this->createSavableObjects( $post );
@@ -36,6 +38,7 @@
 				$new_savable_object['type'] = 'tumblr';
 				$new_savable_object['id'] = $raw_object->id;
 				$new_savable_object['object'] = json_encode( $raw_object );
+				$new_savable_object['pretty_url'] = strrchr( $raw_object->post_url, '/' );
 				return Array( $new_savable_object );
 			}
 		}

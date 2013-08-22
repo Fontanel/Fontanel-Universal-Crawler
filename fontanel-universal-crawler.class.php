@@ -109,30 +109,66 @@
 			
 			
 			
-			public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
+			public function getEvents( $types = NULL, $page = 0, $per_page = 10, $cleaned_order = false, $author = NULL ) {
         $events = Array();
-  			foreach( $this->database_manager->getEvents( $types, $page, $per_page ) as $event ) {
+  			foreach( $this->database_manager->getEvents( $types, $page, $per_page, $author ) as $event ) {
     			$new_event = $this->createEventObject( $event );
     			
     			if( is_object( $new_event ) ) {
       			$events[] = $new_event;
     			}
   			}
+  			
+  			if( $cleaned_order ) { return $this->cleanOrder( $events ); }
+  			
   			return $events;
+  		}
+  		
+  		public function getEventsByObjectIds( $ids ) {
+    		$events = Array();
+  			foreach( $this->database_manager->getEventsByObjectIds( $ids ) as $event ) {
+    			$new_event = $this->createEventObject( $event );
+    			
+    			if( is_object( $new_event ) ) {
+      			$events[] = $new_event;
+    			}
+  			}
+  			
+  			return $this->cleanOrder( $events );
+  		}
+  		
+  		
+  		private function cleanOrder( $events ) {
+    		$i = 1;
+			  foreach( $events as $event ) {
+			    if( $event->isNote() ) {
+  			    array_unshift($events, $event);
+  			    unset( $events[$i] );
+  			    break;
+			    }
+			    $i++;
+			  }
+			  return $events;
   		}
   		
   		
   		
   		public function getEvent( $id ) {
-        $events = Array();
-  			foreach( $this->database_manager->getEvent( $id ) as $event ) {
+  		  $events = $res = Array();
+  		  if( gettype( $id ) === "integer" ) {
+          $events = $this->database_manager->getEvent( $id );
+        } else {
+          $events = $this->database_manager->getEventByNoteUrl( $id );
+        }
+        
+  			foreach( $events as $event ) {
     			$new_event = $this->createEventObject( $event );
     			
     			if( is_object( $new_event ) ) {
-      			$events[] = $new_event;
+      			$res[] = $new_event;
     			}
   			}
-  			return $events;
+  			return $res;
   		}
   		
   		

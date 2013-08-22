@@ -1,4 +1,4 @@
-<article class="jobs weekly">
+<article class="jobs weekly" data-id="<?php print_r( $vars['id'] ); ?>">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 	  <section>
