@@ -5,5 +5,4 @@
 	<a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" style="background-color: <?php the_field( 'header_kleur_boven', $vars['objects']->ID ) ?>;" class="deep">Bekijk de story</a>
 </article>
 
-<?php include( dirname(__FILE__) . '/partials/good-bezig-logo-bg.php' ); ?>
 <?php include( dirname(__FILE__) . '/partials/gradient-bg.php' ); ?>
