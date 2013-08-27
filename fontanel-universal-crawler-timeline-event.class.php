@@ -62,6 +62,8 @@
 			public function render( $template = null, $skip_readmore_wrap = false ) {
 			  if( !is_null( $template ) ){
   			  $this->extendTemplatePath( $template );
+			  } else {
+  			  $this->findTemplate();
 			  }
 			  
         $vars = Array();
@@ -83,6 +85,21 @@
           include $this->template_path;
           return ob_get_clean();
         }
+			}
+			
+			public function isNote() {
+  			if( $this->type == 'TumblrText' or
+  			    $this->type == 'TumblrQuote' or
+  			    $this->type == 'TumblrLink' or
+  			    $this->type == 'TumblrAnswer' or
+  			    $this->type == 'TumblrVideo' or
+  			    $this->type == 'TumblrAudio' or
+      			$this->type == 'TumblrPhoto' or
+  			    $this->type == 'TumblrChat' ) {
+    			return true;
+  			}
+  			
+  			return false;
 			}
 		}
 	endif;

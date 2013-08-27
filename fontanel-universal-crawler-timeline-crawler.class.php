@@ -23,13 +23,12 @@
 			 * );
 			 */
 			protected function storeEvent( $type_id, $objects_id, $timestamp, $objects = NULL, $author = NULL ) {
-				$new_or_updated = $this->db_manager->newOrUpdatedEvent( $type_id, $objects_id, $timestamp );
-				if( $new_or_updated ) {
+				if( $this->db_manager->newOrUpdatedEvent( $type_id, $objects_id, $timestamp ) ) {
 					$this->db_manager->storeEvent( $type_id, $objects_id, $timestamp, $author );
-					
-					if( ! is_null( $objects ) ) {
-						$this->db_manager->storeObjects($objects);
-					}
+				}
+				
+				if( ! is_null( $objects ) ) {
+					$this->db_manager->storeObjects( $objects );
 				}
 			}
 			

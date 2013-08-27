@@ -31,7 +31,7 @@
           . "sticky_untill int NOT NULL,"
           . "author varchar(128) NULL,"
           . "sponsor int NULL,"
-          . "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY );";
+          . "id int NOT NULL AUTO_INCREMENT PRIMARY KEY );";
 				
 				$sql[] =
           "CREATE TABLE IF NOT EXISTS " . $this->tables['objects'] . " ( "
@@ -39,6 +39,7 @@
           . "id varchar(128) NOT NULL,"
           . "updated_at int NOT NULL,"
           . "object text NOT NULL,"
+          . "pretty_url varchar(128) NULL,"
           . "PRIMARY KEY(id,type) );";
           
         $sql[] =
@@ -95,13 +96,24 @@
     
       public function storeObjects( $objects ) {
       	foreach( $objects as $object ) {
-		      $this->iwpdb->insert( $this->tables['objects'], array(
-	      		'type' => $object['type'],
-	      		'object' => $object['object'],
-	      		'id' => $object['id'],
-	      		'updated_at' => time()
-	      	) );
+      	  $this->storeObject( $object );
       	}
+      }
+      
+      
+      
+      public function storeObject( $object ) {
+    	  $query = "REPLACE " .
+    	    "INTO " . $this->tables['objects'] ." " .
+  	      "(type, object, id, updated_at,pretty_url)" .
+  	      "VALUES (" .
+  	        "'" . $object['type'] . "'," .
+  	        "'" . mysql_real_escape_string( $object['object'] ) . "'," .
+  	        "'" . intval( $object['id'] ) . "'," .
+  	        "'" . time() . "'," .
+  	        "'" .( array_key_exists('pretty_url', $object ) ? mysql_real_escape_string( $object['pretty_url'] ) : "NULL" ) . "'" .
+  	      ");";
+	      $this->iwpdb->get_results( $query );
       }
       
       
@@ -111,7 +123,8 @@
           "SELECT "
           . $this->tables['authors'] . ".name, "
           . $this->tables['authors'] . ".thumb, "
-          . $this->tables['authors'] . ".tag "
+          . $this->tables['authors'] . ".tag, "
+          . $this->tables['authors'] . ".wordpress_id "
           . "FROM " . $this->tables['authors'] . ";";
           
         return $this->iwpdb->get_results( $query );
@@ -119,26 +132,13 @@
 
 
     
-      public function getEvents( $types = null, $page = 0, $per_page = 10 ) {
-        global $filter_types_on;
+      public function getEvents( $types = NULL, $page = 0, $per_page = 10, $author = NULL ) {
+        if( !is_null( $types ) and !empty( $types ) ) {
+          $types = $this->prepareTypes( $types );
+        }
         
-        $filter = function( $key ) {
-          global $filter_types_on;
-          return( strpos( strtolower( $key ), $filter_types_on ) !== false );
-        };
-        
-        switch( $types ) {
-          case 'magazine':
-          case 'stories':
-            $types = 'magazine';
-            $filter_types_on = $types;
-            $keys = array_flip( unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES ) );
-            $filtered_keys = array_filter( $keys, $filter );
-            $types = implode( ',', array_keys( $filtered_keys ) );
-            break;
-          default:
-            $types = null;
-            break;
+        if( !is_null( $author ) ) {
+          $author = $this->getAuthorByWPId( $author );
         }
         
         $query = 
@@ -152,6 +152,7 @@
           . $this->tables['authors'] . ".thumb, "
           . $this->tables['authors'] . ".url, "
           . $this->tables['authors'] . ".wordpress_id, "
+          . $this->tables['authors'] . ".tag AS user_tag, "
           . $this->tables['sponsors'] . ".brand, "
           . $this->tables['sponsors'] . ".url AS sponsor_url, "
           . $this->tables['sponsors'] . ".logo_url AS sponsor_logo "
@@ -161,11 +162,76 @@
             . "LEFT JOIN " . $this->tables['sponsors'] . " "
             . "ON " . $this->tables['sponsors'] . ".id = " . $this->tables['events'] . ".sponsor "
           . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
-          . ( is_null( $types ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
+          . ( ( is_null( $types ) or empty( $types ) ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
+          . ( ( is_null( $author ) or empty( $author ) ) ? "" : "AND " . $this->tables['events'] . ".author = '" . $author . "' " )
           . "ORDER BY time DESC "
-          . "LIMIT " . $per_page . ";";
+          . "LIMIT " . ( $per_page * $page ) . "," . $per_page . ";";
           
         return $this->iwpdb->get_results( $query );
+      }
+      
+      
+      
+      public function getEventsByObjectIds( $ids = '' ) {        
+        $query = 
+          "SELECT "
+          . $this->tables['events'] . ".type, "
+          . $this->tables['events'] . ".objects, "
+          . $this->tables['events'] . ".id, "
+          . $this->tables['events'] . ".sticky_untill, "
+          . $this->tables['events'] . ".sponsor, "
+          . $this->tables['authors'] . ".name, "
+          . $this->tables['authors'] . ".thumb, "
+          . $this->tables['authors'] . ".url, "
+          . $this->tables['authors'] . ".wordpress_id, "
+          . $this->tables['authors'] . ".tag AS user_tag, "
+          . $this->tables['sponsors'] . ".brand, "
+          . $this->tables['sponsors'] . ".url AS sponsor_url, "
+          . $this->tables['sponsors'] . ".logo_url AS sponsor_logo "
+          . "FROM " . $this->tables['events'] . " "
+            . "LEFT JOIN " . $this->tables['authors'] . " "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+            . "LEFT JOIN " . $this->tables['sponsors'] . " "
+            . "ON " . $this->tables['sponsors'] . ".id = " . $this->tables['events'] . ".sponsor "
+          . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
+          . "AND " . $this->tables['events'] . ".objects IN (" . $ids . ") "
+          . "ORDER BY time DESC;";
+          
+        return $this->iwpdb->get_results( $query );
+      }
+      
+      
+      
+      private function getAuthorByWPId( $author_id ) {
+        $query = 
+          "SELECT " . $this->tables['authors'] . ".tag " .
+          "FROM " . $this->tables['authors'] . " " .
+          "WHERE " . $this->tables['authors'] . ".wordpress_id = (" . $author_id . ");";
+        $res = $this->iwpdb->get_results( $query );
+        return $res[0]->tag;
+      }
+      
+      
+      
+      private function prepareTypes( $types ) {
+        global $filter_types_on;
+          
+        $filter = function( $key ) {
+          global $filter_types_on;
+          return( strpos( strtolower( $key ), $filter_types_on ) !== false );
+        };
+        
+        switch( $types ) {
+          case 'magazine':
+          case 'stories':
+            $types = 'magazine';
+            break;
+        }
+        
+        $filter_types_on = $types;
+        $keys = array_flip( unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES ) );
+        $filtered_keys = array_filter( $keys, $filter );
+        return implode( ',', array_keys( $filtered_keys ) );
       }
 
 
@@ -177,20 +243,6 @@
           global $filter_types_on;
           return( strpos( strtolower( $key ), $filter_types_on ) !== false );
         };
-        
-        switch( $types ) {
-          case 'magazine':
-          case 'stories':
-            $types = 'magazine';
-            $filter_types_on = $types;
-            $keys = array_flip( unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES ) );
-            $filtered_keys = array_filter( $keys, $filter );
-            $types = implode( ',', array_keys( $filtered_keys ) );
-            break;
-          default:
-            $types = null;
-            break;
-        }
         
         $query = 
           "SELECT "
@@ -209,12 +261,50 @@
           
         return $this->iwpdb->get_results( $query );
       }
+      
+      
+      
+      public function getEventByNoteUrl( $url ) {
+        global $filter_types_on;
+        
+        $filter = function( $key ) {
+          global $filter_types_on;
+          return( strpos( strtolower( $key ), $filter_types_on ) !== false );
+        };
+        
+        $query = 
+          "SELECT "
+          . $this->tables['objects'] . ".id "
+          . "FROM " . $this->tables['objects'] . " "
+          . "WHERE " . $this->tables['objects'] . ".pretty_url='" . $url . "';";
+        $id = $this->iwpdb->get_results( $query );
+        $id = $id[0]->id;
+        
+        $query = 
+          "SELECT "
+          . $this->tables['events'] . ".type, "
+          . $this->tables['events'] . ".objects, "
+          . $this->tables['events'] . ".id, "
+          . $this->tables['events'] . ".sticky_untill, "
+          . $this->tables['authors'] . ".name, "
+          . $this->tables['authors'] . ".thumb, "
+          . $this->tables['authors'] . ".url, "
+          . $this->tables['authors'] . ".wordpress_id "
+          . "FROM " . $this->tables['events'] . " "
+            . "LEFT JOIN " . $this->tables['authors'] . " "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+          . "WHERE " . $this->tables['events'] . ".objects LIKE '%" . $id . "%';";
+        
+        return $this->iwpdb->get_results( $query );
+      }
 
 
 
       public function getObjects( $objects ) {
         $query = 
-          "SELECT " . $this->tables['objects'] . ".type, " . $this->tables['objects'] . ".object " .
+          "SELECT " . $this->tables['objects'] . ".type" .
+          ", " . $this->tables['objects'] . ".object " .
+          ", " . $this->tables['objects'] . ".pretty_url " .
           "FROM " . $this->tables['objects'] . " " .
           "WHERE " . $this->tables['objects'] . ".id IN (" . $objects . ");";
         return $this->iwpdb->get_results( $query );
@@ -237,7 +327,7 @@
         $sql =
           "SELECT * "
           . "FROM `wp_timeline_authors` "
-          . "WHERE `tag` REGEXP  '" . $search . "' "
+          . "WHERE `tag` REGEXP '" . $search . "' "
           . "LIMIT 1";
         $author = $this->iwpdb->get_row( $sql );
         if( $author ){ return $author->tag; }
