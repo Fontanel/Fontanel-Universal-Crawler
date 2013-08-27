@@ -15,9 +15,9 @@
     	  $this->requireTimelineEvents();
     	  $this->requireCrawlers();
     	  
-    	  if( $fetch ) {
-        	$this->fetchPosts();
-      	}
+    	  if ( $fetch ) { $this->fetchPosts(); }
+    	  
+    	  if ( function_exists('w3tc_pgcache_flush') ) { w3tc_pgcache_flush(); }
       	
 				$this->prepareForWP();
 				
