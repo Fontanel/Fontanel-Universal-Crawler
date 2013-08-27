@@ -1,4 +1,4 @@
-<a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="item story weekvan header carousel" data-second-background="#300747" data-id="<?php print_r( $vars['id'] ); ?>">
+<div class="rsContent item story weekvan header carousel" data-second-background="#300747" data-id="<?php print_r( $vars['id'] ); ?>">
   <?php if( is_null( $vars['sponsor'] ) ): ?>
     <figure class="sponsor">
       <figcaption>presented by</figcaption>
@@ -14,4 +14,4 @@
     <img src="<?php bloginfo('template_directory') ?>/img/logo-weekvan.png" class="logo" />
     <h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
   </div>
-</a>
+</div>
