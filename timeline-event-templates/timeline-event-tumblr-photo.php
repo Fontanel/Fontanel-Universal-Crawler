@@ -1,6 +1,5 @@
 <?php
   $post = json_decode( $vars['objects'][0]->object );
-  $photo = $post->photos[0]->alt_sizes[1];
   
   if( !$vars['skip_readmore_wrap'] ) {
     $article_parts = preg_split("/<p><!-- more -->.*?\/p>/", $post->caption );
@@ -11,14 +10,13 @@
 <article class="note photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>">
 	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
-		<figure class="<?php if( count( $post->photos ) > 1 ): ?>icon-gallery has-slideshow<?php endif; ?>">
-			<img src="<?php print( $photo->url ); ?>" width="100%" height="auto">
-		</figure>
-		<ul class="all-images" data-ref="group-<?php print( $post->id ); ?>">
+		<figure class="<?php if( count( $post->photos ) > 1 ): ?>has-slideshow royalSlider rsDefault<?php endif; ?>">
 		  <?php foreach( $post->photos as $slide_photo ): ?>
-		    <li><a class="group-<?php print( $post->id ); ?>" href="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">Dit is een foto</a></li>
+  			<a class="rsImg bugaga group-<?php print( $post->id ); ?>" href="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
+  			  <img class="rsTmb" src="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
+        </a>
 		  <?php endforeach; ?>
-		</ul>
+		</figure>
 		<div class="caption">
 		  <section>
   			<?php print( $article_parts[0] ); ?>

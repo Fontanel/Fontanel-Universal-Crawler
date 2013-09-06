@@ -1,5 +1,4 @@
-<article class="story weekvan" data-id="<?php print_r( $vars['id'] ); ?>">
-  <img src="<?php echo $portrait[0] ?>" class="portrait">
+<article class="story weekvan timeline" data-id="<?php print_r( $vars['id'] ); ?>">
   <?php if( is_null( $vars['sponsor'] ) ): ?>
     <figure class="sponsor">
       <figcaption>presented by</figcaption>
@@ -8,9 +7,9 @@
   <?php else: ?>
     <?php include( dirname(__FILE__) . '/partials/sponsor.php' ); ?>
   <?php endif; ?>
-  <img src="<?php bloginfo('template_directory') ?>/img/logo-weekvan.png" class="logo" />
+  <?php $portrait = wp_get_attachment_image_src( get_field( 'portretfoto', $vars['objects']->ID ), 'medium' ); ?>
+  <img src="<?php print( $portrait[0] ); ?>" class="portrait">
   <h2><?php print( $vars['objects']->post_title ); ?></h2>
-  <h3>Chief Pencil bij Present Plus</h3>
-  <h4><?php print( $vars['objects']->post_excerpt ); ?></h4>
+  <h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
   <a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="deep">Bekijk de story</a>
 </article>

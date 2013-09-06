@@ -1,5 +1,12 @@
 <article class="jobs weekly" data-id="<?php print_r( $vars['id'] ); ?>">
-	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
+  <aside class="avatar jobs">
+    <figure>
+      <a href="http://www.fontaneljobs.nl">
+        <img src="<?php bloginfo('template_directory') ?>/img/timeline-jobs-logo.png">
+        <figcaption>Fontanel Jobs</figcaption>
+      </a>
+    </figure>
+  </aside>
 	<div class="article-body">
 	  <section>
     	<h2><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly Jobs Roundup</a></h2>
@@ -10,7 +17,7 @@
           <li>
             <a href="/vacature/senior-designer-on-en-offline" target="_blank">
               <h5><?php print( $job->company ); ?> zoekt een</h5>
-              <h4><?php print( $job->job_function ); ?> <span class="new">nieuw</span></h4>
+              <h4><?php print( $job->job_function ); ?><?php if( ( time() - $job->created_at ) < 604800 ): ?> <span class="new">nieuw</span><?php endif; ?></h4>
               <p>
                 Vaste baan in <?php print( $job->city ); ?>
                 <span class="fields-container">
@@ -31,6 +38,5 @@
     	<div class="twitter icon-twitter"> Tweet<span>240</span></div>
     	<time class="icon-clock">Week <?php print( $vars['created_at'] ); ?></time>
     </footer>
-
   </div>
 </article>

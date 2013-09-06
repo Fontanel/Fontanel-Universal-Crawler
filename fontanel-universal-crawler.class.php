@@ -15,9 +15,9 @@
     	  $this->requireTimelineEvents();
     	  $this->requireCrawlers();
     	  
-    	  if( $fetch ) {
-        	$this->fetchPosts();
-      	}
+    	  if ( $fetch ) { $this->fetchPosts(); }
+    	  
+    	  if ( function_exists('w3tc_pgcache_flush') ) { w3tc_pgcache_flush(); }
       	
 				$this->prepareForWP();
 				
@@ -77,22 +77,7 @@
 			
 			private function prepareForWP() {
   			// add_filter( 'page_template', array( &$this, 'register_page_templates' ) );
-  			add_action( 'wp_enqueue_scripts', array( &$this, 'register_fontanel_universal_import_scripts' ) );
-			}
-			
-			
-			
-			public function register_fontanel_universal_import_scripts() {
-				wp_register_script( 'waypoints'         , plugins_url( '/js/waypoints.min.js', __FILE__ ), array('jquery'), 1, true );
-				wp_register_script( 'fitvid'            , plugins_url( '/js/fitvid.js', __FILE__ ), array('jquery'), 1, true );
-				wp_register_script( 'infinity'          , plugins_url( '/js/infinity.min.js', __FILE__ ), array('jquery'), 1, true );
-				wp_register_script( 'colorbox'          , plugins_url( '/js/vendor/jquery.colorbox-min.js', __FILE__ ), array( 'jquery' ), 1, true );
-				wp_register_script( 'universal-importer', plugins_url( '/js/universal-importer.js', __FILE__ ), array('fitvid','jquery','waypoints', 'colorbox'), 1, true );
-
-        wp_enqueue_script( 'colorbox' );
-				wp_enqueue_script( 'waypoints' );
-				wp_enqueue_script( 'fitvid' );
-				wp_enqueue_script( 'universal-importer' );
+/*   			add_action( 'wp_enqueue_scripts', array( &$this, 'register_fontanel_universal_import_scripts' ) ); */
 			}
 			
 			public function register_admin_pages() {
