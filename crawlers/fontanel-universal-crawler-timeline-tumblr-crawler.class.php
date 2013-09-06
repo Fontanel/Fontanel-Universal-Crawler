@@ -12,8 +12,18 @@
 			}
 			
 			public function fetchPosts( $range ) {
-				$result = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=25' );
-				$this->processResult( $result );
+  			$results = Array();
+  			$results[] = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=20' );
+  			
+			  if( $range == "max" ):
+			    for ( $i = 0; $i < 20; $i++ ):
+  			    $results[] = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=20&offset=' . ( ( $i * 20 ) - 1 ) );
+  			   endfor;
+			  endif;
+			  
+			  foreach( $results as $result ):
+  				$this->processResult( $result );
+        endforeach;
 			}
 			
 			private function processResult( $result ) {
@@ -22,6 +32,7 @@
   				$type = $post->type;
   				$object_id = $post->id;
   				$type_id = $this->getTypeId( $this->platform, $type );
+  				$author = null;
   				if( !empty( $post->tags ) ) {
     				$author = $this->db_manager->tryToFindAuthor( $post->tags );
   				}
