@@ -322,12 +322,11 @@
       
       
       
-      public function tryToFindAuthor( $tags ) {
-        $search = implode('|', $tags );
+      public function tryToFindAuthor( $tumblr_name ) {
         $sql =
           "SELECT * "
           . "FROM `wp_timeline_authors` "
-          . "WHERE `tag` REGEXP '" . $search . "' "
+          . "WHERE `tumblr_name` = '" . $tumblr_name . "' "
           . "LIMIT 1";
         $author = $this->iwpdb->get_row( $sql );
         if( $author ){ return $author->tag; }
