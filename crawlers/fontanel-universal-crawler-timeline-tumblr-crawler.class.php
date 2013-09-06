@@ -16,7 +16,7 @@
   			$results[] = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=20' );
   			
 			  if( $range == "max" ):
-			    for ( $i = 0; $i < 20; $i++ ):
+			    for ( $i = 0; $i < 40; $i++ ):
   			    $results[] = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=20&offset=' . ( ( $i * 20 ) - 1 ) );
   			   endfor;
 			  endif;
