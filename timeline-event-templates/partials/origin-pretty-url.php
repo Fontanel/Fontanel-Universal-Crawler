@@ -1,0 +1,1 @@
+data-origin="http://notes.fontanel.nl/post<?php print( $vars['objects'][0]->pretty_url ); ?>"
