@@ -3,8 +3,8 @@
 		class TimelineJobsCrawler extends TimelineCrawler {
 			private $platform = 'jobs';
 			
-			public function fetchPosts() {
-				$result = $this->fetch( 'http://fontaneljobs.nl/vacatures.json?limit=50' );
+			public function fetchPosts( $range ) {
+				$result = $this->fetch( 'http://fontaneljobs.nl/vacatures.json?limit=50' . ( $range == "max" ? '1000' : '50' ) );
 				
 				$this->processResult( $result );
 			}

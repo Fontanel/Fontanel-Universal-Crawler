@@ -11,7 +11,7 @@
 				$this->api_key = get_option( 'fontanel_universal_crawler_tumblr_api_key' );
 			}
 			
-			public function fetchPosts() {
+			public function fetchPosts( $range ) {
 				$result = $this->fetch( 'http://api.tumblr.com/v2/blog/fontanel.tumblr.com/posts?api_key=' . $this->api_key . '&limit=25' );
 				$this->processResult( $result );
 			}

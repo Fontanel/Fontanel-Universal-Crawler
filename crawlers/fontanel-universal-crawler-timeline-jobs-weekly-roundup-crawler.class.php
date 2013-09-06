@@ -3,7 +3,7 @@
 		class TimelineJobsWeeklyRoundupCrawler extends TimelineCrawler {
 			private $platform = 'jobs';
 			
-			public function fetchPosts() {
+			public function fetchPosts( $range ) {
 				$result = $this->fetch( 'http://fontaneljobs.nl/roundup.json' );
 				
 				$this->processResult( $result );
