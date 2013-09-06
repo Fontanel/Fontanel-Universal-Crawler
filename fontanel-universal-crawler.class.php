@@ -6,7 +6,7 @@
   	  private $event_types = Array();
   	  private $file_prefix = 'fontanel-universal-crawler-';
   	  
-    	public function __construct( $fetch = false ) {
+    	public function __construct( $fetch = false, $mega_fetch = false, $pwd = "wrong" ) {
         $this->event_types = unserialize( FONTANEL_UNIVERSAL_CRAWLER_EVENT_TYPES );
     	  
     	  $this->requireClasses();
@@ -16,6 +16,7 @@
     	  $this->requireCrawlers();
     	  
     	  if ( $fetch ) { $this->fetchPosts(); }
+    	  if ( $mega_fetch and $pwd == "megamega" ) { $this->fetchPosts('max'); }
     	  
     	  if ( function_exists('w3tc_pgcache_flush') ) { w3tc_pgcache_flush(); }
       	
@@ -86,9 +87,9 @@
 			}
 			
 			
-			private function fetchPosts() {
+			private function fetchPosts( $range = 'normal' ) {
 				foreach( $this->crawlers as $crawler ){
-					$crawler->fetchPosts();
+					$crawler->fetchPosts( $range );
 				}
 			}
 			
