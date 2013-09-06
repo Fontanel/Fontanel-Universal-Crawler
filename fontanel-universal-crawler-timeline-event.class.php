@@ -6,6 +6,7 @@
 			private $user;
 			private $id;
 			private $sponsor;
+			private $pretty_url;
 			protected $created_at;
 			protected $objects = Array();
 			protected $slug = 'timeline-event';
@@ -75,6 +76,7 @@
         $vars['created_at'] = $this->createdAt;
         $vars['skip_readmore_wrap'] = $skip_readmore_wrap;
         $vars['sponsor'] = $this->sponsor;
+        $vars['pretty_url'] = $this->pretty_url;
         
         if( is_array( $vars ) && !empty( $vars ) ) {
           extract( $vars );
