@@ -23,13 +23,13 @@
 			 * );
 			 */
 			protected function storeEvent( $type_id, $objects_id, $timestamp, $objects = NULL, $author = NULL ) {
-				if( $this->db_manager->newOrUpdatedEvent( $type_id, $objects_id, $timestamp ) ) {
+				if( $this->db_manager->newOrUpdatedEvent( $type_id, $objects_id, $timestamp ) ):
 					$this->db_manager->storeEvent( $type_id, $objects_id, $timestamp, $author );
-				}
+				endif;
 				
-				if( ! is_null( $objects ) ) {
+				if( ! is_null( $objects ) ):
 					$this->db_manager->storeObjects( $objects );
-				}
+				endif;
 			}
 			
 			protected function fetch( $url ) {
