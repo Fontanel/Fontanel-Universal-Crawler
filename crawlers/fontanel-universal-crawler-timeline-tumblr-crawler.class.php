@@ -44,12 +44,32 @@
 				}
 			}
 			
+			private function getAuthorData( $url ) {
+			  $dom = new DomDocument();
+        @$dom->loadHTMLFile($url);
+        $finder = new DomXPath($dom);
+        $classname="author-profile";
+        $nodes = $finder->query("//*[contains(@class, '$classname')]");
+        $data = array();
+        foreach($nodes as $node):
+          foreach($node->childNodes as $child):
+            if( $child->nodeName == "img" ):
+              foreach( $child->attributes as $attr ):
+                $data[$attr->nodeName] = $attr->nodeValue;
+              endforeach;
+            endif;
+          endforeach;
+        endforeach;
+        print_r($data);
+			}
+			
 			private function createSavableObjects( $raw_object ) {
 				$new_savable_object = array();
 				$new_savable_object['type'] = 'tumblr';
 				$new_savable_object['id'] = $raw_object->id;
 				$new_savable_object['object'] = json_encode( $raw_object );
 				$new_savable_object['pretty_url'] = strrchr( $raw_object->post_url, '/' );
+				$new_savable_object['user'] = $this->getAuthorData( "http://notes.fontanel.nl/post/" . $new_savable_object['id'] . $new_savable_object['pretty_url'] );
 				return Array( $new_savable_object );
 			}
 		}
