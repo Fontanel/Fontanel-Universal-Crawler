@@ -2,7 +2,7 @@
   $post = json_decode( $vars['objects'][0]->object );
   
   if( !$vars['skip_readmore_wrap'] ) {
-    $article_parts = preg_split("/<p><!-- more -->.*?\/p>/", $post->caption );
+    $article_parts = preg_split( "/<p>.*?<!-- more -->.*?\/p>/", $post->caption );
   } else {
     $article_parts = array( $post->caption );
   }
