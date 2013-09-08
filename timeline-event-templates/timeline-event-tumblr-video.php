@@ -1,7 +1,8 @@
 <?php
-  $video = json_decode( $vars['objects'][0]->object ); 
+  $video = json_decode( $vars['objects'][0]->object );
+  
   if( !$vars['skip_readmore_wrap'] ) {
-    $article_parts = preg_split("/<p><!-- more -->.*?\/p>/", $video->caption );
+    $article_parts = preg_split( "^<p>(|<strong>)<!-- more -->.*?\/p>$", $video->caption );
   } else {
     $article_parts = array( $video->caption );
   }
