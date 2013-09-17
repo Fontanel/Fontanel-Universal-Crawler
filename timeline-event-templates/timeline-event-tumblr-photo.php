@@ -25,4 +25,10 @@
 			<?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
 		</div>
   </div>
+  
+  <?php
+    if( $vars['large_author_block'] ):
+      include( dirname(__FILE__) . '/partials/large-author-block.php' );
+    endif;
+  ?>
 </article>
