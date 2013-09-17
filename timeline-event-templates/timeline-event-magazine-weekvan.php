@@ -2,7 +2,7 @@
   <?php if( is_null( $vars['sponsor'] ) ): ?>
     <figure class="sponsor">
       <figcaption>presented by</figcaption>
-      <a href="http://www.vitra.nl" target="_blank"><img src="<?php bloginfo('template_directory') ?>/img/vitra-logo-purple.png"></a>
+      <a href="http://www.vitra.nl" target="_blank"><img src="<?php bloginfo('template_directory') ?>/img/sponsors/vitra-logo-purple.png"></a>
     </figure>  
   <?php else: ?>
     <?php include( dirname(__FILE__) . '/partials/sponsor.php' ); ?>
