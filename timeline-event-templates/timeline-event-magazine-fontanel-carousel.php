@@ -3,6 +3,7 @@
   <div class="carousel-wrapper">
   	<h2><a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>"><?php print( $vars['objects']->post_title ); ?></a></h2>
   	<h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
+		<a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="deep">Lees het artikel</a>
   </div>
   <?php include( dirname(__FILE__) . '/partials/gradient-bg.php' ); ?>
 </div>
