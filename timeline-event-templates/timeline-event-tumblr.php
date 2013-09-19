@@ -1,7 +1,7 @@
 <?php
   $post = json_decode( $vars['objects'][0]->object );
   if( !$vars['skip_readmore_wrap'] ) {
-    $article_parts = preg_split( "/<p>.*?<!-- more -->.*?\/p>/", $post->body );
+    $article_parts = preg_split( "/<p>.*?<!-- more -->.*?\/p>|<!-- more -->/", $post->body );
   } else {
     $article_parts = array( $post->body );
   }
