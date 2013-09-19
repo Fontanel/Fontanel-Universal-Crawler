@@ -278,28 +278,24 @@
           . "FROM " . $this->tables['objects'] . " "
           . "WHERE " . $this->tables['objects'] . ".pretty_url='" . $url . "';";
         $ids = $this->iwpdb->get_results( $query );
-        if( count( $ids ) > 0 ) { 
-          $id = $ids[0]->id;
-          
-          $query = 
-            "SELECT "
-            . $this->tables['events'] . ".type, "
-            . $this->tables['events'] . ".objects, "
-            . $this->tables['events'] . ".id, "
-            . $this->tables['events'] . ".sticky_untill, "
-            . $this->tables['authors'] . ".name, "
-            . $this->tables['authors'] . ".thumb, "
-            . $this->tables['authors'] . ".url, "
-            . $this->tables['authors'] . ".wordpress_id "
-            . "FROM " . $this->tables['events'] . " "
-              . "LEFT JOIN " . $this->tables['authors'] . " "
-              . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
-            . "WHERE " . $this->tables['events'] . ".objects LIKE '%" . $id . "%';";
-          
-          return $this->iwpdb->get_results( $query );
-        } else {
-          return null;
-        }
+        $id = $ids[0]->id;
+        
+        $query = 
+          "SELECT "
+          . $this->tables['events'] . ".type, "
+          . $this->tables['events'] . ".objects, "
+          . $this->tables['events'] . ".id, "
+          . $this->tables['events'] . ".sticky_untill, "
+          . $this->tables['authors'] . ".name, "
+          . $this->tables['authors'] . ".thumb, "
+          . $this->tables['authors'] . ".url, "
+          . $this->tables['authors'] . ".wordpress_id "
+          . "FROM " . $this->tables['events'] . " "
+            . "LEFT JOIN " . $this->tables['authors'] . " "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+          . "WHERE " . $this->tables['events'] . ".objects LIKE '%" . $id . "%';";
+        
+        return $this->iwpdb->get_results( $query );
       }
 
 
