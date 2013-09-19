@@ -8,7 +8,7 @@
 			private $sponsor;
 			private $pretty_url;
 			protected $created_at;
-			protected $objects = Array();
+			public $objects = Array();
 			protected $slug = 'timeline-event';
 			protected $type = 'Undefined';
 			
