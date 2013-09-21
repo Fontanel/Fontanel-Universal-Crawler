@@ -11,5 +11,5 @@
   <img src="<?php print( $portrait[0] ); ?>" class="portrait">
   <h2><?php print( $vars['objects']->post_title ); ?></h2>
   <h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
-  <a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="deep">Lees het artikel</a>
+  <a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="deep">Lees verder</a>
 </article>
