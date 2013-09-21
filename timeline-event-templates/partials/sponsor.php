@@ -1,7 +1,6 @@
 <?php if( !is_null( $vars['sponsor'] ) ): ?>
   <figure class="sponsor">
     <figcaption>presented by</figcaption>
-    
-    <img src="<?php print( $vars['sponsor']->thumb ); ?>">
+    <a href="http://www.vitra.nl/" target="_blank"><img src="<?php print( $vars['sponsor']->thumb ); ?>"></a>
   </figure>
 <?php endif; ?>
