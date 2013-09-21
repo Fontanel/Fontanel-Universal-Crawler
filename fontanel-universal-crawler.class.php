@@ -161,7 +161,8 @@
 
   		private function createEventObject( $event ) {
   		  if( $event->type > 0 ) {
-  		    $type = array_flip( $this->event_types )[ $event->type ];
+  		    $workable = array_flip( $this->event_types );
+  		    $type = $workable[ $event->type ];
     		  $class_name = 'TimelineEvent' . $type;
     		  $user = $sponsor = NULL;
     		  
