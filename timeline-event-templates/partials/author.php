@@ -10,7 +10,7 @@
   <aside class="avatar">
     <figure>
       <?php if( !is_null( $user_url ) ): ?><a href="<?php print( $user_url ); ?>"><?php endif; ?>
-      <img src="<?php print( $vars['user']->thumb ); ?>">
+      <img src="<?php print( $vars['user']->thumb ); ?>" class="hovers darker-shadow">
       <figcaption><?php print( $vars['user']->name ); ?></figcaption>
       <?php if( !is_null( $user_url ) ): ?></a><?php endif; ?>
     </figure>
