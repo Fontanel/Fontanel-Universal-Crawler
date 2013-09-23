@@ -33,14 +33,6 @@
       	  <li><a target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>" class="deep">Bekijk alle vacatures en stages</a></li>
     	</ul>
 	  </section>
-    <?php
-    	$permalink = home_url() . '/notes' . $vars['objects'][0]->pretty_url;
-    ?>
-    <footer class="timeline-footer">
-      <p><?php print_r($vars) ?></p>
-    	<div class="fb-share icon-facebook-1" data-url="<?php echo $permalink; ?>" data-title="Like"></div>
-    	<div class="tw-share icon-twitter" data-url="<?php echo $permalink; ?>" data-title="Tweet" data-text="De nieuwste vacatures op @fontaneljobs"></div>
-    	<time class="icon-clock"><a href="<?php echo $permalink; ?>">Week <?php print( $vars['created_at'] ); ?></a></time>
-    </footer>
+    <footer>&nbsp;</footer>
   </div>
 </article>
