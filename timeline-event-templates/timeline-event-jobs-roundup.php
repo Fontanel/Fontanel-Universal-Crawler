@@ -15,7 +15,7 @@
     	  <?php foreach( array_reverse( $vars['objects'] ) as $raw_job ): ?>
     	    <?php $job = json_decode( $raw_job->object ); ?>
           <li>
-            <a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL . $vacancy->url ); ?>" target="_blank">
+            <a href="<?php echo FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL . $job->url ?>" target="_blank">
               <h5><?php print( $job->company ); ?> zoekt een</h5>
               <h4><?php print( $job->job_function ); ?><?php if( ( time() - $job->created_at ) < 604800 ): ?> <span class="new">nieuw</span><?php endif; ?></h4>
               <p>
