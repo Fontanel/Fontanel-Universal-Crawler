@@ -13,6 +13,6 @@
     <img src="<?php echo $portrait[0] ?>" class="portrait">
     <img src="<?php bloginfo('template_directory') ?>/img/logo-weekvan.png" class="logo" />
     <h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
-		<a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="deep">Lees het artikel</a>
+		<a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>" class="deep">Lees verder</a>
   </div>
 </div>

@@ -12,7 +12,11 @@
     <section>
       <figure>
         <?php if( !is_null( $user_url ) ): ?><a href="<?php print( $user_url ); ?>"><?php endif; ?>
-        <img src="<?php print( $vars['user']->thumb ); ?>">
+        <img src="<?php if( has_wp_user_avatar( $vars['user']->wordpress_id ) ) {
+        print( get_wp_user_avatar_src( $vars['user']->wordpress_id, 'thumbnail' ) );
+      } else {
+        print( $vars['user']->thumb );
+      } ?>">
         <?php if( !is_null( $user_url ) ): ?></a><?php endif; ?>
       </figure>
       <aside>

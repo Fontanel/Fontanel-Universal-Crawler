@@ -1,7 +1,7 @@
 <article class="jobs weekly" data-id="<?php print_r( $vars['id'] ); ?>">
   <aside class="avatar jobs">
     <figure>
-      <a href="http://www.fontaneljobs.nl">
+      <a href="http://www.fontaneljobs.nl" target="_blank">
         <img src="<?php bloginfo('template_directory') ?>/img/timeline-jobs-logo.png">
         <figcaption>Fontanel Jobs</figcaption>
       </a>
@@ -9,7 +9,7 @@
   </aside>
 	<div class="article-body">
 	  <section>
-    	<h2><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly Jobs Roundup</a></h2>
+    	<h2><a target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly Jobs Roundup</a></h2>
     	<h3>Alle vacatures vorige week op Fontanel Jobs</h3>
     	<ul>
     	  <?php foreach( array_reverse( $vars['objects'] ) as $raw_job ): ?>
@@ -30,7 +30,7 @@
             </a>
           </li>
     	  <?php endforeach; ?>
-      	  <li><a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>" class="deep">Bekijk alle vacatures en stages</a></li>
+      	  <li><a target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>" class="deep">Bekijk alle vacatures en stages</a></li>
     	</ul>
 	  </section>
     <footer class="timeline-footer">
