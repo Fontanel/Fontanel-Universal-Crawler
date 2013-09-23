@@ -15,7 +15,7 @@
     	  <?php foreach( array_reverse( $vars['objects'] ) as $raw_job ): ?>
     	    <?php $job = json_decode( $raw_job->object ); ?>
           <li>
-            <a href="/vacature/senior-designer-on-en-offline" target="_blank">
+            <a href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL . $vacancy->url ); ?>" target="_blank">
               <h5><?php print( $job->company ); ?> zoekt een</h5>
               <h4><?php print( $job->job_function ); ?><?php if( ( time() - $job->created_at ) < 604800 ): ?> <span class="new">nieuw</span><?php endif; ?></h4>
               <p>
@@ -33,10 +33,14 @@
       	  <li><a target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>" class="deep">Bekijk alle vacatures en stages</a></li>
     	</ul>
 	  </section>
+    <?php
+    	$permalink = home_url() . '/notes' . $vars['objects'][0]->pretty_url;
+    ?>
     <footer class="timeline-footer">
-			<div class="fb-share icon-facebook-1" data-url="<?php echo $permalink; ?>" data-title="Like"></div>
-			<div class="tw-share icon-twitter" data-url="<?php echo $permalink; ?>" data-title="Tweet"></div>
-			<time class="icon-clock"><a href="<?php echo $permalink; ?>">Week <?php print( $vars['created_at'] ); ?></a></time>
+      <p><?php print_r($vars) ?></p>
+    	<div class="fb-share icon-facebook-1" data-url="<?php echo $permalink; ?>" data-title="Like"></div>
+    	<div class="tw-share icon-twitter" data-url="<?php echo $permalink; ?>" data-title="Tweet" data-text="De nieuwste vacatures op @fontaneljobs"></div>
+    	<time class="icon-clock"><a href="<?php echo $permalink; ?>">Week <?php print( $vars['created_at'] ); ?></a></time>
     </footer>
   </div>
 </article>
