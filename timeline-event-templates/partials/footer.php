@@ -1,5 +1,5 @@
 <?php
-	$permalink = get_permalink( get_page_by_title( 'notes' ) ) . $vars['objects'][0]->pretty_url;
+	$permalink = home_url() . '/notes' . $vars['objects'][0]->pretty_url;
 	$obj = json_decode( $vars['objects'][0]->object );
   $title = substr( strip_tags( isset( $obj->caption ) ? $obj->caption : $obj->body ), 0, 25 );
 ?>
