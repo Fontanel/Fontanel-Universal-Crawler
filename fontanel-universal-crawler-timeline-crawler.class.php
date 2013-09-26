@@ -27,7 +27,7 @@
 					$this->db_manager->storeEvent( $type_id, $objects_id, $timestamp, $author );
 				endif;
 				
-				if( ! is_null( $objects ) ):
+				if( !is_null( $objects ) ):
 					$this->db_manager->storeObjects( $objects );
 				endif;
 			}
