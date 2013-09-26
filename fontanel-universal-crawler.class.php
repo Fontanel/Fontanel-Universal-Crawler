@@ -139,6 +139,21 @@
   		
   		
   		
+  		public function getEventByPrettyUrl( $url ) {
+    		$res = Array();
+        $event = $this->database_manager->getEventByPrettyUrl( $url )[0];
+        
+  			$new_event = $this->createEventObject( $event );
+    			
+  			if( is_object( $new_event ) ) {
+    			$res[] = $new_event;
+  			}
+  			
+  			return $res;
+  		}
+  		
+  		
+  		
   		public function getEvent( $search ) {
   		  $events = $res = Array();
   		  if( gettype( $id ) === "integer" ) {
