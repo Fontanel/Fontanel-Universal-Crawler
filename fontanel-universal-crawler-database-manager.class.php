@@ -164,6 +164,7 @@
             . "LEFT JOIN " . $this->tables['sponsors'] . " "
             . "ON " . $this->tables['sponsors'] . ".id = " . $this->tables['events'] . ".sponsor "
           . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
+          . "AND " . $this->tables['events'] . ".sticky_untill < " . time() . " "
           . ( ( is_null( $types ) or empty( $types ) ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
           . ( ( is_null( $author ) or empty( $author ) ) ? "" : "AND " . $this->tables['events'] . ".author = '" . $author . "' " )
           . "ORDER BY time DESC "
