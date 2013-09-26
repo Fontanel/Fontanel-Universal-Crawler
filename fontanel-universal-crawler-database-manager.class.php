@@ -31,6 +31,7 @@
           . "sticky_untill int NOT NULL,"
           . "author varchar(128) NULL,"
           . "sponsor int NULL,"
+          . "pretty_url varchar(128) NULL,"
           . "id int NOT NULL AUTO_INCREMENT PRIMARY KEY );";
 				
 				$sql[] =
