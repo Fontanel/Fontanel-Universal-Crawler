@@ -174,6 +174,36 @@
       }
       
       
+      public function getFeaturedEvent() {
+        $query = 
+          "SELECT "
+          . $this->tables['events'] . ".type, "
+          . $this->tables['events'] . ".objects, "
+          . $this->tables['events'] . ".id, "
+          . $this->tables['events'] . ".sticky_untill, "
+          . $this->tables['events'] . ".sponsor, "
+          . $this->tables['authors'] . ".name, "
+          . $this->tables['authors'] . ".thumb, "
+          . $this->tables['authors'] . ".url, "
+          . $this->tables['authors'] . ".wordpress_id, "
+          . $this->tables['authors'] . ".tag AS user_tag, "
+          . $this->tables['sponsors'] . ".brand, "
+          . $this->tables['sponsors'] . ".url AS sponsor_url, "
+          . $this->tables['sponsors'] . ".logo_url AS sponsor_logo "
+          . "FROM " . $this->tables['events'] . " "
+            . "LEFT JOIN " . $this->tables['authors'] . " "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+            . "LEFT JOIN " . $this->tables['sponsors'] . " "
+            . "ON " . $this->tables['sponsors'] . ".id = " . $this->tables['events'] . ".sponsor "
+          . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
+          . "AND " . $this->tables['events'] . ".sticky_untill > " . time() . " "
+          . "ORDER BY time DESC "
+          . "LIMIT 1;";
+          
+        return $this->iwpdb->get_results( $query );
+      }
+      
+      
       
       public function getEventsByObjectIds( $ids = '' ) {        
         $query = 
