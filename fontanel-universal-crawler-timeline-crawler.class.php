@@ -22,9 +22,9 @@
 			 *   array( ['type'] => 'job', ['id'] => 987859, ['object'] => OBJECT )
 			 * );
 			 */
-			protected function storeEvent( $type_id, $objects_id, $timestamp, $objects = NULL, $author = NULL ) {
+			protected function storeEvent( $type_id, $objects_id, $timestamp, $objects = NULL, $author = NULL, $pretty_url = NULL ) {
 				if( $this->db_manager->newOrUpdatedEvent( $type_id, $objects_id, $timestamp ) ):
-					$this->db_manager->storeEvent( $type_id, $objects_id, $timestamp, $author );
+					$this->db_manager->storeEvent( $type_id, $objects_id, $timestamp, $author, $pretty_url );
 				endif;
 				
 				if( !is_null( $objects ) ):
