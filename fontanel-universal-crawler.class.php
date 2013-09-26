@@ -104,6 +104,14 @@
             $events[] = $new_event;
           }
         }
+
+        if( $page == 0 and is_null( $types ) and is_null( $author ) ) {
+          $featured = $this->database_manager->getFeaturedEvent();
+          
+          if( count( $featured ) > 0 ) {
+            $events[] = $this->createEventObject( $featured[0] ); // Should go in index 1
+          }
+        }
         
         if( $cleaned_order ) { return $this->cleanOrder( $events ); }
         
