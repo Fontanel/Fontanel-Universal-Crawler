@@ -22,7 +22,7 @@
 				
 				$savable_objects = $this->createSavableObjects( $workable_result );
 				
-				$pretty_url = '/weekly/' . date("Y") . '/' . date("W");
+				$pretty_url = '/weekly/' . date( "Y", $timestamp ) . '/' . date( "W", $timestamp );
 				
 				$this->storeEvent( $type_id, implode( ',', $object_ids ), $timestamp, $savable_objects, 'jobs', $pretty_url );
 			}
