@@ -139,12 +139,12 @@
   		
   		
   		
-  		public function getEvent( $id ) {
+  		public function getEvent( $search ) {
   		  $events = $res = Array();
   		  if( gettype( $id ) === "integer" ) {
-          $events = $this->database_manager->getEvent( $id );
+          $events = $this->database_manager->getEvent( $search );
         } else {
-          $events = $this->database_manager->getEventByNoteUrl( $id );
+          $events = $this->database_manager->getEventByNoteUrl( $search );
         }
         
   			foreach( $events as $event ) {
