@@ -266,6 +266,34 @@
       
       
       
+      public function getEventByPrettyUrl( $pretty_url ) {
+        global $filter_types_on;
+        
+        $filter = function( $key ) {
+          global $filter_types_on;
+          return( strpos( strtolower( $key ), $filter_types_on ) !== false );
+        };
+        
+        $query = 
+          "SELECT "
+          . $this->tables['events'] . ".type, "
+          . $this->tables['events'] . ".objects, "
+          . $this->tables['events'] . ".id, "
+          . $this->tables['events'] . ".sticky_untill, "
+          . $this->tables['authors'] . ".name, "
+          . $this->tables['authors'] . ".thumb, "
+          . $this->tables['authors'] . ".url, "
+          . $this->tables['authors'] . ".wordpress_id "
+          . "FROM " . $this->tables['events'] . " "
+            . "LEFT JOIN " . $this->tables['authors'] . " "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+          . "WHERE " . $this->tables['events'] . ".pretty_url='" . $pretty_url . "';";
+          
+        return $this->iwpdb->get_results( $query );
+      }
+      
+      
+      
       public function getEventByNoteUrl( $url ) {
         global $filter_types_on;
         
