@@ -83,13 +83,14 @@
 
 
 
-      public function storeEvent( $type = 0, $objects = '', $timestamp = 0, $author = NULL ) {
+      public function storeEvent( $type = 0, $objects = '', $timestamp = 0, $author = NULL, $pretty_url = NULL ) {
       	$this->iwpdb->insert( $this->tables['events'], array(
       		'type' => $type,
       		'objects' => $objects,
       		'time' => $timestamp,
       		'updated_at' => $timestamp,
-      		'author' => $author
+      		'author' => $author,
+      		'pretty_url' => $pretty_url
       	) );
       }
     
