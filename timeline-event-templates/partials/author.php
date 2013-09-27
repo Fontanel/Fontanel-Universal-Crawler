@@ -15,7 +15,7 @@
       } else {
         print( $vars['user']->thumb );
       } ?>" class="hovers darker-shadow">
-      <figcaption><?php print( $vars['user']->name ); ?></figcaption>
+      <figcaption class="proxima-regular"><?php print( $vars['user']->name ); ?></figcaption>
       <?php if( !is_null( $user_url ) ): ?></a><?php endif; ?>
     </figure>
   </aside>
