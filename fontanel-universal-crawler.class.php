@@ -109,7 +109,7 @@
           $featured = $this->database_manager->getFeaturedEvent();
           
           if( count( $featured ) > 0 ) {
-            $events[] = $this->createEventObject( $featured[0] ); // Should go in index 1
+            array_splice( $events, 1, 0, array( $this->createEventObject( $featured[0] ) ) );
           }
         }
         
