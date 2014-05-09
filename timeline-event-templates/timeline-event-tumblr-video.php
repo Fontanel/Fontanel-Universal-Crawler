@@ -1,30 +1,35 @@
 <?php
   $video = json_decode( $vars['objects'][0]->object );
   
+  $article =
+        strstr($video->caption, '<p>', true) .        
+        '<h4>' . date_i18n( 'j F', $vars['created_at'] ) . ' - ' . get_the_author_meta( 'display_name', $vars['user']->wordpress_id ) . '</h4>' .
+        '<p>' .
+        strstr($video->caption, '<p>');
+  
   if( !$vars['skip_readmore_wrap'] ) {
-    $article_parts = preg_split( "/<p>.*?<!-- more -->.*?\/p>|<!-- more -->/", $video->caption );
+    $article_parts = preg_split( "/<p>.*?<!-- more -->.*?\/p>|<!-- more -->/", $article );
   } else {
-    $article_parts = array( $video->caption );
+    $article_parts = array( $article );
   }
 ?>
 <article class="note video photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>" <?php include( dirname(__FILE__) . '/partials/origin-pretty-url.php' ); ?>>
-	<?php include( dirname(__FILE__) . '/partials/author.php' ); ?>
 	<div class="article-body">
 		<figure class="fitting-video">
 			<?php print( $video->player[0]->embed_code ); ?>
 		</figure>
 		<div class="caption">
 		  <section>
+              <h3>Short story</h3>
   			<?php print( $article_parts[0] ); ?>
   			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
 		  </section>
-		  <?php include( dirname(__FILE__) . '/partials/footer.php' ); ?>
+		  <aside class="sharing"></aside>
 		</div>
   </div>
-
-  <?php
-    if( $vars['large_author_block'] ):
-      include( dirname(__FILE__) . '/partials/large-author-block.php' );
-    endif;
-  ?>
 </article>
+
+<?php
+if( $vars['large_author_block'] ):
+  include( dirname(__FILE__) . '/partials/large-author-block.php' );
+endif;

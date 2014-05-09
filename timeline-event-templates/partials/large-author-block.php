@@ -19,10 +19,9 @@
       } ?>">
         <?php if( !is_null( $user_url ) ): ?></a><?php endif; ?>
       </figure>
-      <aside>
-        <h2 class="proxima-semibold"><?php print( $vars['user']->name ); ?></h2>
+        <h3>Auteur</h3>
+        <h2><?php print( get_the_author_meta( 'display_name', $vars['user']->wordpress_id ) ); ?></h2>
         <p><?php print( get_the_author_meta( 'description', $vars['user']->wordpress_id ) ); ?></p>
-      </aside>
     </section>
   </footer>
 <?php endif; ?>
