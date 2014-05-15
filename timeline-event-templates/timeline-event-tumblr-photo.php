@@ -9,11 +9,25 @@
   
   if( !$vars['skip_readmore_wrap'] ) {
     $article_parts = preg_split( "/<p>.*?<!-- more -->.*?\/p>|<!-- more -->/", $article );
+    $article = explode(' ', $article_parts[0]);
+    $article_tmp = '';
+    while (strlen(strip_tags($article_tmp)) < 320 && count($article) > 0) {
+        $article_tmp .= array_shift($article) . ' ';
+    }
+    $article_parts[0] = trim($article_tmp);
+    
+    if (count($article) > 0) {
+        $article_parts[0] .= "...";
+        $article_parts[1] = ".";
+    }
+    
   } else {
     $article_parts = array( $article );
   }
+  
+  $isShortStory = in_array('story', $post->tags) || $vars['id'] < 1438;
 ?>
-<article class="note photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>" <?php include( dirname(__FILE__) . '/partials/origin-pretty-url.php' ); ?>>
+<article class="note photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>" data-story="<?php echo $isShortStory ? 'true' : 'false'; ?>" <?php include( dirname(__FILE__) . '/partials/origin-pretty-url.php' ); ?>>
 	<div class="article-body">
 		<figure class="has-slideshow royalSlider rsDefault">
 		  <?php foreach( $post->photos as $slide_photo ): ?>
@@ -24,7 +38,9 @@
 		</figure>
 		<div class="caption">
 		  <section>
+            <?php if ($isShortStory):?>
             <h3>Short story</h3>
+            <?php endif;?>
   			<?php print( $article_parts[0] ); ?>
   			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
 		  </section>
