@@ -27,7 +27,7 @@
   
   $isShortStory = in_array('story', $video->tags) || $vars['id'] < 1438;
 ?>
-<article class="note video photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>" <?php include( dirname(__FILE__) . '/partials/origin-pretty-url.php' ); ?>>
+<article class="note video photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>" data-story="<?php echo $isShortStory ? 'true' : 'false'; ?>" <?php include( dirname(__FILE__) . '/partials/origin-pretty-url.php' ); ?>>
 	<div class="article-body">
 		<figure class="fitting-video">
 			<?php print( $video->player[0]->embed_code ); ?>
