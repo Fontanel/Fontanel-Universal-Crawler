@@ -10,7 +10,7 @@
         </div>
         <div style="background-color:<?php the_field( 'tweede_kleur', $vars['objects']->ID ); ?>">
             <span class="helper"></span>
-            <img src="<?php the_field( 'achtergrondafbeelding', $vars['objects']->ID ); ?>" alt="" />
+            <img src="<?php print reset(wp_get_attachment_image_src( get_post_thumbnail_id( $vars['objects']->ID ), 'full' )); ?>" alt="" />
         </div>
 	</a>
 </article>
