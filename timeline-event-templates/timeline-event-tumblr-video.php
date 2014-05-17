@@ -25,7 +25,7 @@
     $article_parts = array( $article );
   }
   
-  $isShortStory = in_array('story', $video->tags) || $vars['id'] < 1438;
+  $isShortStory = in_array('story', $video->tags) || $vars['id'] < 1495;
 ?>
 <article class="note video photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>" data-story="<?php echo $isShortStory ? 'true' : 'false'; ?>" <?php include( dirname(__FILE__) . '/partials/origin-pretty-url.php' ); ?>>
 	<div class="article-body">
