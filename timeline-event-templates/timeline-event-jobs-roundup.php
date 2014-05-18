@@ -9,8 +9,8 @@
   </aside>
 	<div class="article-body">
 	  <section>
-    	<h2><a target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly Jobs Roundup</a></h2>
-    	<h3>Alle vacatures vorige week op Fontanel Jobs</h3>
+        <h3>Fontanel Jobs</h3>
+    	<h2><a target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly Jobs roundup</a></h2>
     	<ul>
     	  <?php foreach( array_reverse( $vars['objects'] ) as $raw_job ): ?>
     	    <?php $job = json_decode( $raw_job->object ); ?>
@@ -30,14 +30,8 @@
             </a>
           </li>
     	  <?php endforeach; ?>
-      	  <li><a target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>" class="deep">Bekijk alle vacatures en stages</a></li>
+      	  <li><a target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>" class="deep">&mdash; Alle vacatures en stages</a></li>
     	</ul>
 	  </section>
-    <footer class="timeline-footer">
-      <?php $permalink = site_url( '/weekly/' . Date( 'Y', $vars['created_at'] ) . '/' . Date( 'W', $vars['created_at'] ) ); ?>
-			<div class="fb-share icon-facebook-1" data-url="<?php print( $permalink ); ?>" data-title="Like"></div>
-			<div class="tw-share icon-twitter" data-url="<?php print( $permalink ); ?>" data-title="Tweet"></div>
-			<time class="icon-clock"><a href="<?php print( $permalink ); ?>">Week <?php print( Date( 'W', $vars['created_at'] ) ); ?></a></time>
-    </footer>
   </div>
 </article>

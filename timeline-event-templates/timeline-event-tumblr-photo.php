@@ -1,8 +1,14 @@
 <?php
   $post = json_decode( $vars['objects'][0]->object );
   
+  $title = trim(strstr($post->caption, '<p>', true));
+  
+  if ($title !== '') {
+      $title = '<a class="read-more" href="' . home_url() . '/notes' . $vars['objects'][0]->pretty_url . '">' . $title . '</a>';
+  }
+  
   $article =
-        strstr($post->caption, '<p>', true) .        
+        $title .
         '<h4>' . date_i18n( 'j F', $vars['created_at'] ) . ' - ' . get_the_author_meta( 'display_name', $vars['user']->wordpress_id ) . '</h4>' .
         '<p>' .
         strstr($post->caption, '<p>');
@@ -40,6 +46,8 @@
 		  <section>
             <?php if ($isShortStory):?>
             <h3>Short story</h3>
+            <?php else:?>
+            <h3>Note</h3>
             <?php endif;?>
   			<?php print( $article_parts[0] ); ?>
   			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
