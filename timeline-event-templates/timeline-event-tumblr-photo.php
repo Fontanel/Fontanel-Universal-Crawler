@@ -35,11 +35,14 @@
 ?>
 <article class="note photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>" data-story="<?php echo $isShortStory ? 'true' : 'false'; ?>" <?php include( dirname(__FILE__) . '/partials/origin-pretty-url.php' ); ?>>
 	<div class="article-body">
+        <?php if (!$isShortStory && isset($post->link_url)):?>
+        <a href="<?php print $post->link_url;?>" target="_blank">
+        <?php endif;?>
 		<figure class="has-slideshow royalSlider rsDefault">
 		  <?php foreach( $post->photos as $slide_photo ): ?>
-  			<a class="rsImg bugaga group-<?php print( $post->id ); ?>" href="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
+  			<!--<a class="rsImg bugaga group-<?php print( $post->id ); ?>" href="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">-->
   			  <img class="rsTmb" src="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
-        </a>
+        <!--</a>-->
 		  <?php endforeach; ?>
 		</figure>
 		<div class="caption">
@@ -63,6 +66,9 @@
             ?>
             <aside class="sharing"></aside>
 		</div>
+        <?php if (!$isShortStory):?>
+        </a>
+        <?php endif;?>
   </div>
 </article>
 
