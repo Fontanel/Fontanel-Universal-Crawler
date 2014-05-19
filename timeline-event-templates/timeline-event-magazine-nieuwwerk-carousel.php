@@ -3,7 +3,7 @@
   	<a href="<?php print( get_permalink( $vars['objects']->ID ) ); ?>">
         <div style="background-color:<?php the_field( 'eerste_kleur', $vars['objects']->ID ); ?>">
             <span class="helper"></span>
-            <div>
+            <div class="<?php the_field( 'thema', $vars['objects']->ID ); ?>">
                 <figure class="logo"></figure>
                 <h2><?php print( $vars['objects']->post_title ); ?></h2>
                 <h3><?php print( $vars['objects']->post_excerpt ); ?></h3>
