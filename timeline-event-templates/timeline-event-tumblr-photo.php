@@ -35,7 +35,7 @@
 ?>
 <article class="note photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>" data-story="<?php echo $isShortStory ? 'true' : 'false'; ?>" <?php include( dirname(__FILE__) . '/partials/origin-pretty-url.php' ); ?>>
 	<div class="article-body">
-        <?php if (!$isShortStory && isset($post->link_url)):?>
+        <?php if (!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)):?>
         <a href="<?php print $post->link_url;?>" target="_blank">
         <?php endif;?>
 		<figure class="<?php if ($isShortStory):?>has-slideshow royalSlider rsDefault<?php endif;?>">
@@ -54,6 +54,9 @@
             <?php endif;?>
   			<?php print( $article_parts[0] ); ?>
   			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
+            <?php if (!$isShortStory && $vars['skip_readmore_wrap'] && isset($post->link_url)):?>
+            <a href="<?php print $post->link_url;?>" target="_blank">&mdash; Link</a>
+            <?php endif;?>
 		  </section>
             <?php
             if ($isShortStory && $vars['skip_readmore_wrap']):
@@ -66,7 +69,7 @@
             ?>
             <aside class="sharing"></aside>
 		</div>
-        <?php if (!$isShortStory):?>
+        <?php if (!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)):?>
         </a>
         <?php endif;?>
   </div>
