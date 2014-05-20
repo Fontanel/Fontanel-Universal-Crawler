@@ -12,5 +12,6 @@
             <span class="helper"></span>
             <img src="<?php the_field( 'achtergrondafbeelding', $vars['objects']->ID ); ?>" alt="" />
         </div>
+        <div class="clear-both"></div>
 	</a>
 </article>

@@ -12,5 +12,6 @@
             <span class="helper"></span>
             <img src="<?php print reset(wp_get_attachment_image_src( get_post_thumbnail_id( $vars['objects']->ID ), 'full' )); ?>" alt="" />
         </div>
+        <div class="clear-both"></div>
 	</a>
 </article>

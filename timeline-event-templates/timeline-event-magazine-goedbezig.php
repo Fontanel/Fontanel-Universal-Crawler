@@ -11,5 +11,6 @@
         <div>
             
         </div>
+        <div class="clear-both"></div>
     </a>
 </article>
