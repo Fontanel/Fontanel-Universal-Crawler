@@ -17,7 +17,7 @@
     $article_parts = preg_split( "/<p>.*?<!-- more -->.*?\/p>|<!-- more -->/", $article );
     $article = explode(' ', $article_parts[0]);
     $article_tmp = '';
-    while (strlen(strip_tags($article_tmp)) < 320 && count($article) > 0) {
+    while (strlen(strip_tags($article_tmp)) < 250 && count($article) > 0) {
         $article_tmp .= array_shift($article) . ' ';
     }
     $article_parts[0] = trim($article_tmp);
