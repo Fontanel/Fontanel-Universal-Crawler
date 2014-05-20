@@ -55,7 +55,7 @@
   			<?php print( $article_parts[0] ); ?>
   			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
             <?php if (!$isShortStory && $vars['skip_readmore_wrap'] && isset($post->link_url)):?>
-            <a href="<?php print $post->link_url;?>" target="_blank">&mdash; Link</a>
+            <p><a href="<?php print $post->link_url;?>" target="_blank">&mdash; Link</a></p>
             <?php endif;?>
 		  </section>
             <?php
