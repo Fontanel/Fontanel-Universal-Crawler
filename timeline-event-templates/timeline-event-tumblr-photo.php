@@ -45,7 +45,7 @@
         <!--</a>-->
 		  <?php endforeach; ?>
 		</figure>
-		<div class="caption <?php if ($isShortStory):?>short-story<?php endif;?>">
+		<div class="caption <?php if (!$isShortStory):?>short-note<?php endif;?>">
 		  <section>
             <?php if ($isShortStory):?>
             <h3>Short story</h3>
