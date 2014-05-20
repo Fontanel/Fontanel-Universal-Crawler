@@ -45,7 +45,7 @@
         <!--</a>-->
 		  <?php endforeach; ?>
 		</figure>
-		<div class="caption">
+		<div class="caption <?php if ($isShortStory):?>short-story<?php endif;?>">
 		  <section>
             <?php if ($isShortStory):?>
             <h3>Short story</h3>
@@ -56,7 +56,7 @@
   			<?php include( dirname(__FILE__) . '/partials/read-more.php' ); ?>
 		  </section>
             <?php
-            if ($vars['skip_readmore_wrap']):
+            if ($isShortStory && $vars['skip_readmore_wrap']):
             foreach( $post->photos as $slide_photo ):
             ?>
   			  <img src="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
