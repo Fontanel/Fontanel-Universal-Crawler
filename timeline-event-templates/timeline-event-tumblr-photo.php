@@ -43,8 +43,12 @@
   			<!--<a class="rsImg bugaga group-<?php print( $post->id ); ?>" href="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">-->
   			  <img class="rsTmb" src="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
         <!--</a>-->
+          <?php if ($isShortStory) { break; } ?>
 		  <?php endforeach; ?>
 		</figure>
+        <?php if (!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)):?>
+        </a>
+        <?php endif;?>
 		<div class="caption <?php if (!$isShortStory):?>short-note<?php endif;?>">
 		  <section>
             <?php if ($isShortStory):?>
@@ -59,7 +63,7 @@
             <?php endif;?>
 		  </section>
             <?php
-            if ($isShortStory && $vars['skip_readmore_wrap']):
+            if (($isShortStory || count($post->photos) > 1) && $vars['skip_readmore_wrap']):
             foreach( $post->photos as $slide_photo ):
             ?>
   			  <img src="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
@@ -69,9 +73,6 @@
             ?>
             <aside class="sharing"></aside>
 		</div>
-        <?php if (!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)):?>
-        </a>
-        <?php endif;?>
   </div>
 </article>
 
