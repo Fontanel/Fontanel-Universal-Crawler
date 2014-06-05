@@ -38,12 +38,12 @@
         <?php if (!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)):?>
         <a href="<?php print $post->link_url;?>" target="_blank">
         <?php endif;?>
-		<figure class="<?php if ($isShortStory):?>has-slideshow royalSlider rsDefault<?php endif;?>">
+		<figure class="<?php if ($isShortStory && $vars['skip_readmore_wrap']):?>has-slideshow royalSlider rsDefault<?php endif;?>">
 		  <?php foreach( $post->photos as $slide_photo ): ?>
   			<!--<a class="rsImg bugaga group-<?php print( $post->id ); ?>" href="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">-->
   			  <img class="rsTmb" src="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
         <!--</a>-->
-          <?php if ($isShortStory) { break; } ?>
+          <?php if (!$isShortStory || !$vars['skip_readmore_wrap']) { break; } ?>
 		  <?php endforeach; ?>
 		</figure>
         <?php if (!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)):?>
