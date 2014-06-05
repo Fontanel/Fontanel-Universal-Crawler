@@ -43,7 +43,7 @@
   			<!--<a class="rsImg bugaga group-<?php print( $post->id ); ?>" href="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">-->
   			  <img class="rsTmb" src="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
         <!--</a>-->
-          <?php if (!$isShortStory || !$vars['skip_readmore_wrap']) { break; } ?>
+          <?php if (!$isShortStory || !$vars['skip_readmore_wrap'] || $vars['id'] == 1612) { break; } ?>
 		  <?php endforeach; ?>
 		</figure>
         <?php if (!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)):?>
