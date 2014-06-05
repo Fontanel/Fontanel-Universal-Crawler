@@ -37,6 +37,8 @@
 	<div class="article-body">
         <?php if (!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)):?>
         <a href="<?php print $post->link_url;?>" target="_blank">
+        <?php elseif ($isShortStory && !$vars['skip_readmore_wrap']): ?>
+        <a href="<?php print home_url() . '/notes' . $vars['objects'][0]->pretty_url;?>">
         <?php endif;?>
 		<figure class="<?php if ($isShortStory && $vars['skip_readmore_wrap'] && count($post->photos) > 1 && $vars['id'] != 1612):?>has-slideshow royalSlider rsDefault<?php endif;?>">
 		  <?php foreach( $post->photos as $slide_photo ): ?>
@@ -46,7 +48,7 @@
           <?php if (!$isShortStory || !$vars['skip_readmore_wrap'] || $vars['id'] == 1612) { break; } ?>
 		  <?php endforeach; ?>
 		</figure>
-        <?php if (!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)):?>
+        <?php if ((!$isShortStory && !$vars['skip_readmore_wrap'] && isset($post->link_url)) || ($isShortStory && !$vars['skip_readmore_wrap'])):?>
         </a>
         <?php endif;?>
 		<div class="caption <?php if (!$isShortStory):?>short-note<?php endif;?>">
