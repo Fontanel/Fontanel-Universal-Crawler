@@ -3,8 +3,8 @@
 		class TimelineEvent {
 			private $template_path;
 			private $database_manager;
-			private $user;
-			private $id;
+			public $user;
+			public $id;
 			private $sponsor;
 			private $pretty_url;
 			protected $created_at;
