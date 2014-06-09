@@ -1,6 +1,8 @@
 <?php
   $video = json_decode( $vars['objects'][0]->object );
   
+  $isShortStory = in_array('story', $video->tags) || $vars['id'] < 1495;
+  
   $title = trim(strstr($video->caption, '<p>', true));
   
   if ($title !== '') {
@@ -13,7 +15,7 @@
         '<p>' .
         strstr($video->caption, '<p>');
   
-  if( !$vars['skip_readmore_wrap'] ) {
+  if( $isShortStory && !$vars['skip_readmore_wrap'] ) {
     $article_parts = preg_split( "/<p>.*?<!-- more -->.*?\/p>|<!-- more -->/", $article );
     $article = explode(' ', $article_parts[0]);
     $article_tmp = '';
@@ -30,8 +32,6 @@
   } else {
     $article_parts = array( $article );
   }
-  
-  $isShortStory = in_array('story', $video->tags) || $vars['id'] < 1495;
 ?>
 <article class="note video photo<?php include( dirname(__FILE__) . '/partials/author-tag.php' ); ?>" data-id="<?php print_r( $vars['id'] ); ?>" data-story="<?php echo $isShortStory ? 'true' : 'false'; ?>" <?php include( dirname(__FILE__) . '/partials/origin-pretty-url.php' ); ?>>
 	<div class="article-body">
