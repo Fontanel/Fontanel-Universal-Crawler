@@ -66,7 +66,7 @@
 		  </section>
             <?php
             if (($isShortStory || count($post->photos) > 1) && $vars['skip_readmore_wrap']):
-            foreach( $post->photos as $slide_photo ):
+            foreach( $post->photos as $k => $slide_photo ): if ($k === 0) { continue; }
             ?>
   			  <img src="<?php print( $slide_photo->alt_sizes[0]->url ); ?>">
             <?php
