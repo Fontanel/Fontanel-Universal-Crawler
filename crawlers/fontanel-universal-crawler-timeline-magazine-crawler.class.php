@@ -3,9 +3,12 @@
 		class TimelineMagazineCrawler extends TimelineCrawler {
 			private $platform = 'magazine';
 			
-			public function fetchPosts() {
+			public function fetchPosts( $range ) {
 				global $wp_query;
-				$args = array( 'post_type' => array( 'weekvan', 'nieuwwerk', 'goedbezig', 'fontanel' ), 'posts_per_page' => 10 );
+				$args = array(
+				  'post_type' => array( 'weekvan', 'nieuwwerk', 'goedbezig', 'fontanel' ),
+				  'posts_per_page' => ( $range == "max" ? 1000 : 10 ),
+				  'post_status' => 'publish' );
 				query_posts( $args );
 
 				while ( have_posts() ) : the_post();

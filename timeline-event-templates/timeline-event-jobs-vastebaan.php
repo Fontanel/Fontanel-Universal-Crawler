@@ -2,14 +2,14 @@
 <article class="jobs fulltime" data-id="<?php print_r( $vars['id'] ); ?>">
   <aside class="avatar jobs">
     <figure>
-      <a href="http://www.fontaneljobs.nl">
+      <a href="http://www.fontaneljobs.nl" target="_blank">
         <img src="<?php bloginfo('template_directory') ?>/img/timeline-jobs-logo.png">
         <figcaption>Fontanel Jobs</figcaption>
       </a>
     </figure>
   </aside>
 
-	<a class="article-body" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL . $vacancy->url ); ?>">
+	<a class="article-body" target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL . $vacancy->url ); ?>">
 	  <div class="right">
   	  <figure>
   	    <?php if( !empty( $vacancy->company_logo ) ): ?>

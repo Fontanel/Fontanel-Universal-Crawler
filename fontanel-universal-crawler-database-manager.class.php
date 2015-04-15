@@ -31,6 +31,7 @@
           . "sticky_untill int NOT NULL,"
           . "author varchar(128) NULL,"
           . "sponsor int NULL,"
+          . "pretty_url varchar(128) NULL,"
           . "id int NOT NULL AUTO_INCREMENT PRIMARY KEY );";
 				
 				$sql[] =
@@ -82,13 +83,14 @@
 
 
 
-      public function storeEvent( $type = 0, $objects = '', $timestamp = 0, $author = NULL ) {
+      public function storeEvent( $type = 0, $objects = '', $timestamp = 0, $author = NULL, $pretty_url = NULL ) {
       	$this->iwpdb->insert( $this->tables['events'], array(
       		'type' => $type,
       		'objects' => $objects,
       		'time' => $timestamp,
       		'updated_at' => $timestamp,
-      		'author' => $author
+      		'author' => $author,
+      		'pretty_url' => $pretty_url
       	) );
       }
     
@@ -161,11 +163,42 @@
             . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
             . "LEFT JOIN " . $this->tables['sponsors'] . " "
             . "ON " . $this->tables['sponsors'] . ".id = " . $this->tables['events'] . ".sponsor "
-          . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
+          . "WHERE " . $this->tables['events'] . ".type NOT IN (9,10,14) "
+          . "AND " . $this->tables['events'] . ".sticky_untill < " . time() . " "
           . ( ( is_null( $types ) or empty( $types ) ) ? "" : "AND " . $this->tables['events'] . ".type IN (" . $types . ") " )
           . ( ( is_null( $author ) or empty( $author ) ) ? "" : "AND " . $this->tables['events'] . ".author = '" . $author . "' " )
           . "ORDER BY time DESC "
           . "LIMIT " . ( $per_page * $page ) . "," . $per_page . ";";
+          
+        return $this->iwpdb->get_results( $query );
+      }
+      
+      
+      public function getFeaturedEvent() {
+        $query = 
+          "SELECT "
+          . $this->tables['events'] . ".type, "
+          . $this->tables['events'] . ".objects, "
+          . $this->tables['events'] . ".id, "
+          . $this->tables['events'] . ".sticky_untill, "
+          . $this->tables['events'] . ".sponsor, "
+          . $this->tables['authors'] . ".name, "
+          . $this->tables['authors'] . ".thumb, "
+          . $this->tables['authors'] . ".url, "
+          . $this->tables['authors'] . ".wordpress_id, "
+          . $this->tables['authors'] . ".tag AS user_tag, "
+          . $this->tables['sponsors'] . ".brand, "
+          . $this->tables['sponsors'] . ".url AS sponsor_url, "
+          . $this->tables['sponsors'] . ".logo_url AS sponsor_logo "
+          . "FROM " . $this->tables['events'] . " "
+            . "LEFT JOIN " . $this->tables['authors'] . " "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+            . "LEFT JOIN " . $this->tables['sponsors'] . " "
+            . "ON " . $this->tables['sponsors'] . ".id = " . $this->tables['events'] . ".sponsor "
+          . "WHERE " . $this->tables['events'] . ".type NOT IN (9,10,14) "
+          . "AND " . $this->tables['events'] . ".sticky_untill > " . time() . " "
+          . "ORDER BY time DESC "
+          . "LIMIT 1;";
           
         return $this->iwpdb->get_results( $query );
       }
@@ -193,7 +226,7 @@
             . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
             . "LEFT JOIN " . $this->tables['sponsors'] . " "
             . "ON " . $this->tables['sponsors'] . ".id = " . $this->tables['events'] . ".sponsor "
-          . "WHERE " . $this->tables['events'] . ".type NOT IN (9) "
+          . "WHERE " . $this->tables['events'] . ".type NOT IN (9,10,14) "
           . "AND " . $this->tables['events'] . ".objects IN (" . $ids . ") "
           . "ORDER BY time DESC;";
           
@@ -264,6 +297,34 @@
       
       
       
+      public function getEventByPrettyUrl( $pretty_url ) {
+        global $filter_types_on;
+        
+        $filter = function( $key ) {
+          global $filter_types_on;
+          return( strpos( strtolower( $key ), $filter_types_on ) !== false );
+        };
+        
+        $query = 
+          "SELECT "
+          . $this->tables['events'] . ".type, "
+          . $this->tables['events'] . ".objects, "
+          . $this->tables['events'] . ".id, "
+          . $this->tables['events'] . ".sticky_untill, "
+          . $this->tables['authors'] . ".name, "
+          . $this->tables['authors'] . ".thumb, "
+          . $this->tables['authors'] . ".url, "
+          . $this->tables['authors'] . ".wordpress_id "
+          . "FROM " . $this->tables['events'] . " "
+            . "LEFT JOIN " . $this->tables['authors'] . " "
+            . "ON " . $this->tables['authors'] . ".tag = " . $this->tables['events'] . ".author "
+          . "WHERE " . $this->tables['events'] . ".pretty_url='" . $pretty_url . "';";
+          
+        return $this->iwpdb->get_results( $query );
+      }
+      
+      
+      
       public function getEventByNoteUrl( $url ) {
         global $filter_types_on;
         
@@ -277,8 +338,8 @@
           . $this->tables['objects'] . ".id "
           . "FROM " . $this->tables['objects'] . " "
           . "WHERE " . $this->tables['objects'] . ".pretty_url='" . $url . "';";
-        $id = $this->iwpdb->get_results( $query );
-        $id = $id[0]->id;
+        $ids = $this->iwpdb->get_results( $query );
+        $id = $ids[0]->id;
         
         $query = 
           "SELECT "
@@ -322,12 +383,11 @@
       
       
       
-      public function tryToFindAuthor( $tags ) {
-        $search = implode('|', $tags );
+      public function tryToFindAuthor( $tumblr_name ) {
         $sql =
           "SELECT * "
           . "FROM `wp_timeline_authors` "
-          . "WHERE `tag` REGEXP '" . $search . "' "
+          . "WHERE `tumblr_name` = '" . $tumblr_name . "' "
           . "LIMIT 1";
         $author = $this->iwpdb->get_row( $sql );
         if( $author ){ return $author->tag; }

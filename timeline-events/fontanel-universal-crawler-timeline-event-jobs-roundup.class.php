@@ -8,7 +8,7 @@
 			
 			protected function setCreatedAt() {
 			  $obj = json_decode( $this->objects[0]->object );
-  			$this->createdAt = date( 'W', $obj->created_at );
+  			$this->createdAt = $obj->created_at;
 			}
 		}
 	endif;

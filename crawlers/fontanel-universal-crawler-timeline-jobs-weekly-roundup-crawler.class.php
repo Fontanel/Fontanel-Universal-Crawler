@@ -3,7 +3,7 @@
 		class TimelineJobsWeeklyRoundupCrawler extends TimelineCrawler {
 			private $platform = 'jobs';
 			
-			public function fetchPosts() {
+			public function fetchPosts( $range ) {
 				$result = $this->fetch( 'http://fontaneljobs.nl/roundup.json' );
 				
 				$this->processResult( $result );
@@ -22,7 +22,9 @@
 				
 				$savable_objects = $this->createSavableObjects( $workable_result );
 				
-				$this->storeEvent( $type_id, implode( ',', $object_ids ), $timestamp, $savable_objects, 'jobs' );
+				$pretty_url = '/weekly/' . date( "Y", $timestamp ) . '/' . date( "W", $timestamp );
+				
+				$this->storeEvent( $type_id, implode( ',', $object_ids ), $timestamp, $savable_objects, 'jobs', $pretty_url );
 			}
 			
 			private function createSavableObjects( $raw_objects ) {

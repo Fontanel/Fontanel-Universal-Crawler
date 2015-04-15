@@ -3,11 +3,12 @@
 		class TimelineEvent {
 			private $template_path;
 			private $database_manager;
-			private $user;
-			private $id;
+			public $user;
+			public $id;
 			private $sponsor;
+			private $pretty_url;
 			protected $created_at;
-			protected $objects = Array();
+			public $objects = Array();
 			protected $slug = 'timeline-event';
 			protected $type = 'Undefined';
 			
@@ -59,7 +60,7 @@
   			$this->template_path = preg_replace('/\.php/', "-$template.php", $this->template_path);
 			}
 			
-			public function render( $template = null, $skip_readmore_wrap = false ) {
+			public function render( $template = null, $skip_readmore_wrap = false, $large_author_block = false ) {
 			  if( !is_null( $template ) ){
   			  $this->extendTemplatePath( $template );
 			  } else {
@@ -74,7 +75,9 @@
         $vars['user'] = $this->user;
         $vars['created_at'] = $this->createdAt;
         $vars['skip_readmore_wrap'] = $skip_readmore_wrap;
+        $vars['large_author_block'] = $large_author_block;
         $vars['sponsor'] = $this->sponsor;
+        $vars['pretty_url'] = $this->pretty_url;
         
         if( is_array( $vars ) && !empty( $vars ) ) {
           extract( $vars );
