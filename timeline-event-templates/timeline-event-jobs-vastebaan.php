@@ -4,7 +4,7 @@
     <figure>
       <a href="http://www.fontaneljobs.nl" target="_blank">
         <img src="<?php bloginfo('template_directory') ?>/img/timeline-jobs-logo.png">
-        <figcaption>Fontanel Jobs</figcaption>
+        <figcaption>FONTANEL</figcaption>
       </a>
     </figure>
   </aside>

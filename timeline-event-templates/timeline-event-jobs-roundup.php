@@ -3,13 +3,13 @@
     <figure>
       <a href="http://www.fontaneljobs.nl" target="_blank">
         <img src="<?php bloginfo('template_directory') ?>/img/timeline-jobs-logo.png">
-        <figcaption>Fontanel Jobs</figcaption>
+        <figcaption>FONTANEL</figcaption>
       </a>
     </figure>
   </aside>
 	<div class="article-body">
 	  <section>
-        <h3>Fontanel Jobs</h3>
+        <h3>FONTANEL</h3>
     	<h2><a target="_blank" href="<?php print( FONTANEL_UNIVERSAL_CRAWLER_JOBS_URL ); ?>">Weekly Jobs roundup</a></h2>
     	<ul>
     	  <?php foreach( array_reverse( $vars['objects'] ) as $raw_job ): ?>
